@@ -1,10 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import AppText from '../../components/AppTextComps/AppText';
 import LineBreak from '../../components/LineBreak';
@@ -48,7 +44,7 @@ const Login = () => {
             borderRadius={5}
           />
           <LineBreak space={1} />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigateToRoute('ForgotPassword')}>
             <View style={{alignItems: 'flex-end'}}>
               <AppText
                 title={'Forgot Username?'}
@@ -72,10 +68,10 @@ const Login = () => {
             borderRadius={5}
           />
           <LineBreak space={1} />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigateToRoute('ForgotPassword')}>
             <View style={{alignItems: 'flex-end'}}>
               <AppText
-                title={'Forgot password?'}
+                title={'Forgot Password?'}
                 textColor={AppColors.BLACK}
                 textSize={1.7}
                 borderBottomWidth={1}
@@ -88,7 +84,11 @@ const Login = () => {
       <LineBreak space={27} />
 
       <View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
-        <AppButton title={'Login'} borderRadius={5} />
+        <AppButton
+          title={'Login'}
+          borderRadius={5}
+          handlePress={() => navigateToRoute('CreateProfile')}
+        />
         <LineBreak space={2} />
         <AppButton
           title={'Sign up'}

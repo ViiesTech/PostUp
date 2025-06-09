@@ -20,8 +20,9 @@ type Colors = {
     hotPink: string
     royalBlue: string
     darkBlue: string
+    darkYellow:string
   };
-  
+
 const   AppColors: Colors = {
     BLACK: "#000000",
     WHITE: "#FFFFFF",
@@ -32,7 +33,7 @@ const   AppColors: Colors = {
     DARKGRAY: "#939393",
     PEACHCOLOUR: "#F7D794",
     INPUTBG: "#F5F5F5",
-    BGCOLOURS: "#80FF45",
+    BGCOLOURS: "#3CC835",
     BGCOLOURS2: "#FE3F9B",
     PRIMARY:"#0088F0",
     TEXTCOLOR: "#494949",
@@ -45,7 +46,7 @@ const   AppColors: Colors = {
     hotPink: '#E74B90',
     royalBlue: '#2F6CAD',
     darkBlue: '#33434F',
+    darkYellow: '#E55B13',
   };
   
   export default AppColors;
-  
