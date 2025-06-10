@@ -311,6 +311,34 @@ const Home = () => {
 
         <LineBreak space={2} />
 
+        <FlatList
+          data={placesData}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          ListFooterComponent={<LineBreak space={10} />}
+          contentContainerStyle={{gap: 15, paddingLeft: responsiveWidth(5)}}
+          renderItem={({item}) => {
+            return (
+              <View>
+                <Image
+                  source={item.eventImg}
+                  style={{width: 130, height: 130, borderRadius: 10}}
+                />
+                <LineBreak space={1} />
+                <AppText
+                  title={item.title}
+                  textColor={AppColors.BLACK}
+                  textSize={1.4}
+                  textFontWeight
+                  textAlignment={'center'}
+                />
+              </View>
+            );
+          }}
+        />
+
+        <LineBreak space={7} />
+
         <View style={{alignItems: 'center'}}>
           <AppButton title={'PostUp'} borderRadius={5} handlePress={() => {}} />
         </View>
