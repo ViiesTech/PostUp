@@ -19,6 +19,7 @@ type textProps = {
   lineHeight?:any;
   numberOfLines?:any;
   borderBottomWidth?:any;
+  borderBottomColor?:any;
 };
 
 const AppText = ({
@@ -32,6 +33,7 @@ const AppText = ({
   lineHeight,
   numberOfLines,
   borderBottomWidth,
+  borderBottomColor,
 }: textProps) => {
   return (
     <Text
@@ -48,6 +50,7 @@ const AppText = ({
         textTransform: textTransform,
         lineHeight: responsiveHeight(lineHeight),
         borderBottomWidth: borderBottomWidth,
+        borderBottomColor: borderBottomColor,
       }}>
       {title}
     </Text>

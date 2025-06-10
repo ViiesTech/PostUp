@@ -5,4 +5,6 @@ export default APPIMAGE = {
     stepFour: require('../images/stepFour.png'),
     user: require('../images/service.png'),
     location: require('../images/locationMap.png'),
+    banner: require('../images/banner.png'),
+    event: require('../images/event.png'),
 };
