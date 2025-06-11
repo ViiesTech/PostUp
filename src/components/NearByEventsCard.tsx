@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, TouchableOpacity} from 'react-native';
 import AppColors from '../utils/AppColors';
 import {
   responsiveFontSize,
@@ -16,7 +16,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import AppButton from './AppButton';
 
-const NearByEventsCard = ({item, search, viewDetailsHandleOnPress}: any) => {
+const NearByEventsCard = ({
+  item,
+  search,
+  viewDetailsHandleOnPress,
+  favorites,
+}: any) => {
   return (
     <View
       style={{
@@ -37,12 +42,41 @@ const NearByEventsCard = ({item, search, viewDetailsHandleOnPress}: any) => {
         />
         <View>
           {!search && <LineBreak space={1.5} />}
-          <AppText
-            title={item.title}
-            textColor={AppColors.BLACK}
-            textSize={2}
-            textFontWeight
-          />
+          <View
+            style={
+              favorites
+                ? {
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }
+                : null
+            }>
+            <AppText
+              title={item.title}
+              textColor={AppColors.BLACK}
+              textSize={2}
+              textFontWeight
+            />
+
+            {favorites && (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: AppColors.darkYellow,
+                  borderRadius: 100,
+                  width: 23,
+                  height: 23,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <AppText
+                  title={'🤗'}
+                  textColor={AppColors.BLACK}
+                  textSize={1.5}
+                  textFontWeight
+                />
+              </TouchableOpacity>
+            )}
+          </View>
           <LineBreak space={1} />
 
           <View

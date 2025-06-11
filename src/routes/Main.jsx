@@ -18,6 +18,8 @@ import LocationSelection from '../screens/main/LocationSelection';
 import Messages from '../screens/main/Messages';
 import PrivateMessages from '../screens/main/PrivateMessages';
 import EventDetails from '../screens/main/EventDetails';
+import Favorites from '../screens/main/Favorites';
+import PostUpPals from '../screens/main/PostUpPals';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -31,6 +33,8 @@ const Main = () => {
       <Stack.Screen name="LocationSelection" component={LocationSelection} />
       <Stack.Screen name="PrivateMessages" component={PrivateMessages} />
       <Stack.Screen name="EventDetails" component={EventDetails} />
+      <Stack.Screen name="Favorites" component={Favorites} />
+      <Stack.Screen name="PostUpPals" component={PostUpPals} />
     </Stack.Navigator>
   );
 };
