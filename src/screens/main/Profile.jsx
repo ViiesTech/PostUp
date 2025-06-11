@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   ScrollView,
@@ -24,6 +24,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useCustomNavigation} from '../../utils/Hooks';
+import WelcomeModal from '../../components/WelcomeModal';
 
 const settingsSections = [
   {
@@ -81,13 +82,12 @@ const settingsSections = [
         id: '7',
         title: 'History',
         icon: <Ionicons name="time-outline" size={20} />,
-        navTo: 'Favorites',
+        navTo: 'History',
       },
       {
         id: '8',
         title: 'Logout',
         icon: <MaterialIcons name="logout" size={20} />,
-        navTo: 'Favorites',
       },
     ],
   },
@@ -95,6 +95,8 @@ const settingsSections = [
 
 const Profile = () => {
   const {navigateToRoute} = useCustomNavigation();
+  const [showModal, setShowModal] = useState(false);
+
   const renderGroup = ({item}) => (
     <View style={styles.card}>
       {item.items.map((setting, index) => (
@@ -104,6 +106,8 @@ const Profile = () => {
           onPress={() => {
             if (setting.navTo) {
               navigateToRoute(setting.navTo);
+            } else {
+              setShowModal(true);
             }
           }}>
           <View style={styles.icon}>{setting.icon}</View>
@@ -125,6 +129,12 @@ const Profile = () => {
         isCenteredHead={true}
         textFontWeight={true}
         isCenteredHeadWidth={57.5}
+      />
+
+      <WelcomeModal
+        isVisible={showModal}
+        exploreOnPress={() => setShowModal(false)}
+        submitOnPress={() => setShowModal(false)}
       />
 
       <LineBreak space={3} />

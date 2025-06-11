@@ -20,6 +20,7 @@ import PrivateMessages from '../screens/main/PrivateMessages';
 import EventDetails from '../screens/main/EventDetails';
 import Favorites from '../screens/main/Favorites';
 import PostUpPals from '../screens/main/PostUpPals';
+import History from '../screens/main/History';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,6 +36,7 @@ const Main = () => {
       <Stack.Screen name="EventDetails" component={EventDetails} />
       <Stack.Screen name="Favorites" component={Favorites} />
       <Stack.Screen name="PostUpPals" component={PostUpPals} />
+      <Stack.Screen name="History" component={History} />
     </Stack.Navigator>
   );
 };

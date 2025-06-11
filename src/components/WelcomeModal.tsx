@@ -27,9 +27,6 @@ const WelcomeModal = ({
   return (
     <Modal
       isVisible={isVisible}
-      backdropOpacity={0.9}
-      animationIn={'fadeIn'}
-      animationOut={'fadeOut'}
       onBackdropPress={onBackdropPress}
       style={{
         flex: 1,
@@ -40,13 +37,13 @@ const WelcomeModal = ({
         style={{
           backgroundColor: 'white',
           paddingHorizontal: responsiveWidth(4),
-          marginHorizontal: responsiveHeight(2),
-          height: responsiveHeight(37),
+          marginHorizontal: responsiveWidth(7),
+          borderRadius: 10,
           position: 'relative',
         }}>
-        <LineBreak space={4} />
+        <LineBreak space={3} />
         <AppText
-          title={'Take this task?'}
+          title={'Logout'}
           textColor={AppColors.BLACK}
           textSize={2.5}
           textwidth={60}
@@ -55,39 +52,34 @@ const WelcomeModal = ({
         />
         <LineBreak space={2} />
         <AppText
-          title={
-            'Service kondensor AC dan tiga kipas angin minim mollit non deserut'
-          }
+          title={'Are you sure you want to logout'}
           textColor={AppColors.GRAY}
           textSize={2}
-          textFontWeight
           textAlignment={'center'}
           lineHeight={2.5}
-          textwidth={60}
+          textwidth={40}
         />
         <LineBreak space={3.5} />
-        <View style={{alignSelf: 'center'}}>
+        <View style={{flexDirection: 'row', alignSelf: 'center'}}>
           <AppButton
-            title="YES, TAKE THIS TASK"
-            textColor={AppColors.WHITE}
-            bgColor={AppColors.BTNCOLOURS}
-            buttoWidth={85}
-            padding={15}
-            handlePress={submitOnPress}
-          />
-
-          <LineBreak space={1} />
-
-          <AppButton
-            title="CANCEL"
-            textColor={AppColors.GRAY}
+            title="Cancel"
+            textColor={AppColors.BLACK}
             bgColor={AppColors.WHITE}
-            buttoWidth={85}
+            buttoWidth={40}
             padding={15}
             borderColor={AppColors.BTNCOLOURS}
             handlePress={exploreOnPress}
           />
+          <AppButton
+            title="Logout"
+            textColor={AppColors.WHITE}
+            bgColor={'#E55B13'}
+            buttoWidth={40}
+            padding={15}
+            handlePress={submitOnPress}
+          />
         </View>
+        <LineBreak space={3} />
       </View>
     </Modal>
   );
