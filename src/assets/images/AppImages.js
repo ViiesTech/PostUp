@@ -7,4 +7,6 @@ export default APPIMAGE = {
     location: require('../images/locationMap.png'),
     banner: require('../images/banner.png'),
     event: require('../images/event.png'),
+    mapTwo: require('../images/mapTwo.png'),
+    msg_map: require('../images/msg_map.png'),
 };

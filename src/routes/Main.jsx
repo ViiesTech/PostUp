@@ -14,6 +14,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Search from '../screens/main/Search';
 import GeneralForum from '../screens/main/GeneralForum';
 import Profile from '../screens/main/Profile';
+import LocationSelection from '../screens/main/LocationSelection';
+import Messages from '../screens/main/Messages';
+import PrivateMessages from '../screens/main/PrivateMessages';
+import EventDetails from '../screens/main/EventDetails';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,6 +28,9 @@ const Main = () => {
       screenOptions={{headerShown: false}}
       initialRouteName="Main">
       <Stack.Screen name="Main" component={MyTabs} />
+      <Stack.Screen name="LocationSelection" component={LocationSelection} />
+      <Stack.Screen name="PrivateMessages" component={PrivateMessages} />
+      <Stack.Screen name="EventDetails" component={EventDetails} />
     </Stack.Navigator>
   );
 };
@@ -51,7 +58,7 @@ function MyTabs() {
             iconName = focused ? 'home-outline' : 'home-outline';
           } else if (route.name === 'Search') {
             iconName = focused ? 'search' : 'search';
-          } else if (route.name === 'GeneralForum') {
+          } else if (route.name === 'Messages') {
             iconName = focused
               ? 'chatbox-ellipses-outline'
               : 'chatbox-ellipses-outline';
@@ -68,7 +75,8 @@ function MyTabs() {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="GeneralForum" component={GeneralForum} />
+      {/* <Tab.Screen name="GeneralForum" component={GeneralForum} /> */}
+      <Tab.Screen name="Messages" component={Messages} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

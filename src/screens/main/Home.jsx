@@ -24,6 +24,7 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import AppImages from '../../assets/images/AppImages';
 import AppButton from '../../components/AppButton';
 import NearByEventsCard from '../../components/NearByEventsCard';
+import {useCustomNavigation} from '../../utils/Hooks';
 
 const nearByData = [
   {
@@ -74,6 +75,7 @@ const placesData = [
 const Home = () => {
   const sliderRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const {navigateToRoute} = useCustomNavigation();
 
   const slides = [
     {
@@ -279,7 +281,12 @@ const Home = () => {
           ListFooterComponent={<LineBreak space={10} />}
           contentContainerStyle={{gap: 15, paddingLeft: responsiveWidth(5)}}
           renderItem={({item}) => {
-            return <NearByEventsCard item={item} />;
+            return (
+              <NearByEventsCard
+                item={item}
+                viewDetailsHandleOnPress={() => navigateToRoute('EventDetails')}
+              />
+            );
           }}
         />
 
@@ -340,7 +347,11 @@ const Home = () => {
         <LineBreak space={7} />
 
         <View style={{alignItems: 'center'}}>
-          <AppButton title={'PostUp'} borderRadius={5} handlePress={() => {}} />
+          <AppButton
+            title={'PostUp'}
+            borderRadius={5}
+            handlePress={() => navigateToRoute('LocationSelection')}
+          />
         </View>
 
         <LineBreak space={4} />

@@ -21,6 +21,7 @@ type Colors = {
     royalBlue: string
     darkBlue: string
     darkYellow:string
+    lowGreen: string
   };
 
 const   AppColors: Colors = {
@@ -47,6 +48,7 @@ const   AppColors: Colors = {
     royalBlue: '#2F6CAD',
     darkBlue: '#33434F',
     darkYellow: '#E55B13',
+    lowGreen: '#587B58',
   };
   
   export default AppColors;

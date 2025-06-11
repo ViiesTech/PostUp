@@ -26,8 +26,11 @@ type props = {
   isCenteredHeadWidth?: any;
   headerBg?: any;
   privateChat?: any;
-  paddingBottom?:any;
-  textTransform?:any;
+  paddingBottom?: any;
+  textTransform?: any;
+  privateMessages?: any;
+  profImg?: any;
+  arrowWhite?:any;
 };
 
 const AppHeader = ({
@@ -46,6 +49,9 @@ const AppHeader = ({
   paddingBottom,
   privateChat,
   textTransform,
+  privateMessages,
+  profImg,
+  arrowWhite,
 }: props) => {
   return (
     <View
@@ -73,17 +79,25 @@ const AppHeader = ({
           }}>
           {goBack && (
             <View style={{marginRight: responsiveWidth(3)}}>
-              <BackIcon />
+              <BackIcon arrowWhite={arrowWhite} />
             </View>
           )}
           <View>
-            <AppText
-              title={heading}
-              textSize={2.5}
-              textColor={AppColors.BLACK}
-              textFontWeight={textFontWeight}
-              textTransform={textTransform}
-            />
+            <View
+              style={
+                privateMessages
+                  ? {flexDirection: 'row', gap: 12, alignItems: 'center'}
+                  : null
+              }>
+              {profImg}
+              <AppText
+                title={heading}
+                textSize={2.5}
+                textColor={AppColors.BLACK}
+                textFontWeight={textFontWeight}
+                textTransform={textTransform}
+              />
+            </View>
             <LineBreak space={0.3} />
             {taskId && (
               <AppText
