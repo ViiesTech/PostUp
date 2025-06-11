@@ -1,0 +1,98 @@
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
+import {
+  View,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
+import AppColors from '../../utils/AppColors';
+import AppHeader from '../../components/AppHeader';
+import LineBreak from '../../components/LineBreak';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from '../../utils/Responsive_Dimensions';
+import AppImages from '../../assets/images/AppImages';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import AppText from '../../components/AppTextComps/AppText';
+import AppTextInput from '../../components/AppTextInput';
+
+const AccountSettings = () => {
+  return (
+    <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+      <AppHeader
+        heading="Account Setting"
+        goBack
+        isCenteredHead={true}
+        textFontWeight={true}
+        isCenteredHeadWidth={65}
+      />
+      <LineBreak space={4} />
+
+      <View style={{paddingHorizontal: responsiveWidth(6)}}>
+        <View style={{alignItems: 'center'}}>
+          <ImageBackground
+            source={AppImages.user}
+            style={{width: 120, height: 120, position: 'relative'}}
+            imageStyle={{borderRadius: 100}}>
+            <TouchableOpacity
+              style={{
+                width: 50,
+                height: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: AppColors.WHITE,
+                borderRadius: 100,
+                position: 'absolute',
+                bottom: responsiveHeight(-1),
+                right: responsiveWidth(-1),
+                elevation: 10,
+              }}>
+              <AntDesign
+                name="plus"
+                size={responsiveFontSize(3)}
+                color={AppColors.BLACK}
+              />
+            </TouchableOpacity>
+          </ImageBackground>
+        </View>
+
+        <LineBreak space={8} />
+
+        <View>
+          <View>
+            <AppText
+              title={'Full Name or Username'}
+              textColor={AppColors.BLACK}
+              textSize={2}
+            />
+            <LineBreak space={1} />
+            <AppTextInput
+              inputPlaceHolder={'Ronald Sustroharjo'}
+              placeholderTextColor={AppColors.GRAY}
+              borderRadius={5}
+            />
+          </View>
+        <LineBreak space={2} />
+          <View>
+            <AppText
+              title={'Email Address'}
+              textColor={AppColors.BLACK}
+              textSize={2}
+            />
+            <LineBreak space={1} />
+            <AppTextInput
+              inputPlaceHolder={'sustroharjo.ronald@email.com'}
+              placeholderTextColor={AppColors.GRAY}
+              borderRadius={5}
+            />
+          </View>
+        </View>
+      </View>
+    </ScrollView>
+  );
+};
+
+export default AccountSettings;

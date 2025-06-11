@@ -21,6 +21,8 @@ import EventDetails from '../screens/main/EventDetails';
 import Favorites from '../screens/main/Favorites';
 import PostUpPals from '../screens/main/PostUpPals';
 import History from '../screens/main/History';
+import Settings from '../screens/main/Settings';
+import AccountSettings from '../screens/main/AccountSettings';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,6 +39,8 @@ const Main = () => {
       <Stack.Screen name="Favorites" component={Favorites} />
       <Stack.Screen name="PostUpPals" component={PostUpPals} />
       <Stack.Screen name="History" component={History} />
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="AccountSettings" component={AccountSettings} />
     </Stack.Navigator>
   );
 };

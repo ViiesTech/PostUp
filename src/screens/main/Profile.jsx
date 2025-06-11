@@ -34,7 +34,7 @@ const settingsSections = [
         id: '1',
         title: 'Settings',
         icon: <Ionicons name="settings-outline" size={20} />,
-        navTo: 'Favorites',
+        navTo: 'Settings',
       },
       {
         id: '2',
