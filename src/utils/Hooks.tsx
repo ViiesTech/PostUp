@@ -3,8 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 export const useCustomNavigation = () => {
   const navigation = useNavigation();
 
-  const navigateToRoute = (routeName: any) => {
-    navigation.navigate(routeName);
+  const navigateToRoute = (routeName: any, params: object) => {
+    navigation.navigate(routeName, params);
   };
 
   const goBack = () => {

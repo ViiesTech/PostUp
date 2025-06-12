@@ -19,8 +19,12 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import AppText from '../../components/AppTextComps/AppText';
 import AppTextInput from '../../components/AppTextInput';
 import PhoneInputScreen from '../../components/PhoneInput';
+import AppButton from '../../components/AppButton';
+import {useCustomNavigation} from '../../utils/Hooks';
 
 const AccountSettings = () => {
+  const {navigateToRoute} = useCustomNavigation();
+
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <AppHeader
@@ -129,6 +133,46 @@ const AccountSettings = () => {
                 inputWidth={23}
               />
             </View>
+          </View>
+          <LineBreak space={2} />
+          <View>
+            <AppText
+              title={'Password'}
+              textColor={AppColors.BLACK}
+              textSize={2}
+            />
+            <LineBreak space={1} />
+
+            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+              <AppTextInput
+                inputPlaceHolder={'password'}
+                placeholderTextColor={AppColors.GRAY}
+                borderRadius={5}
+                inputWidth={45}
+                value={'newpassword'}
+                secureTextEntry={true}
+              />
+              <AppButton
+                title={'Change Password'}
+                borderRadius={5}
+                handlePress={() => navigateToRoute('ChangePassword')}
+                textSize={1.5}
+                padding={17}
+                textFontWeight={false}
+                buttoWidth={36}
+              />
+            </View>
+
+            <LineBreak space={8} />
+
+            <View>
+              <AppButton
+                title={'Save Changes'}
+                borderRadius={5}
+                handlePress={() => {}}
+              />
+            </View>
+            <LineBreak space={2} />
           </View>
         </View>
       </View>

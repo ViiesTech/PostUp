@@ -23,6 +23,12 @@ import PostUpPals from '../screens/main/PostUpPals';
 import History from '../screens/main/History';
 import Settings from '../screens/main/Settings';
 import AccountSettings from '../screens/main/AccountSettings';
+import ChangePassword from '../screens/main/ChangePassword';
+import PrivacyPolicy from '../screens/main/PrivacyPolicy';
+import Notifications from '../screens/main/Notifications';
+import ShowMyLocation from '../screens/main/ShowMyLocation';
+import FAQ from '../screens/main/FAQ';
+import AllowAccess from '../screens/auth/AllowAccess';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,6 +47,12 @@ const Main = () => {
       <Stack.Screen name="History" component={History} />
       <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen name="AccountSettings" component={AccountSettings} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      <Stack.Screen name="Notifications" component={Notifications} />
+      <Stack.Screen name="ShowMyLocation" component={ShowMyLocation} />
+      <Stack.Screen name="FAQ" component={FAQ} />
+      <Stack.Screen name="AllowAccess" component={AllowAccess} />
     </Stack.Navigator>
   );
 };

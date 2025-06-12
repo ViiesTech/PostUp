@@ -57,7 +57,8 @@ const settingsSections = [
         id: '4',
         title: 'Privacy and safety',
         icon: <Ionicons name="shield-checkmark-outline" size={20} />,
-        navTo: 'Favorites',
+        navTo: 'PrivacyPolicy',
+        heading: 'Privacy Policy',
       },
       {
         id: '5',
@@ -71,7 +72,7 @@ const settingsSections = [
         id: '6',
         title: 'Notifications',
         icon: <Ionicons name="notifications-outline" size={20} />,
-        navTo: 'Favorites',
+        navTo: 'Notifications',
       },
     ],
   },
@@ -106,6 +107,8 @@ const Profile = () => {
           onPress={() => {
             if (setting.navTo) {
               navigateToRoute(setting.navTo);
+            } else if (setting.heading) {
+              navigateToRoute(setting.navTo);
             } else {
               setShowModal(true);
             }
@@ -134,7 +137,10 @@ const Profile = () => {
       <WelcomeModal
         isVisible={showModal}
         exploreOnPress={() => setShowModal(false)}
-        submitOnPress={() => setShowModal(false)}
+        submitOnPress={() => {
+          setShowModal(false);
+          navigateToRoute('Auth');
+        }}
       />
 
       <LineBreak space={3} />
@@ -156,7 +162,7 @@ const Profile = () => {
           <AppButton
             title={'Edit Profile'}
             borderRadius={5}
-            handlePress={() => {}}
+            handlePress={() => navigateToRoute('AccountSettings')}
             textSize={1.4}
             buttoWidth={25}
           />

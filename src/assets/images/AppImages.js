@@ -9,4 +9,6 @@ export default APPIMAGE = {
     event: require('../images/event.png'),
     mapTwo: require('../images/mapTwo.png'),
     msg_map: require('../images/msg_map.png'),
+    full_map: require('../images/fullMap.png'),
+    splash_logo: require('../images/splash_logo.png'),
 };

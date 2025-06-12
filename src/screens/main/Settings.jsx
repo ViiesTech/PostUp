@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import AppHeader from '../../components/AppHeader';
 import LineBreak from '../../components/LineBreak';
@@ -18,10 +19,15 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from '../../utils/Responsive_Dimensions';
-import { useCustomNavigation } from '../../utils/Hooks';
+import {useCustomNavigation} from '../../utils/Hooks';
 
 const settings = [
-  {key: 'account', label: 'Account Settings', icon: 'account-cog-outline', navTo: 'AccountSettings'},
+  {
+    key: 'account',
+    label: 'Account Settings',
+    icon: 'account-cog-outline',
+    navTo: 'AccountSettings',
+  },
   {key: 'privacy', label: 'Privacy Settings', icon: 'lock-outline', navTo: ''},
   {
     key: 'notification',
@@ -29,17 +35,50 @@ const settings = [
     icon: 'bell-outline',
     isSwitch: true,
   },
-  {key: 'push', label: 'Push Notification', icon: 'bell-outline', navTo: ''},
-  {key: 'terms', label: 'Terms of Service', icon: 'file-document-outline', navTo: ''},
-  {key: 'policy', label: 'Privacy Policy', icon: 'file-document-outline', navTo: ''},
+  {
+    key: 'push',
+    label: 'Push Notification',
+    icon: 'bell-outline',
+    navTo: 'Notifications',
+  },
+  {
+    key: 'terms',
+    label: 'Terms of Service',
+    icon: 'file-document-outline',
+    navTo: 'PrivacyPolicy',
+    heading: 'Terms of Service',
+  },
+  {
+    key: 'policy',
+    label: 'Privacy Policy',
+    icon: 'file-document-outline',
+    navTo: 'PrivacyPolicy',
+    heading: 'Privacy Policy',
+  },
   {
     key: 'faq',
     label: 'Frequently Ask Questions',
     icon: 'file-question-outline',
+    navTo: 'FAQ',
   },
-  {key: 'report', label: 'Report an Issue', icon: 'alert-circle-outline', navTo: ''},
-  {key: 'about', label: 'About PostUp', icon: 'information-outline', navTo: ''},
-  {key: 'location', label: 'Show My Location', icon: 'map-marker', navTo: ''},
+  {
+    key: 'report',
+    label: 'Report an Issue',
+    icon: 'alert-circle-outline',
+  },
+  {
+    key: 'about',
+    label: 'About PostUp',
+    icon: 'information-outline',
+    navTo: 'PrivacyPolicy',
+    heading: 'About PostUp',
+  },
+  {
+    key: 'location',
+    label: 'Show My Location',
+    icon: 'map-marker',
+    navTo: 'ShowMyLocation',
+  },
 ];
 
 const Settings = () => {
@@ -47,7 +86,17 @@ const Settings = () => {
   const {navigateToRoute} = useCustomNavigation();
 
   const renderItem = ({item}) => (
-    <TouchableOpacity style={styles.item} onPress={() => navigateToRoute(item?.navTo)}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        if (item.heading) {
+          navigateToRoute(item?.navTo, {heading: item.heading});
+        } else if (item?.navTo) {
+          navigateToRoute(item?.navTo);
+        } else if (!item.isSwitch) {
+          Alert.alert('will soon...');
+        }
+      }}>
       <View style={styles.iconLabel}>
         <Icon name={item.icon} size={20} color="#000" />
         <Text style={styles.label}>{item.label}</Text>

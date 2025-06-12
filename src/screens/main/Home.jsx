@@ -177,7 +177,7 @@ const Home = () => {
             inputWidth={70}
           />
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => navigateToRoute('Settings')}
             style={{
               borderColor: AppColors.GRAY,
               borderWidth: 1,
@@ -222,11 +222,13 @@ const Home = () => {
                 />
               </View>
             </View>
-            <MaterialCommunityIcons
-              name="bell-badge-outline"
-              size={responsiveFontSize(3)}
-              color={AppColors.BLACK}
-            />
+            <TouchableOpacity onPress={() => navigateToRoute('Notifications')}>
+              <MaterialCommunityIcons
+                name="bell-badge-outline"
+                size={responsiveFontSize(3)}
+                color={AppColors.BLACK}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </View>

@@ -8,7 +8,7 @@ const Routes = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="Main">
+      initialRouteName="Auth">
       <Stack.Screen name="Auth" component={Auth} />
       <Stack.Screen name="Main" component={Main} />
     </Stack.Navigator>

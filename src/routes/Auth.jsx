@@ -10,13 +10,15 @@ import CreateProfile from '../screens/auth/CreateProfile';
 import AllowAccess from '../screens/auth/AllowAccess';
 import SelectLocation from '../screens/auth/SelectLocation';
 import TermsOfService from '../screens/auth/TermsOfService';
+import Splash from '../screens/auth/Splash';
 
 const Stack = createStackNavigator();
 const Auth = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="OnBoarding">
+      initialRouteName="Splash">
+      <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
