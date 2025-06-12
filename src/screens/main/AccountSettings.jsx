@@ -18,6 +18,7 @@ import AppImages from '../../assets/images/AppImages';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AppText from '../../components/AppTextComps/AppText';
 import AppTextInput from '../../components/AppTextInput';
+import PhoneInputScreen from '../../components/PhoneInput';
 
 const AccountSettings = () => {
   return (
@@ -75,7 +76,7 @@ const AccountSettings = () => {
               borderRadius={5}
             />
           </View>
-        <LineBreak space={2} />
+          <LineBreak space={2} />
           <View>
             <AppText
               title={'Email Address'}
@@ -88,6 +89,46 @@ const AccountSettings = () => {
               placeholderTextColor={AppColors.GRAY}
               borderRadius={5}
             />
+          </View>
+          <LineBreak space={2} />
+          <View>
+            <AppText
+              title={'Phone Number'}
+              textColor={AppColors.BLACK}
+              textSize={2}
+            />
+            <LineBreak space={1} />
+            <PhoneInputScreen />
+          </View>
+          <LineBreak space={2} />
+          <View>
+            <AppText
+              title={'Location'}
+              textColor={AppColors.BLACK}
+              textSize={2}
+            />
+            <LineBreak space={1} />
+
+            <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+              <AppTextInput
+                inputPlaceHolder={'Street'}
+                placeholderTextColor={AppColors.GRAY}
+                borderRadius={5}
+                inputWidth={23}
+              />
+              <AppTextInput
+                inputPlaceHolder={'City'}
+                placeholderTextColor={AppColors.GRAY}
+                borderRadius={5}
+                inputWidth={23}
+              />
+              <AppTextInput
+                inputPlaceHolder={'State'}
+                placeholderTextColor={AppColors.GRAY}
+                borderRadius={5}
+                inputWidth={23}
+              />
+            </View>
           </View>
         </View>
       </View>
