@@ -1,5 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import AppText from '../../components/AppTextComps/AppText';
@@ -7,11 +6,43 @@ import LineBreak from '../../components/LineBreak';
 import AppTextInput from '../../components/AppTextInput';
 import {responsiveWidth} from '../../utils/Responsive_Dimensions';
 import AppButton from '../../components/AppButton';
-import {useCustomNavigation} from '../../utils/Hooks';
+import {ShowToast, useCustomNavigation} from '../../utils/Hooks';
 import AppHeader from '../../components/AppHeader';
+import {useForgetPasswordMutation} from '../../redux/services';
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState('');
   const {navigateToRoute} = useCustomNavigation();
+
+  const [forgetPassword, {isLoading}] = useForgetPasswordMutation();
+
+  const onNextPress = async () => {
+    if (!email) {
+      return ShowToast('Please enter your email');
+    } else {
+      let data = {
+        email: email,
+      };
+      await forgetPassword(data)
+        .unwrap()
+        .then(res => {
+          console.log('send otp response =====>', res);
+          ShowToast(res.message);
+          if (res.success) {
+            navigateToRoute('OTPVerifications', {
+              code: res.data.Otp,
+              email: res.data.email,
+              id: res.data._id
+            });
+          }
+        })
+        .catch(error => {
+          console.log('failed to send otp on email ====>', error);
+          ShowToast('Some problem occured');
+        });
+    }
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <AppHeader goBack />
@@ -41,6 +72,8 @@ const ForgotPassword = () => {
           <LineBreak space={1} />
           <AppTextInput
             inputPlaceHolder={'Input email address'}
+            value={email}
+            onChangeText={setEmail}
             placeholderTextColor={AppColors.GRAY}
             borderRadius={5}
           />
@@ -54,7 +87,8 @@ const ForgotPassword = () => {
               title={'Next'}
               textColor={AppColors.WHITE}
               borderRadius={5}
-              handlePress={() => navigateToRoute('OTPVerifications')}
+              loading={isLoading}
+              handlePress={() => onNextPress()}
             />
           </View>
         </View>

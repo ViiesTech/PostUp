@@ -8,6 +8,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from '../utils/Responsive_Dimensions';
+import AppLoader from './AppLoader';
 type props = {
   title?: any;
   bgColor?: any;
@@ -26,6 +27,7 @@ type props = {
   elevation?:any;
   borderRightWidth?:any;
   borderBottomWidth?:any;
+  loading: boolean,
 };
 const AppButton = ({
   title,
@@ -45,6 +47,7 @@ const AppButton = ({
   elevation,
   borderRightWidth,
   borderBottomWidth,
+  loading
 }: props) => {
   return (
     <TouchableOpacity
@@ -66,6 +69,9 @@ const AppButton = ({
       }}>
       {leftIcon}
       <View />
+      {loading ?
+              <AppLoader  />
+      :
       <AppText
         textColor={textColor}
         textSize={textSize}
@@ -73,6 +79,7 @@ const AppButton = ({
         textFontWeight={textFontWeight}
         textTransform={textTransform}
       />
+      }
     </TouchableOpacity>
   );
 };
