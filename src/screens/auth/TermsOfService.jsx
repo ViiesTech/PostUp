@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import AppHeader from '../../components/AppHeader';
 import LineBreak from '../../components/LineBreak';
@@ -15,7 +15,7 @@ import {useCustomNavigation} from '../../utils/Hooks';
 const TermsOfService = () => {
   const {navigateToRoute} = useCustomNavigation();
   return (
-    <View style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+    <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <AppHeader
         goBack
         heading="Terms Of Service"
@@ -50,7 +50,8 @@ const TermsOfService = () => {
           handlePress={() => navigateToRoute('Main')}
         />
       </View>
-    </View>
+      <LineBreak space={3} />
+    </ScrollView>
   );
 };
 
