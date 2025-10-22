@@ -61,16 +61,15 @@ export const Apis = createApi({
                 body: data
             })
         }),
-   
-        // getProfile: builder.query({
-        //     query: ({id,type} = {}) => {
-        //         //   console.log('typeeee',type)
-        //         return {
-        //             url: endpoints.GET_PROFILE({id,type}),
-        //             method: 'GET',
-        //         }
-        //     }
-        // }), 
+        getProfile: builder.query({
+            query: () => {
+                //   console.log('typeeee',type)
+                return {
+                    url: endpoints.GET_PROFILE,
+                    method: 'GET',
+                }
+            }
+        }), 
     })
 })
 
@@ -79,5 +78,6 @@ export const {
     useLoginMutation,
     useForgetPasswordMutation,
     useVerifyOTPMutation,
-    usePasswordOptionsMutation
+    usePasswordOptionsMutation,
+    useLazyGetProfileQuery
 } = Apis;

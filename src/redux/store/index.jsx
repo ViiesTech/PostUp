@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { Apis } from '../services';
-import appReducer from '../slices/appSlice'; 
+import appReducer  from './../slices/appSlice';
 
 const persistConfig = {
   key: 'persistedData',

@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 const Routes = () => {
 
-  const {token} = useSelector(state => state.persistedData)
+  const {token} = useSelector(state => state?.persistedData)
 
 
   return (
