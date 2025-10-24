@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   ScrollView,
@@ -7,6 +7,7 @@ import {
   Image,
   ImageBackground,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import AppColors from '../../utils/AppColors';
 import {
@@ -24,7 +25,12 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import AppImages from '../../assets/images/AppImages';
 import AppButton from '../../components/AppButton';
 import NearByEventsCard from '../../components/NearByEventsCard';
-import {useCustomNavigation} from '../../utils/Hooks';
+import {ShowToast, useCustomNavigation} from '../../utils/Hooks';
+import {
+  useAddOrRemoveToFavMutation,
+  useLazyGetAllEventQuery,
+} from '../../redux/services';
+import {useSelector} from 'react-redux';
 
 const nearByData = [
   {
@@ -76,6 +82,13 @@ const Home = () => {
   const sliderRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const {navigateToRoute} = useCustomNavigation();
+  const [getAllEvent, {data, error, isLoading}] = useLazyGetAllEventQuery();
+  const [
+    addOrRemoveToFav,
+    {data: favRes, error: favErr, isLoading: favIsLoading},
+  ] = useAddOrRemoveToFavMutation();
+  const {user} = useSelector(state => state?.persistedData);
+  const [isId, setIsId] = useState(0);
 
   const slides = [
     {
@@ -163,6 +176,55 @@ const Home = () => {
       <LineBreak space={2} />
     </View>
   );
+
+  const handleFetch = async () => {
+    await getAllEvent()
+      .unwrap()
+      .then(res => {
+        if (!res.success) {
+          ShowToast(res.message);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        ShowToast(
+          err.error ||
+            err?.error?.response?.data?.message ||
+            'Failed to fetch events',
+        );
+      });
+  };
+
+  const handleAddToFav = async id => {
+    const bodyData = {
+      userId: user?._id,
+      eventId: id,
+    };
+
+    setIsId(id);
+
+    await addOrRemoveToFav(bodyData)
+      .unwrap()
+      .then(res => {
+        console.log(res);
+        if (res.success) {
+          ShowToast(res.message);
+        } else {
+          ShowToast(res.message);
+        }
+      })
+      .catch(err => {
+        ShowToast(
+          err.error ||
+            err?.error?.response?.data?.message ||
+            'Failed to Add To favorite',
+        );
+      });
+  };
+
+  useEffect(() => {
+    handleFetch(user?._id);
+  }, [user?._id]);
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
@@ -276,25 +338,42 @@ const Home = () => {
       <LineBreak space={2} />
 
       <View>
-        <FlatList
-          data={nearByData}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          ListFooterComponent={<LineBreak space={10} />}
-          contentContainerStyle={{gap: 15, paddingLeft: responsiveWidth(5)}}
-          renderItem={({item}) => {
-            return (
-              <NearByEventsCard
-                item={item}
-                viewDetailsHandleOnPress={() => navigateToRoute('EventDetails')}
-              />
-            );
-          }}
-        />
+        {data?.data?.length === 0 ? (
+          <AppText
+            title={'Events Not Found'}
+            textFontWeight
+            textSize={2}
+            textAlignment={'center'}
+            textColor={AppColors.BLACK}
+          />
+        ) : isLoading ? (
+          <ActivityIndicator color={AppColors.lowGreen} size={'large'} />
+        ) : (
+          <FlatList
+            data={data?.data}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ListFooterComponent={<LineBreak space={10} />}
+            contentContainerStyle={{gap: 15, paddingLeft: responsiveWidth(5)}}
+            renderItem={({item}) => {
+              return (
+                <NearByEventsCard
+                  item={item}
+                  home={'home'}
+                  addToFavLoading={favIsLoading && isId === item?._id}
+                  handleAddToFav={() => handleAddToFav(item?._id)}
+                  viewDetailsHandleOnPress={() =>
+                    navigateToRoute('EventDetails', {eventId: item?._id})
+                  }
+                />
+              );
+            }}
+          />
+        )}
 
         <LineBreak space={4} />
 
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             paddingHorizontal: responsiveWidth(5),
@@ -344,9 +423,9 @@ const Home = () => {
               </View>
             );
           }}
-        />
+        /> */}
 
-        <LineBreak space={7} />
+        {/* <LineBreak space={7} /> */}
 
         <View style={{alignItems: 'center'}}>
           <AppButton

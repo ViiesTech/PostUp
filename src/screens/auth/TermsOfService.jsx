@@ -47,7 +47,7 @@ const TermsOfService = () => {
         <AppButton
           title={'Accept'}
           borderRadius={5}
-          handlePress={() => navigateToRoute('Main')}
+          handlePress={() => navigateToRoute('Login')}
         />
       </View>
       <LineBreak space={3} />

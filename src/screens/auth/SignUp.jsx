@@ -30,7 +30,7 @@ const SignUp = () => {
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
-    const {navigateToRoute} = useCustomNavigation();
+  const {navigateToRoute} = useCustomNavigation();
   const [register, {isLoading}] = useRegisterMutation();
 
   const onChangeText = (value, text) => {
@@ -40,53 +40,58 @@ const SignUp = () => {
     }));
   };
 
-  console.log(state.dob)
+  console.log(state.dob);
 
-const onSignupPress = async () => {
-  if (!state.full_name) {
-    return ShowToast('Please enter your full name');
-  } else if (!state.username) {
-    return ShowToast('Please enter your username');
-  } else if (!state.email) {
-    return ShowToast('Please enter your email');
-  } else if (!state.password) {
-    return ShowToast('Please enter your password');
-  } else if (state.password.length < 8) {
-    return ShowToast('Your password is too weak');
-  } else if (!day || !month || !year) {
-    return ShowToast('Please enter your complete date of birth');
-  } else if (!isValidDate(day, month, year)) {
-    return ShowToast('Please enter a valid date of birth');
-  } else if (!state.gender) {
-    return ShowToast('Please select your gender');
-  } else if (!state.phone) {
-    return ShowToast('Please enter your phone number');
-  }
+  const onSignupPress = async () => {
+    if (!state.full_name) {
+      return ShowToast('Please enter your full name');
+    } else if (!state.username) {
+      return ShowToast('Please enter your username');
+    } else if (!state.email) {
+      return ShowToast('Please enter your email');
+    } else if (!state.password) {
+      return ShowToast('Please enter your password');
+    } else if (state.password.length < 8) {
+      return ShowToast('Your password is too weak');
+    } else if (!day || !month || !year) {
+      return ShowToast('Please enter your complete date of birth');
+    } else if (!isValidDate(day, month, year)) {
+      return ShowToast('Please enter a valid date of birth');
+    } else if (!state.gender) {
+      return ShowToast('Please select your gender');
+    } else if (!state.phone) {
+      return ShowToast('Please enter your phone number');
+    }
 
-  const formattedDOB = `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`;
+    const formattedDOB = `${day.padStart(2, '0')}-${month.padStart(
+      2,
+      '0',
+    )}-${year}`;
 
-  const data = {
-    email: state.email,
-    password: state.password,
-    fullName: state.full_name,
-    userName: state.username,
-    phoneNumber: state.phone,
-    gender: state.gender,
-    dob: formattedDOB,
+    const data = {
+      email: state.email,
+      password: state.password,
+      fullName: state.full_name,
+      userName: state.username,
+      phoneNumber: state.phone,
+      gender: state.gender,
+      dob: formattedDOB,
+    };
+
+    try {
+      const res = await register(data).unwrap();
+      console.log('register response ====>', res);
+      if (res.success) {
+        navigateToRoute('CreateProfile', {data: res?.data});
+        ShowToast(res.message);
+      } else {
+        ShowToast(res.message);
+      }
+    } catch (error) {
+      console.log('failed to register ====>', error);
+      ShowToast('Some problem occurred');
+    }
   };
-
-  try {
-    const res = await register(data).unwrap();
-    console.log('register response ====>', res);   
-    ShowToast(res.message);
-    // if(res.success) {
-    //   navigateToRoute('')
-    // }
-  } catch (error) {
-    console.log('failed to register ====>', error);
-    ShowToast('Some problem occurred');
-  }
-};
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>

@@ -25,6 +25,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useCustomNavigation} from '../../utils/Hooks';
 import WelcomeModal from '../../components/WelcomeModal';
+import {useDispatch} from 'react-redux';
+import {setLogout} from '../../redux/slices/appSlice';
 
 const settingsSections = [
   {
@@ -97,6 +99,7 @@ const settingsSections = [
 const Profile = () => {
   const {navigateToRoute} = useCustomNavigation();
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
 
   const renderGroup = ({item}) => (
     <View style={styles.card}>
@@ -138,8 +141,8 @@ const Profile = () => {
         isVisible={showModal}
         exploreOnPress={() => setShowModal(false)}
         submitOnPress={() => {
+          dispatch(setLogout());
           setShowModal(false);
-          navigateToRoute('Auth');
         }}
       />
 

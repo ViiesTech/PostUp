@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import {
@@ -12,7 +12,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AppText from '../../components/AppTextComps/AppText';
 import AppImages from '../../assets/images/AppImages';
 import NearByEventsCard from '../../components/NearByEventsCard';
-import {useCustomNavigation} from '../../utils/Hooks';
+import {ShowToast, useCustomNavigation} from '../../utils/Hooks';
+import {useLazyGetAllEventQuery} from '../../redux/services';
+import { useSelector } from 'react-redux';
 
 const nearByData = [
   {
@@ -39,6 +41,30 @@ const nearByData = [
 
 const Search = () => {
   const {navigateToRoute} = useCustomNavigation();
+  const [getAllEvent, {data, error, isLoading}] = useLazyGetAllEventQuery();
+  const {user} = useSelector(state => state?.persistedData);
+
+  const handleFetch = async () => {
+    await getAllEvent()
+      .unwrap()
+      .then(res => {
+        if (!res.success) {
+          ShowToast(res.message);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        ShowToast(
+          err.error ||
+            err?.error?.response?.data?.message ||
+            'Failed to fetch events',
+        );
+      });
+  };
+
+  useEffect(() => {
+    handleFetch(user?._id);
+  }, [user?._id]);
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
@@ -80,7 +106,7 @@ const Search = () => {
         <LineBreak space={2} />
 
         <FlatList
-          data={nearByData}
+          data={data?.data}
           ListFooterComponent={<LineBreak space={10} />}
           contentContainerStyle={{gap: 15}}
           renderItem={({item}) => {
@@ -88,7 +114,7 @@ const Search = () => {
               <NearByEventsCard
                 item={item}
                 search={'search'}
-                viewDetailsHandleOnPress={() => navigateToRoute('EventDetails')}
+                viewDetailsHandleOnPress={() => navigateToRoute('EventDetails', {eventId: item?._id})}
               />
             );
           }}

@@ -29,6 +29,7 @@ import Notifications from '../screens/main/Notifications';
 import ShowMyLocation from '../screens/main/ShowMyLocation';
 import FAQ from '../screens/main/FAQ';
 import AllowAccess from '../screens/auth/AllowAccess';
+import AllReview from '../screens/main/AllReview';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,6 +54,7 @@ const Main = () => {
       <Stack.Screen name="ShowMyLocation" component={ShowMyLocation} />
       <Stack.Screen name="FAQ" component={FAQ} />
       <Stack.Screen name="AllowAccess" component={AllowAccess} />
+      <Stack.Screen name="AllReview" component={AllReview} />
     </Stack.Navigator>
   );
 };
