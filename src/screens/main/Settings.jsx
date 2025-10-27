@@ -22,12 +22,6 @@ import {
 import {useCustomNavigation} from '../../utils/Hooks';
 
 const settings = [
-  {
-    key: 'account',
-    label: 'Account Settings',
-    icon: 'account-cog-outline',
-    navTo: 'AccountSettings',
-  },
   {key: 'privacy', label: 'Privacy Settings', icon: 'lock-outline', navTo: ''},
   {
     key: 'notification',

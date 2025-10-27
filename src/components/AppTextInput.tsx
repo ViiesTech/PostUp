@@ -30,6 +30,7 @@ type props = {
   maxLength?:any;
   keyboardType?:any;
   textAlign?:any;
+  editable?:any;
 };
 const AppTextInput = ({
   logo,
@@ -53,6 +54,7 @@ const AppTextInput = ({
   maxLength,
   keyboardType,
   textAlign,
+  editable,
 }: props) => {
   return (
     <View
@@ -87,6 +89,7 @@ const AppTextInput = ({
             : null,
           textAlign: textAlign,
         }}
+        editable={editable}
         secureTextEntry={secureTextEntry}
         textAlignVertical={textAlignVertical}
         multiline={multiline}

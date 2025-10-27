@@ -23,6 +23,11 @@ export const appSlice = createSlice({
           state.token = action.payload.token;
         }
       })
+      .addMatcher(Apis.endpoints.createProfile.matchFulfilled, (state, action) => {
+        if (action.payload?.data) {
+          state.user = action.payload?.data;
+        }
+      });
   },
 });
 

@@ -13,4 +13,5 @@ export const endpoints = {
   GET_EVENT_BY_ID: eventId =>  `/api/admin/getEventById?eventId=${eventId}`,
   ADD_OR_REMOVE_TO_FAV: '/api/user/addOrRemoveFavorite',
   GET_FAVORITES: '/api/user/getFavorites',
+  CHANGE_PASSWORD: '/api/user/resetPassword',
 }

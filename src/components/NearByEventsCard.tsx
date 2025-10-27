@@ -26,6 +26,8 @@ type Prop = {
   home: any;
   handleAddToFav: any;
   addToFavLoading: any;
+  handleRemoveToFav: any;
+  removeToFavLoading: any;
 }
 
 const NearByEventsCard = ({
@@ -36,6 +38,8 @@ const NearByEventsCard = ({
   home,
   handleAddToFav,
   addToFavLoading,
+  handleRemoveToFav,
+  removeToFavLoading,
 }: Prop) => {
   return (
     <View
@@ -106,13 +110,16 @@ const NearByEventsCard = ({
                   height: 23,
                   justifyContent: 'center',
                   alignItems: 'center',
-                }}>
-                <AppText
+                }}
+                disabled={removeToFavLoading}
+                onPress={handleRemoveToFav}
+                >
+               {removeToFavLoading ? <ActivityIndicator size={'small'} color={AppColors.WHITE} /> :  <AppText
                   title={'🤗'}
                   textColor={AppColors.BLACK}
                   textSize={1.5}
                   textFontWeight
-                />
+                />}
               </TouchableOpacity>
             )}
           </View>

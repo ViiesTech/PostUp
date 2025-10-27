@@ -65,11 +65,13 @@ export const Apis = createApi({
       }),
     }),
     getProfile: builder.query({
-      query: () => {
-        //   console.log('typeeee',type)
+      query: (token) => {
         return {
           url: endpoints.GET_PROFILE,
           method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         };
       },
     }),
@@ -96,6 +98,13 @@ export const Apis = createApi({
         body: data,
       }),
     }),
+    changePassword: builder.mutation({
+      query: data => ({
+        url: endpoints.CHANGE_PASSWORD,
+        method: 'POST',
+        body: data,
+      }),
+    }),
      getFavoriesByToken: builder.query({
       query: (token) => {
         return {
@@ -118,6 +127,7 @@ export const {
   useVerifyOTPMutation,
   usePasswordOptionsMutation,
   useAddOrRemoveToFavMutation,
+  useChangePasswordMutation,
   useLazyGetProfileQuery,
   useLazyGetAllEventQuery,
   useLazyGetEventByIdQuery,

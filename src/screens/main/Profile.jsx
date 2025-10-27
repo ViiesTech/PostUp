@@ -1,6 +1,7 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   ScrollView,
@@ -25,8 +26,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useCustomNavigation} from '../../utils/Hooks';
 import WelcomeModal from '../../components/WelcomeModal';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setLogout} from '../../redux/slices/appSlice';
+import { IMAGE_URL } from '../../redux/constant';
 
 const settingsSections = [
   {
@@ -100,6 +102,7 @@ const Profile = () => {
   const {navigateToRoute} = useCustomNavigation();
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+  const {user} = useSelector(state => state?.persistedData);
 
   const renderGroup = ({item}) => (
     <View style={styles.card}>
@@ -151,12 +154,12 @@ const Profile = () => {
       <View style={{paddingHorizontal: responsiveWidth(6)}}>
         <View style={{alignItems: 'center'}}>
           <Image
-            source={AppImages.user}
+            source={{uri: `${IMAGE_URL}${user?.image}`}}
             style={{width: 100, height: 100, borderRadius: 100}}
           />
           <LineBreak space={2} />
           <AppText
-            title={'Ronald Sustroharjo'}
+            title={user?.fullName}
             textColor={AppColors.BLACK}
             textSize={1.8}
             textFontWeight
