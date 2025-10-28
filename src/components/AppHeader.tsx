@@ -58,7 +58,7 @@ const AppHeader = ({
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        // alignItems: 'center',
+        alignItems: 'center',
         paddingTop: responsiveHeight(3),
         paddingHorizontal: responsiveWidth(4),
         borderBottomWidth: borderBottomWidth,

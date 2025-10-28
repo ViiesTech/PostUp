@@ -30,6 +30,10 @@ import ShowMyLocation from '../screens/main/ShowMyLocation';
 import FAQ from '../screens/main/FAQ';
 import AllowAccess from '../screens/auth/AllowAccess';
 import AllReview from '../screens/main/AllReview';
+import {TouchableOpacity, View} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import CreatePost from '../screens/main/CreatePost';
+import CreateEvent from '../screens/main/CreateEvent';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -55,11 +59,14 @@ const Main = () => {
       <Stack.Screen name="FAQ" component={FAQ} />
       <Stack.Screen name="AllowAccess" component={AllowAccess} />
       <Stack.Screen name="AllReview" component={AllReview} />
+      <Stack.Screen name="CreatePost" component={CreatePost} />
+      <Stack.Screen name="CreateEvent" component={CreateEvent} />
     </Stack.Navigator>
   );
 };
 
 function MyTabs() {
+  const nav = useNavigation();
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -99,7 +106,34 @@ function MyTabs() {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Search" component={Search} />
-      {/* <Tab.Screen name="GeneralForum" component={GeneralForum} /> */}
+      <Tab.Screen
+        name="GeneralForum"
+        component={GeneralForum}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <TouchableOpacity
+            onPress={() =>  nav.navigate('Main', {screen: 'GeneralForum'})}
+              style={{
+                top: -30,
+                width: 60,
+                height: 60,
+                borderRadius: 35,
+                backgroundColor: '#FFD700',
+                justifyContent: 'center',
+                borderWidth: 2,
+                borderColor: AppColors.BTNCOLOURS,
+                alignItems: 'center',
+                shadowColor: '#000',
+                shadowOffset: {width: 0, height: 5},
+                shadowOpacity: 0.3,
+                shadowRadius: 5,
+                elevation: 8,
+              }}>
+              <Ionicons name="add" size={40} color={AppColors.BTNCOLOURS} />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Tab.Screen name="Messages" component={Messages} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>

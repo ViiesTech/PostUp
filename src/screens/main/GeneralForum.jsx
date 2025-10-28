@@ -1,5 +1,6 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   ScrollView,
@@ -24,6 +25,8 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
+import TwoOptionDropdown from '../../components/CustomDropDown';
 
 const data = [
   {
@@ -50,7 +53,30 @@ const data = [
   },
 ];
 
+const comments = [
+  {
+    id: 1,
+    image: AppImages.event,
+    name: 'Alexander',
+    time: '7h',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea codo consequat. ',
+  },
+  {
+    id: 2,
+    image: AppImages.event,
+    name: 'Alexander',
+    time: '7h',
+    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea codo consequat. ',
+  },
+];
+
 const GeneralForum = () => {
+  const nav = useNavigation();
+  const [isShowComment, setIsshowComment] = useState({
+    index: null,
+    shown: false,
+  });
+
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <AppHeader
@@ -58,6 +84,12 @@ const GeneralForum = () => {
         heading="General Forum"
         textFontWeight={true}
         isCenteredHead={true}
+        icon={
+          <TwoOptionDropdown
+            onOption1Press={() => nav.navigate('CreatePost')}
+            onOption2Press={() => nav.navigate('CreateEvent')}
+          />
+        }
       />
       <LineBreak space={2} />
       <FlatList
@@ -169,7 +201,7 @@ const GeneralForum = () => {
             <LineBreak space={2} />
           </>
         }
-        renderItem={({item}) => {
+        renderItem={({item, index}) => {
           return (
             <View
               style={{
@@ -287,6 +319,19 @@ const GeneralForum = () => {
                     />
                   </TouchableOpacity>
                   <TouchableOpacity
+                    onPress={() => {
+                      if (isShowComment.index == index && isShowComment.shown) {
+                        setIsshowComment({
+                          index: index,
+                          shown: !isShowComment.shown,
+                        });
+                      } else {
+                        setIsshowComment({
+                          index: index,
+                          shown: true,
+                        });
+                      }
+                    }}
                     style={{
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -322,6 +367,95 @@ const GeneralForum = () => {
                   </TouchableOpacity>
                 </View>
               </View>
+              <LineBreak space={2} />
+
+              {isShowComment.index == index && isShowComment.shown && (
+                <FlatList
+                  data={comments}
+                  ItemSeparatorComponent={<LineBreak space={3} />}
+                  renderItem={({item}) => (
+                    <>
+                      <View
+                        style={{
+                          borderWidth: 1,
+                          borderRadius: 10,
+                          borderColor: AppColors.GRAY,
+                          paddingHorizontal: responsiveWidth(2),
+                          paddingVertical: responsiveHeight(1),
+                        }}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            gap: 10,
+                            alignItems: 'center',
+                          }}>
+                          <Image
+                            source={item.image}
+                            style={{width: 30, height: 30, borderRadius: 100}}
+                          />
+                          <View
+                            style={{
+                              flexDirection: 'row',
+                              justifyContent: 'space-between',
+                              width: responsiveWidth(77),
+                              alignItems: 'center',
+                              gap: 20,
+                            }}>
+                            <View>
+                              <AppText
+                                title={item.name}
+                                textColor={AppColors.BLACK}
+                                textSize={1.5}
+                                textFontWeight
+                              />
+                              <AppText
+                                title={item.time}
+                                textColor={AppColors.LIGHTGRAY}
+                                textSize={1}
+                              />
+                            </View>
+                          </View>
+                        </View>
+                        <LineBreak space={1} />
+                        <AppText
+                          title={item.desc}
+                          textColor={AppColors.DARKGRAY}
+                          textSize={1.5}
+                          lineHeight={2.2}
+                        />
+                      </View>
+                      <LineBreak space={1} />
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          paddingHorizontal: responsiveWidth(2),
+                          gap: 10,
+                          alignItems: 'center',
+                        }}>
+                        <TouchableOpacity>
+                          <AppText
+                            title={'Reply'}
+                            textColor={AppColors.LIGHTGRAY}
+                            textSize={1.5}
+                            borderBottomWidth={1}
+                            borderBottomColor={AppColors.LIGHTGRAY}
+                          />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => nav.navigate('PrivateMessages')}>
+                          <AppText
+                            title={'Hey"s'}
+                            textColor={AppColors.lowGreen}
+                            textSize={1.5}
+                            borderBottomWidth={1}
+                            borderBottomColor={AppColors.lowGreen}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    </>
+                  )}
+                />
+              )}
             </View>
           );
         }}
