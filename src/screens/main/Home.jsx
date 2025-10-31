@@ -10,6 +10,8 @@ import {
   FlatList,
   ActivityIndicator,
   StyleSheet,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import AppColors from '../../utils/AppColors';
 import {
@@ -33,8 +35,10 @@ import {
   useLazyGetAllBannerQuery,
   useLazyGetAllEventQuery,
 } from '../../redux/services';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {IMAGE_URL} from '../../redux/constant';
+import Geolocation from 'react-native-geolocation-service';
+import { saveUserLocation } from '../../redux/slices/appSlice';
 
 // const nearByData = [
 //   {
@@ -97,6 +101,7 @@ const Home = () => {
     getAllBanner,
     {data: bannerData, error: bannerError, isLoading: bannerLoading},
   ] = useLazyGetAllBannerQuery();
+  const dispatch = useDispatch();
 
   const renderDots = () => (
     <View
@@ -226,7 +231,60 @@ const Home = () => {
   useEffect(() => {
     handleFetchEvents(user?._id);
     handleFetchBanners();
+    handleGetLocation();
   }, [user?._id]);
+
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'ios') {
+      const status = await Geolocation.requestAuthorization('whenInUse');
+      return status === 'granted';
+    }
+
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'This app needs access to your location.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    } catch (err) {
+      console.warn(err);
+      return false;
+    }
+  };
+
+  const getCurrentLocation = () => {
+    Geolocation.getCurrentPosition(
+      position => {
+        console.log('Current Position:', position);
+        const location = {
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        };
+        dispatch(saveUserLocation(location));
+      },
+      error => {
+        console.log('Location Error:', error.code, error.message);
+        ShowToast(error.message)
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+    );
+  };
+
+  const handleGetLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+    if (hasPermission) {
+      getCurrentLocation();
+    } else {
+      console.log('Permission denied');
+        ShowToast('Permission denied')
+    }
+  };
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>

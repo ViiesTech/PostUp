@@ -177,6 +177,18 @@ export const Apis = createApi({
         };
       },
     }),
+    getNearByUsers: builder.query({
+      query: ({longitude, latitude}) => {
+        console.log('latlong',typeof latitude,longitude)
+        return {
+          url: endpoints.GET_NEAR_BY_USERS(longitude, latitude),
+          method: 'GET',
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        };
+      },
+    }),
   }),
 });
 
@@ -199,5 +211,6 @@ export const {
   useLazyGetAllBannerQuery,
   useLazyGetAllPostQuery,
   useLazyGetEventByIdQuery,
+  useLazyGetNearByUsersQuery,
   useLazyGetFavoriesByTokenQuery,
 } = Apis;

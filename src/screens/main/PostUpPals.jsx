@@ -1,6 +1,7 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, ScrollView, FlatList, Image} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import LineBreak from '../../components/LineBreak';
@@ -12,6 +13,9 @@ import {
 } from '../../utils/Responsive_Dimensions';
 import AppImages from '../../assets/images/AppImages';
 import AppButton from '../../components/AppButton';
+import {useSelector} from 'react-redux';
+import {useLazyGetNearByUsersQuery} from '../../redux/services';
+import {ShowToast} from '../../utils/Hooks';
 
 const suggestions = [
   {
@@ -96,6 +100,49 @@ const myPal = [
 
 const PostUpPals = () => {
   const [selectedTab, setSelectedTab] = useState('pal-req');
+  const {lat, long} = useSelector(state => state?.persistedData.userLocation);
+  const {token} = useSelector(state => state?.persistedData);
+  const [getNearByUsers, {data, isLoading}] = useLazyGetNearByUsersQuery();
+
+  // const handleFetchNearByUsers = async (lat, long, token) => {
+  //   await getNearByUsers(lat, long, token)
+  //     .unwrap()
+  //     .then(res => {
+  //       if (!res.success) {
+  //         ShowToast(res.message);
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //       ShowToast(
+  //         err.error ||
+  //           err?.error?.response?.data?.message ||
+  //           'Failed to fetch near by users',
+  //       );
+  //     });
+  // };
+
+  useEffect(() => {
+    if (lat && long) {
+      getNearByUsers({longitude: long, latitude: lat})
+        .unwrap()
+        .then(res => {
+          if (!res.success) {
+            ShowToast(res.message);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          ShowToast(
+            err.error ||
+              err?.error?.response?.data?.message ||
+              'Failed to fetch near by users',
+          );
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lat, long]);
+
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <AppHeader

@@ -4,6 +4,10 @@ import {Apis} from '../services';
 const initialState = {
   token: '',
   user: {},
+  userLocation: {
+    lat: null,
+    long: null,
+  },
 };
 
 export const appSlice = createSlice({
@@ -13,6 +17,9 @@ export const appSlice = createSlice({
     setLogout: state => {
       state.user = {};
       state.token = null;
+    },
+    saveUserLocation: (state,action) => {
+      state.userLocation = action.payload;
     },
   },
   extraReducers: builder => {
@@ -31,6 +38,6 @@ export const appSlice = createSlice({
   },
 });
 
-export const {setLogout} = appSlice.actions;
+export const {setLogout,saveUserLocation} = appSlice.actions;
 
 export default appSlice.reducer;
