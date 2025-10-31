@@ -83,6 +83,14 @@ export const Apis = createApi({
         };
       },
     }),
+    getAllBanner: builder.query({
+      query: () => {
+        return {
+          url: endpoints.GET_BANNER,
+          method: 'GET',
+        };
+      },
+    }),
     getEventById: builder.query({
       query: (eventId) => {
         return {
@@ -116,6 +124,59 @@ export const Apis = createApi({
         };
       },
     }),
+     createPost: builder.mutation({
+      query: data => {
+        return {
+          url: endpoints.CREATE_POST,
+          method: 'POST',
+          body: data,
+          headers: {
+            Accept: 'application/json',
+          },
+        };
+      },
+    }),
+    getAllPost: builder.query({
+      query: () => {
+        return {
+          url: endpoints.GET_ALL_POST,
+          method: 'GET',
+        };
+      },
+    }),
+    likePost: builder.mutation({
+      query: data => ({
+        url: endpoints.LIKE_POST,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    commentPost: builder.mutation({
+      query: data => ({
+        url: endpoints.COMMENT_POST,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    replyCommentPost: builder.mutation({
+      query: data => ({
+        url: endpoints.REPLY_COMMENT_POST,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    createEvent: builder.mutation({
+      query: data => {
+        return {
+          url: endpoints.CREATE_EVENT,
+          method: 'POST',
+          body: data,
+          headers: {
+            Accept: 'application/json',
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -123,13 +184,20 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useCreateProfileMutation,
+  useCreatePostMutation,
   useForgetPasswordMutation,
   useVerifyOTPMutation,
   usePasswordOptionsMutation,
   useAddOrRemoveToFavMutation,
   useChangePasswordMutation,
+  useLikePostMutation,
+  useCommentPostMutation,
+  useReplyCommentPostMutation,
+  useCreateEventMutation,
   useLazyGetProfileQuery,
   useLazyGetAllEventQuery,
+  useLazyGetAllBannerQuery,
+  useLazyGetAllPostQuery,
   useLazyGetEventByIdQuery,
   useLazyGetFavoriesByTokenQuery,
 } = Apis;

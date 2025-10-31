@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useRef, useState} from 'react';
 import {
@@ -8,6 +9,7 @@ import {
   ImageBackground,
   FlatList,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import AppColors from '../../utils/AppColors';
 import {
@@ -28,55 +30,57 @@ import NearByEventsCard from '../../components/NearByEventsCard';
 import {ShowToast, useCustomNavigation} from '../../utils/Hooks';
 import {
   useAddOrRemoveToFavMutation,
+  useLazyGetAllBannerQuery,
   useLazyGetAllEventQuery,
 } from '../../redux/services';
 import {useSelector} from 'react-redux';
+import {IMAGE_URL} from '../../redux/constant';
 
-const nearByData = [
-  {
-    id: 1,
-    eventImg: AppImages.event,
-    title: 'Event Name Here',
-    date: '12-15 March, 2025',
-    location: 'Lorem venue, California',
-    likes: '196',
-    comments: '20',
-    shares: '5',
-  },
-  {
-    id: 2,
-    eventImg: AppImages.event,
-    title: 'Event Name Here',
-    date: '12-15 March, 2025',
-    location: 'Lorem venue, California',
-    likes: '196',
-    comments: '20',
-    shares: '5',
-  },
-];
+// const nearByData = [
+//   {
+//     id: 1,
+//     eventImg: AppImages.event,
+//     title: 'Event Name Here',
+//     date: '12-15 March, 2025',
+//     location: 'Lorem venue, California',
+//     likes: '196',
+//     comments: '20',
+//     shares: '5',
+//   },
+//   {
+//     id: 2,
+//     eventImg: AppImages.event,
+//     title: 'Event Name Here',
+//     date: '12-15 March, 2025',
+//     location: 'Lorem venue, California',
+//     likes: '196',
+//     comments: '20',
+//     shares: '5',
+//   },
+// ];
 
-const placesData = [
-  {
-    id: 1,
-    eventImg: AppImages.event,
-    title: 'Places Name Here',
-  },
-  {
-    id: 2,
-    eventImg: AppImages.event,
-    title: 'Places Name Here',
-  },
-  {
-    id: 3,
-    eventImg: AppImages.event,
-    title: 'Places Name Here',
-  },
-  {
-    id: 4,
-    eventImg: AppImages.event,
-    title: 'Places Name Here',
-  },
-];
+// const placesData = [
+//   {
+//     id: 1,
+//     eventImg: AppImages.event,
+//     title: 'Places Name Here',
+//   },
+//   {
+//     id: 2,
+//     eventImg: AppImages.event,
+//     title: 'Places Name Here',
+//   },
+//   {
+//     id: 3,
+//     eventImg: AppImages.event,
+//     title: 'Places Name Here',
+//   },
+//   {
+//     id: 4,
+//     eventImg: AppImages.event,
+//     title: 'Places Name Here',
+//   },
+// ];
 
 const Home = () => {
   const sliderRef = useRef(null);
@@ -89,37 +93,10 @@ const Home = () => {
   ] = useAddOrRemoveToFavMutation();
   const {user} = useSelector(state => state?.persistedData);
   const [isId, setIsId] = useState(0);
-
-  const slides = [
-    {
-      key: 1,
-      title: 'One Quality The Highest',
-      subTitle:
-        'The gold standard in music licensing. for all content creators',
-      image: AppImages.banner,
-    },
-    {
-      key: 2,
-      title: 'One Quality The Highest',
-      subTitle:
-        'The gold standard in music licensing. for all content creators',
-      image: AppImages.banner,
-    },
-    {
-      key: 3,
-      title: 'One Quality The Highest',
-      subTitle:
-        'The gold standard in music licensing. for all content creators',
-      image: AppImages.banner,
-    },
-    {
-      key: 4,
-      title: 'One Quality The Highest',
-      subTitle:
-        'The gold standard in music licensing. for all content creators',
-      image: AppImages.banner,
-    },
-  ];
+  const [
+    getAllBanner,
+    {data: bannerData, error: bannerError, isLoading: bannerLoading},
+  ] = useLazyGetAllBannerQuery();
 
   const renderDots = () => (
     <View
@@ -127,7 +104,7 @@ const Home = () => {
         flexDirection: 'row',
         justifyContent: 'center',
       }}>
-      {slides.map((_, index) => (
+      {bannerData?.data?.map((_, index) => (
         <View
           key={index}
           style={{
@@ -149,15 +126,21 @@ const Home = () => {
     <View>
       <LineBreak space={2} />
       <ImageBackground
-        source={item.image}
+        source={{uri: `${IMAGE_URL}${item.banner}`}}
         style={{
           height: responsiveHeight(25),
           width: responsiveWidth(100),
           paddingHorizontal: responsiveWidth(5),
           justifyContent: 'center',
         }}>
+        <View
+          style={{
+            ...StyleSheet.absoluteFillObject,
+            backgroundColor: 'rgba(0,0,0,0.4)',
+          }}
+        />
         <AppText
-          title={item.title}
+          title={item.businessName}
           textColor={AppColors.WHITE}
           textSize={3}
           textFontWeight
@@ -166,7 +149,7 @@ const Home = () => {
         />
         <LineBreak space={1.5} />
         <AppText
-          title={item.subTitle}
+          title={item.description}
           textColor={AppColors.WHITE}
           textSize={1.5}
           lineHeight={2.5}
@@ -177,7 +160,7 @@ const Home = () => {
     </View>
   );
 
-  const handleFetch = async () => {
+  const handleFetchEvents = async () => {
     await getAllEvent()
       .unwrap()
       .then(res => {
@@ -191,6 +174,24 @@ const Home = () => {
           err.error ||
             err?.error?.response?.data?.message ||
             'Failed to fetch events',
+        );
+      });
+  };
+
+  const handleFetchBanners = async () => {
+    await getAllBanner()
+      .unwrap()
+      .then(res => {
+        if (!res.success) {
+          ShowToast(res.message);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        ShowToast(
+          err.error ||
+            err?.error?.response?.data?.message ||
+            'Failed to fetch banners',
         );
       });
   };
@@ -223,7 +224,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    handleFetch(user?._id);
+    handleFetchEvents(user?._id);
+    handleFetchBanners();
   }, [user?._id]);
 
   return (
@@ -296,18 +298,34 @@ const Home = () => {
       </View>
 
       <View>
-        <AppIntroSlider
-          ref={sliderRef}
-          data={slides}
-          renderItem={renderItem}
-          onSlideChange={index => setCurrentIndex(index)}
-          showNextButton={false}
-          showSkipButton={false}
-          showDoneButton={false}
-          dotStyle={{display: 'none'}}
-          activeDotStyle={{display: 'none'}}
-        />
-        {renderDots()}
+        {bannerData?.data?.length === 0 ? (
+          <View style={{marginTop: responsiveHeight(4)}}>
+            <AppText
+              title={'Banner Not Found'}
+              textFontWeight
+              textSize={2}
+              textAlignment={'center'}
+              textColor={AppColors.BLACK}
+            />
+          </View>
+        ) : bannerLoading ? (
+          <View style={{marginTop: responsiveHeight(4)}}>
+            <ActivityIndicator color={AppColors.lowGreen} size={'large'} />
+          </View>
+        ) : (
+          <AppIntroSlider
+            ref={sliderRef}
+            data={!!bannerData?.data?.length ? bannerData?.data : []}
+            renderItem={renderItem}
+            onSlideChange={index => setCurrentIndex(index)}
+            showNextButton={false}
+            showSkipButton={false}
+            showDoneButton={false}
+            dotStyle={{display: 'none'}}
+            activeDotStyle={{display: 'none'}}
+          />
+        )}
+        {!!bannerData?.data?.length ? renderDots() : null}
       </View>
 
       <LineBreak space={4} />
@@ -325,7 +343,7 @@ const Home = () => {
           textSize={2.5}
           textFontWeight
         />
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <AppText
             title={'See All'}
             textColor={AppColors.LIGHTGRAY}
@@ -333,7 +351,7 @@ const Home = () => {
             borderBottomWidth={1}
             borderBottomColor={AppColors.LIGHTGRAY}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <LineBreak space={2} />
 

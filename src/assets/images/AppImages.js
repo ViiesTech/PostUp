@@ -11,4 +11,5 @@ export default APPIMAGE = {
     msg_map: require('../images/msg_map.png'),
     full_map: require('../images/fullMap.png'),
     splash_logo: require('../images/splash_logo.png'),
+    image_notFound: require('../images/image_not_found.png'),
 };

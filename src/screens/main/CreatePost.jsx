@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   FlatList,
   ImageBackground,
+  Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import AppColors from '../../utils/AppColors';
@@ -25,15 +27,25 @@ import APPICONS from './../../assets/icons/AppIcons';
 import ImagePicker from 'react-native-image-crop-picker';
 import Video from 'react-native-video';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useSelector} from 'react-redux';
+import {IMAGE_URL} from '../../redux/constant';
+import {ShowToast} from '../../utils/Hooks';
+import {useCreatePostMutation, useLazyGetAllPostQuery} from '../../redux/services';
+import { useNavigation } from '@react-navigation/native';
 
 const CreatePost = () => {
   const [media, setMedia] = useState([]);
   const [playingVideo, setPlayingVideo] = useState(null);
+  const {user} = useSelector(state => state?.persistedData);
+  const [caption, setCaption] = useState('');
+  const [createPost, {isLoading}] = useCreatePostMutation();
+  const nav = useNavigation();
+  const [getAllPost] = useLazyGetAllPostQuery();
 
   const handleAddMedia = () => {
     ImagePicker.openPicker({
       multiple: true,
-      mediaType: 'any', // allows both photo & video
+      mediaType: 'any',
     })
       .then(images => {
         console.log('Selected Media:', images);
@@ -57,7 +69,68 @@ const CreatePost = () => {
     setMedia(updatedMedia);
   };
 
+  const handlePost = async () => {
+    if (!caption) {
+      return ShowToast('Please enter your caption');
+    } else if (media.length === 0) {
+      return ShowToast('Please add a photo or video');
+    }
+
+    const formData = new FormData();
+    formData.append('userId', user?._id);
+    formData.append('caption', caption);
+
+    media.forEach(item => {
+      if (item.path) {
+        formData.append('posts', {
+          uri: Platform.OS === 'android' ? item.path : item.path.replace('file://', ''),
+          type: item.mime,
+          name: item.filename ? item.filename : `${Date.now()}.mp4`,
+        });
+      }
+    });
+
+    try {
+      const res = await createPost(formData).unwrap();
+      if (res.success) {
+        ShowToast(res.message);
+        handleFetchPosts();
+        setCaption('');
+        setMedia([]);
+        nav.navigate('Main', {screen: 'GeneralForum'});
+      } else {
+        ShowToast(res.message);
+      }
+    } catch (err) {
+      console.log('Failed to create post ====>', err?.data);
+      ShowToast(
+        err.error ||
+          err?.error?.response?.data?.message ||
+          'Failed to create post',
+      );
+    }
+  };
+
+  const handleFetchPosts = async () => {
+      await getAllPost()
+        .unwrap()
+        .then(res => {
+          if (!res.success) {
+            ShowToast(res.message);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          ShowToast(
+            err.error ||
+              err?.error?.response?.data?.message ||
+              'Failed to fetch posts',
+          );
+        });
+    };
+
   return (
+    <KeyboardAvoidingView style={{flex: 1}} behavior='height'>
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <AppHeader
         goBack
@@ -80,7 +153,7 @@ const CreatePost = () => {
               borderRadius: 10,
             }}>
             <Image
-              source={AppImages.user}
+              source={{uri: `${IMAGE_URL}${user?.image}`}}
               style={{
                 width: responsiveWidth(14),
                 height: responsiveWidth(14),
@@ -90,7 +163,7 @@ const CreatePost = () => {
           </View>
           <View>
             <AppText
-              title={'Ronald Sustroharjo'}
+              title={user?.fullName}
               textColor={AppColors.BLACK}
               textSize={1.8}
               textFontWeight
@@ -108,12 +181,20 @@ const CreatePost = () => {
           inputPlaceHolder={'Write your text'}
           borderColor={AppColors.BTNCOLOURS}
           inputHeight={20}
+          inputWidth={92}
           borderRadius={5}
           multiline={true}
           textAlignVertical={'top'}
+          value={caption}
+          onChangeText={text => setCaption(text)}
         />
         <LineBreak space={2} />
-        <AppButton title={'Post'} buttoWidth={92} />
+        <AppButton
+          title={'Post'}
+          buttoWidth={92}
+          loading={isLoading}
+          handlePress={() => handlePost()}
+        />
         <LineBreak space={2} />
         <TouchableOpacity
           style={{
@@ -234,6 +315,7 @@ const CreatePost = () => {
         />
       </View>
     </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

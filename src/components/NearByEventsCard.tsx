@@ -52,8 +52,8 @@ const NearByEventsCard = ({
       }}>
       <View style={search ? { flexDirection: 'row', gap: 10 } : {}}>
         <ImageBackground
-          // source={item ? { uri: `${IMAGE_URL}${item?.eventImage[0]}` } : AppImages.event}
-          source={AppImages.event}
+          source={item ? { uri: `${IMAGE_URL}${item?.eventImage[0]}` } : AppImages.event}
+          // source={AppImages.event}
           style={
             search
               ? { width: 90, height: 80, borderRadius: 5 }
@@ -175,7 +175,7 @@ const NearByEventsCard = ({
               alignItems: 'center',
               width: search ? responsiveWidth(60) : 'auto',
             }}>
-            <View
+            {/* <View
               style={{
                 flexDirection: 'row',
                 gap: search ? 15 : 20,
@@ -234,7 +234,8 @@ const NearByEventsCard = ({
                   textSize={search ? 1.1 : 1.4}
                 />
               </View>
-            </View>
+            </View> */}
+            <View />
 
             <View>
               <AppButton

@@ -14,4 +14,11 @@ export const endpoints = {
   ADD_OR_REMOVE_TO_FAV: '/api/user/addOrRemoveFavorite',
   GET_FAVORITES: '/api/user/getFavorites',
   CHANGE_PASSWORD: '/api/user/resetPassword',
+  GET_BANNER: '/api/admin/getBanner',
+  CREATE_POST: '/api/user/createPost',
+  GET_ALL_POST: '/api/user/getAllPost',
+  LIKE_POST: '/api/user/likeAndUnLikePost',
+  COMMENT_POST: '/api/user/commentByUser',
+  REPLY_COMMENT_POST: '/api/user/replyByUser',
+  CREATE_EVENT: '/api/admin/createEvent',
 }
