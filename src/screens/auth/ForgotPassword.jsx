@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {KeyboardAvoidingView, View} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import AppText from '../../components/AppTextComps/AppText';
 import LineBreak from '../../components/LineBreak';
@@ -32,7 +32,7 @@ const ForgotPassword = () => {
             navigateToRoute('OTPVerifications', {
               code: res.data.Otp,
               email: res.data.email,
-              id: res.data._id
+              id: res.data._id,
             });
           }
         })
@@ -44,57 +44,61 @@ const ForgotPassword = () => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: AppColors.WHITE}}>
-      <AppHeader goBack />
-      <LineBreak space={5} />
-      <AppText
-        title={'Forgot Password'}
-        textColor={AppColors.BLACK}
-        textSize={2.5}
-        textFontWeight
-        textAlignment={'center'}
-      />
-      <LineBreak space={1} />
-      <AppText
-        title={'We can help to recover your account'}
-        textColor={AppColors.LIGHTGRAY}
-        textSize={2}
-        textAlignment={'center'}
-      />
-      <LineBreak space={20} />
-      <View style={{paddingHorizontal: responsiveWidth(5), flex: 1}}>
-        <View>
-          <AppText
-            title={'Enter your Email Address'}
-            textColor={AppColors.BLACK}
-            textSize={2}
-          />
-          <LineBreak space={1} />
-          <AppTextInput
-            inputPlaceHolder={'Input email address'}
-            value={email}
-            onChangeText={setEmail}
-            placeholderTextColor={AppColors.GRAY}
-            borderRadius={5}
-          />
-          <LineBreak space={1} />
-        </View>
-
-        <View
-          style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+    <KeyboardAvoidingView
+      style={{flex: 1, backgroundColor: AppColors.WHITE}}
+      behavior="height">
+      <View style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+        <AppHeader goBack />
+        <LineBreak space={5} />
+        <AppText
+          title={'Forgot Password'}
+          textColor={AppColors.BLACK}
+          textSize={2.5}
+          textFontWeight
+          textAlignment={'center'}
+        />
+        <LineBreak space={1} />
+        <AppText
+          title={'We can help to recover your account'}
+          textColor={AppColors.LIGHTGRAY}
+          textSize={2}
+          textAlignment={'center'}
+        />
+        <LineBreak space={20} />
+        <View style={{paddingHorizontal: responsiveWidth(5), flex: 1}}>
           <View>
-            <AppButton
-              title={'Next'}
-              textColor={AppColors.WHITE}
-              borderRadius={5}
-              loading={isLoading}
-              handlePress={() => onNextPress()}
+            <AppText
+              title={'Enter your Email Address'}
+              textColor={AppColors.BLACK}
+              textSize={2}
             />
+            <LineBreak space={1} />
+            <AppTextInput
+              inputPlaceHolder={'Input email address'}
+              value={email}
+              onChangeText={setEmail}
+              placeholderTextColor={AppColors.GRAY}
+              borderRadius={5}
+            />
+            <LineBreak space={1} />
           </View>
+
+          <View
+            style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+            <View>
+              <AppButton
+                title={'Next'}
+                textColor={AppColors.WHITE}
+                borderRadius={5}
+                loading={isLoading}
+                handlePress={() => onNextPress()}
+              />
+            </View>
+          </View>
+          <LineBreak space={2} />
         </View>
-        <LineBreak space={2} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

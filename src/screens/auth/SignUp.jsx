@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, View} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import AppText from '../../components/AppTextComps/AppText';
 import LineBreak from '../../components/LineBreak';
@@ -94,6 +94,7 @@ const SignUp = () => {
   };
 
   return (
+    <KeyboardAvoidingView style={{flex: 1, backgroundColor: AppColors.WHITE}} behavior='height'>
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <AppHeader goBack />
       <LineBreak space={10} />
@@ -175,6 +176,7 @@ const SignUp = () => {
             onChangeText={text => onChangeText('password', text)}
             placeholderTextColor={AppColors.GRAY}
             borderRadius={5}
+            secureTextEntry={true}
           />
         </View>
         <LineBreak space={2} />
@@ -302,6 +304,7 @@ const SignUp = () => {
       </View>
       <LineBreak space={4} />
     </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
