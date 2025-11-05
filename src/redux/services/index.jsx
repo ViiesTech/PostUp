@@ -65,7 +65,7 @@ export const Apis = createApi({
       }),
     }),
     getProfile: builder.query({
-      query: (token) => {
+      query: token => {
         return {
           url: endpoints.GET_PROFILE,
           method: 'GET',
@@ -92,7 +92,7 @@ export const Apis = createApi({
       },
     }),
     getEventById: builder.query({
-      query: (eventId) => {
+      query: eventId => {
         return {
           url: endpoints.GET_EVENT_BY_ID(eventId),
           method: 'GET',
@@ -113,8 +113,8 @@ export const Apis = createApi({
         body: data,
       }),
     }),
-     getFavoriesByToken: builder.query({
-      query: (token) => {
+    getFavoriesByToken: builder.query({
+      query: token => {
         return {
           url: endpoints.GET_FAVORITES,
           method: 'GET',
@@ -124,7 +124,7 @@ export const Apis = createApi({
         };
       },
     }),
-     createPost: builder.mutation({
+    createPost: builder.mutation({
       query: data => {
         return {
           url: endpoints.CREATE_POST,
@@ -179,7 +179,6 @@ export const Apis = createApi({
     }),
     getNearByUsers: builder.query({
       query: ({longitude, latitude}) => {
-        console.log('latlong',typeof latitude,longitude)
         return {
           url: endpoints.GET_NEAR_BY_USERS(longitude, latitude),
           method: 'GET',
@@ -188,6 +187,42 @@ export const Apis = createApi({
           // },
         };
       },
+    }),
+    addRequest: builder.mutation({
+      query: data => ({
+        url: endpoints.ADD_REQUEST,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    ignoreUser: builder.mutation({
+      query: data => ({
+        url: endpoints.IGNORE_USER,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    blockUser: builder.mutation({
+      query: data => ({
+        url: endpoints.BLOCK_USER,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    getFollowingsAndFollowReq: builder.query({
+      query: (type) => {
+        return {
+          url: endpoints.GET_FOLLOWINGS_FOLLOWREQ(type),
+          method: 'GET',
+        };
+      },
+    }),
+    approveRejectReq: builder.mutation({
+      query: data => ({
+        url: endpoints.APPROVE_REJECT,
+        method: 'POST',
+        body: data,
+      }),
     }),
   }),
 });
@@ -202,9 +237,13 @@ export const {
   usePasswordOptionsMutation,
   useAddOrRemoveToFavMutation,
   useChangePasswordMutation,
+  useApproveRejectReqMutation,
   useLikePostMutation,
   useCommentPostMutation,
   useReplyCommentPostMutation,
+  useAddRequestMutation,
+  useIgnoreUserMutation,
+  useBlockUserMutation,
   useCreateEventMutation,
   useLazyGetProfileQuery,
   useLazyGetAllEventQuery,
@@ -213,4 +252,5 @@ export const {
   useLazyGetEventByIdQuery,
   useLazyGetNearByUsersQuery,
   useLazyGetFavoriesByTokenQuery,
+  useLazyGetFollowingsAndFollowReqQuery,
 } = Apis;

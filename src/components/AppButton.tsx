@@ -28,6 +28,7 @@ type props = {
   borderRightWidth?:any;
   borderBottomWidth?:any;
   loading: boolean,
+  loaderSize: any,
 };
 const AppButton = ({
   title,
@@ -47,7 +48,8 @@ const AppButton = ({
   elevation,
   borderRightWidth,
   borderBottomWidth,
-  loading
+  loading,
+  loaderSize,
 }: props) => {
   return (
     <TouchableOpacity
@@ -70,7 +72,7 @@ const AppButton = ({
       {leftIcon}
       <View />
       {loading ?
-              <AppLoader  />
+              <AppLoader size={loaderSize} />
       :
       <AppText
         textColor={textColor}

@@ -23,4 +23,9 @@ export const endpoints = {
   CREATE_EVENT: '/api/admin/createEvent',
   GET_NEAR_BY_USERS: (longitude, latitude) =>
     `/api/user/getNearbyUsers?longitude=${longitude}&latitude=${latitude}`,
+  ADD_REQUEST: '/api/user/sendFollowRequest',
+  IGNORE_USER: '/api/user/ignoreUser',
+  BLOCK_USER: '/api/user/blockUser',
+  GET_FOLLOWINGS_FOLLOWREQ: type => `/api/user/getFollowingsAndFollowReq?type=${type}`,
+  APPROVE_REJECT: '/api/user/followRequest',
 };
