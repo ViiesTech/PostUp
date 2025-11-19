@@ -224,6 +224,14 @@ export const Apis = createApi({
         body: data,
       }),
     }),
+    searchByEventName: builder.query({
+      query: (eventName) => {
+        return {
+          url: endpoints.SEARCH_BY_EVENT_NAME(eventName),
+          method: 'GET',
+        };
+      },
+    }),
   }),
 });
 
@@ -253,4 +261,5 @@ export const {
   useLazyGetNearByUsersQuery,
   useLazyGetFavoriesByTokenQuery,
   useLazyGetFollowingsAndFollowReqQuery,
+  useLazySearchByEventNameQuery,
 } = Apis;

@@ -27,5 +27,6 @@ export const endpoints = {
   IGNORE_USER: '/api/user/ignoreUser',
   BLOCK_USER: '/api/user/blockUser',
   GET_FOLLOWINGS_FOLLOWREQ: type => `/api/user/getFollowingsAndFollowReq?type=${type}`,
+  SEARCH_BY_EVENT_NAME: eventName => `/api/admin/getEvent?eventName=${eventName}`,
   APPROVE_REJECT: '/api/user/followRequest',
 };
