@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://p5vt75rb-3010.asse.devtunnels.ms/';
-export const IMAGE_URL = 'https://p5vt75rb-3010.asse.devtunnels.ms/';
+export const BASE_URL = 'https://apiforapp.link/PostUp/';
+export const IMAGE_URL = 'https://apiforapp.link/PostUp/';
 
 export const endpoints = {
   signup: 'api/user/signUpUser',
