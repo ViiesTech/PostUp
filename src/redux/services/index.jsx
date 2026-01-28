@@ -7,7 +7,7 @@ export const Apis = createApi({
     baseUrl: BASE_URL,
     prepareHeaders: (headers, {getState}) => {
       const token = getState().persistedData.token;
-      console.log('state ===>', token);
+      console.log('-:TOKEN:-', token);
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
@@ -210,7 +210,7 @@ export const Apis = createApi({
       }),
     }),
     getFollowingsAndFollowReq: builder.query({
-      query: (type) => {
+      query: type => {
         return {
           url: endpoints.GET_FOLLOWINGS_FOLLOWREQ(type),
           method: 'GET',
@@ -225,7 +225,7 @@ export const Apis = createApi({
       }),
     }),
     searchByEventName: builder.query({
-      query: (eventName) => {
+      query: eventName => {
         return {
           url: endpoints.SEARCH_BY_EVENT_NAME(eventName),
           method: 'GET',

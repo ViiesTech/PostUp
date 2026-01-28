@@ -240,7 +240,7 @@ const GeneralForum = () => {
         }
       />
       <LineBreak space={2} />
-      {data?.data.length === 0 ? (
+      {data?.data?.length === 0 ? (
         <View style={{marginTop: responsiveHeight(4)}}>
           <AppText
             title={'Posts Not Found'}

@@ -38,7 +38,11 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {IMAGE_URL} from '../../redux/constant';
 import Geolocation from 'react-native-geolocation-service';
-import { saveUserLocation } from '../../redux/slices/appSlice';
+import {saveUserLocation} from '../../redux/slices/appSlice';
+import {
+  getCurrentLocation,
+  requestLocationPermission,
+} from '../../config/Location';
 
 // const nearByData = [
 //   {
@@ -97,11 +101,15 @@ const Home = () => {
   ] = useAddOrRemoveToFavMutation();
   const {user} = useSelector(state => state?.persistedData);
   const [isId, setIsId] = useState(0);
-  const [
-    getAllBanner,
-    {data: bannerData, error: bannerError, isLoading: bannerLoading},
-  ] = useLazyGetAllBannerQuery();
+  const [getAllBanner, {data: bannerData, isLoading: bannerLoading}] =
+    useLazyGetAllBannerQuery();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    handleFetchEvents(user?._id);
+    handleFetchBanners();
+    handleGetLocation();
+  }, [user?._id]);
 
   const renderDots = () => (
     <View
@@ -187,12 +195,10 @@ const Home = () => {
     await getAllBanner()
       .unwrap()
       .then(res => {
-        if (!res.success) {
-          ShowToast(res.message);
-        }
+        console.log('res in getAllBanner:-', res);
       })
       .catch(err => {
-        console.log(err);
+        console.log('err in getAllBanner:-', err);
         ShowToast(
           err.error ||
             err?.error?.response?.data?.message ||
@@ -228,61 +234,19 @@ const Home = () => {
       });
   };
 
-  useEffect(() => {
-    handleFetchEvents(user?._id);
-    handleFetchBanners();
-    handleGetLocation();
-  }, [user?._id]);
-
-  const requestLocationPermission = async () => {
-    if (Platform.OS === 'ios') {
-      const status = await Geolocation.requestAuthorization('whenInUse');
-      return status === 'granted';
-    }
-
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Location Permission',
-          message: 'This app needs access to your location.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
-    } catch (err) {
-      console.warn(err);
-      return false;
-    }
-  };
-
-  const getCurrentLocation = () => {
-    Geolocation.getCurrentPosition(
-      position => {
-        console.log('Current Position:', position);
-        const location = {
-          lat: position.coords.latitude,
-          long: position.coords.longitude,
-        };
-        dispatch(saveUserLocation(location));
-      },
-      error => {
-        console.log('Location Error:', error.code, error.message);
-        ShowToast(error.message)
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
-    );
-  };
-
   const handleGetLocation = async () => {
     const hasPermission = await requestLocationPermission();
     if (hasPermission) {
-      getCurrentLocation();
+      try {
+        let location = await getCurrentLocation();
+        console.log('location:-----', location);
+        dispatch(saveUserLocation(location));
+      } catch (error) {
+        console.log('Error getting location in Home:', error);
+      }
     } else {
       console.log('Permission denied');
-        ShowToast('Permission denied')
+      ShowToast('Permission denied');
     }
   };
 
