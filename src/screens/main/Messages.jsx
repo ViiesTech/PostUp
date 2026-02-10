@@ -1,12 +1,10 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   View,
   FlatList,
   TouchableOpacity,
   Image,
-  ScrollView,
+  StyleSheet,
 } from 'react-native';
 import AppHeader from '../../components/AppHeader';
 import LineBreak from '../../components/LineBreak';
@@ -22,28 +20,28 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import AppButton from '../../components/AppButton';
 import {useCustomNavigation} from '../../utils/Hooks';
 
-const tab = [
+const TABS = [
   {id: 1, title: 'Messages'},
   {id: 2, title: 'Map'},
 ];
 
-const messages = [
+const MESSAGE_DATA = [
   {
-    id: 1,
+    id: '1',
     userImg: AppImages.user,
     username: 'Taylor Jonhanson',
     time: '10:45',
     message: 'Lorem ipsum dolor sit amet consectetur.',
   },
   {
-    id: 2,
+    id: '2',
     userImg: AppImages.user,
     username: 'Taylor Jonhanson',
     time: '10:45',
     message: 'Lorem ipsum dolor sit amet consectetur.',
   },
   {
-    id: 3,
+    id: '3',
     userImg: AppImages.user,
     username: 'Taylor Jonhanson',
     time: '10:45',
@@ -52,16 +50,49 @@ const messages = [
 ];
 
 const Messages = () => {
-  const [activeTab, setActiveTab] = useState({id: 1, title: 'Messages'});
+  const [activeTab, setActiveTab] = useState(TABS[0]);
   const {navigateToRoute} = useCustomNavigation();
+
+  // Helper to render the Message List
+  const renderMessageItem = ({item}) => (
+    <TouchableOpacity
+      style={styles.messageItem}
+      onPress={() => navigateToRoute('PrivateMessages')}>
+      <View style={styles.row}>
+        <Image source={item.userImg} style={styles.avatarSmall} />
+        <View style={{flex: 1}}>
+          <View style={styles.messageHeader}>
+            <AppText
+              title={item.username}
+              textColor={AppColors.BLACK}
+              textSize={1.8}
+              textFontWeight
+            />
+            <AppText
+              title={item.time}
+              textColor={AppColors.GRAY}
+              textSize={1.5}
+            />
+          </View>
+          <LineBreak space={0.5} />
+          <AppText
+            title={item.message}
+            textColor={AppColors.LIGHTGRAY}
+            textSize={1.5}
+          />
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
-    <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+    <View style={styles.container}>
       <AppHeader
         goBack
-        heading={activeTab?.title}
+        heading={activeTab.title}
         isCenteredHead={true}
         textFontWeight={true}
-        isCenteredHeadWidth={activeTab.id == 2 ? 52 : null}
+        isCenteredHeadWidth={activeTab.id === 2 ? 52 : null}
         paddingBottom={2}
         borderBottomWidth={0.5}
         borderBottomColor={AppColors.DARKGRAY}
@@ -69,135 +100,62 @@ const Messages = () => {
 
       <LineBreak space={3} />
 
+      {/* Tab Switcher */}
       <View style={{paddingHorizontal: responsiveWidth(5)}}>
         <FlatList
-          data={tab}
+          data={TABS}
           horizontal
-          contentContainerStyle={{
-            backgroundColor: AppColors.lowGreen,
-            borderRadius: 100,
-          }}
-          renderItem={({item}) => {
-            return (
-              <TouchableOpacity
-                style={{
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.tabContainer}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              style={[
+                styles.tabButton,
+                {
                   backgroundColor:
-                    activeTab.id == item.id
+                    activeTab.id === item.id
                       ? AppColors.BTNCOLOURS
                       : AppColors.lowGreen,
-                  width: responsiveWidth(45),
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingVertical: responsiveHeight(1.5),
-                  borderRadius: 100,
-                }}
-                onPress={() => setActiveTab({id: item.id, title: item.title})}>
-                <AppText
-                  title={item.title}
-                  textColor={AppColors.WHITE}
-                  textSize={2}
-                  textFontWeight
-                />
-              </TouchableOpacity>
-            );
-          }}
+                },
+              ]}
+              onPress={() => setActiveTab(item)}>
+              <AppText
+                title={item.title}
+                textColor={AppColors.WHITE}
+                textSize={2}
+                textFontWeight
+              />
+            </TouchableOpacity>
+          )}
         />
       </View>
 
       <LineBreak space={3} />
 
-      {activeTab.id == 1 && (
+      {/* Main Content Area */}
+      {activeTab.id === 1 ? (
         <FlatList
-          data={messages}
-          renderItem={({item}) => {
-            return (
-              <TouchableOpacity
-                style={{
-                  paddingVertical: responsiveHeight(2),
-                  borderTopWidth: 1,
-                  borderTopColor: AppColors.DARKGRAY,
-                  paddingHorizontal: responsiveWidth(5),
-                }}
-                onPress={() => navigateToRoute('PrivateMessages')}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    gap: 10,
-                  }}>
-                  <Image
-                    source={item.userImg}
-                    style={{width: 25, height: 25, borderRadius: 100}}
-                  />
-                  <View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        gap: 20,
-                      }}>
-                      <AppText
-                        title={item.username}
-                        textColor={AppColors.BLACK}
-                        textSize={1.8}
-                        textFontWeight
-                      />
-                      <AppText
-                        title={item.time}
-                        textColor={AppColors.GRAY}
-                        textSize={1.5}
-                      />
-                    </View>
-                    <LineBreak space={0.5} />
-                    <AppText
-                      title={item.message}
-                      textColor={AppColors.LIGHTGRAY}
-                      textSize={1.5}
-                    />
-                  </View>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
+          data={MESSAGE_DATA}
+          keyExtractor={item => item.id}
+          renderItem={renderMessageItem}
+          contentContainerStyle={{paddingBottom: 20}}
         />
-      )}
-
-      {activeTab.id == 2 && (
-        <View style={{paddingHorizontal: responsiveWidth(5)}}>
+      ) : (
+        <View style={{flex: 1, paddingHorizontal: responsiveWidth(5)}}>
           <Image
             source={AppImages.msg_map}
-            style={{
-              width: responsiveWidth(100),
-              height: responsiveHeight(62),
-              alignSelf: 'center',
-            }}
-            resizeMode="contain"
+            style={styles.mapImage}
+            resizeMode="cover"
           />
 
           <LineBreak space={3} />
 
-          <View
-            style={{
-              paddingVertical: responsiveHeight(2),
-              paddingHorizontal: responsiveWidth(2),
-            }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                gap: 10,
-              }}>
-              <Image
-                source={AppImages.user}
-                style={{width: 45, height: 45, borderRadius: 100}}
-              />
-              <View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: responsiveWidth(74),
-                    alignItems: 'center',
-                    gap: 20,
-                  }}>
+          <View style={styles.mapUserInfo}>
+            <View style={styles.row}>
+              <Image source={AppImages.user} style={styles.avatarLarge} />
+              <View style={{flex: 1}}>
+                <View style={styles.mapHeaderRow}>
                   <AppText
                     title={'John Doe'}
                     textColor={AppColors.BLACK}
@@ -223,14 +181,71 @@ const Messages = () => {
             <AppButton
               title={'Chat'}
               borderRadius={5}
-              buttoWidth={88}
+              buttoWidth={90}
               handlePress={() => navigateToRoute('PrivateMessages')}
             />
           </View>
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: AppColors.WHITE,
+  },
+  tabContainer: {
+    backgroundColor: AppColors.lowGreen,
+    borderRadius: 100,
+  },
+  tabButton: {
+    width: responsiveWidth(45),
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: responsiveHeight(1.5),
+    borderRadius: 100,
+  },
+  messageItem: {
+    paddingVertical: responsiveHeight(2),
+    borderTopWidth: 1,
+    borderTopColor: AppColors.DARKGRAY,
+    paddingHorizontal: responsiveWidth(5),
+  },
+  row: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  messageHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  avatarSmall: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  avatarLarge: {
+    width: 45,
+    height: 45,
+    borderRadius: 100,
+  },
+  mapImage: {
+    width: '100%',
+    height: responsiveHeight(45),
+    borderRadius: 15,
+    alignSelf: 'center',
+  },
+  mapUserInfo: {
+    paddingVertical: responsiveHeight(1),
+  },
+  mapHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
 
 export default Messages;

@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
-import {KeyboardAvoidingView, ScrollView, TouchableOpacity, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import AppColors from '../../utils/AppColors';
 import AppText from '../../components/AppTextComps/AppText';
 import LineBreak from '../../components/LineBreak';

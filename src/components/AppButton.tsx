@@ -21,14 +21,15 @@ type props = {
   buttoWidth?: number;
   borderWidth?: any;
   borderColor?: any;
-  borderRadius?:any;
+  borderRadius?: any;
   textTransform?: any;
-  padding?:any;
-  elevation?:any;
-  borderRightWidth?:any;
-  borderBottomWidth?:any;
-  loading: boolean,
-  loaderSize: any,
+  padding?: any;
+  elevation?: any;
+  borderRightWidth?: any;
+  borderBottomWidth?: any;
+  loading: boolean;
+  loaderSize: any;
+  height: any;
 };
 const AppButton = ({
   title,
@@ -50,11 +51,14 @@ const AppButton = ({
   borderBottomWidth,
   loading,
   loaderSize,
+  height,
 }: props) => {
   return (
     <TouchableOpacity
+      disabled={loading}
       onPress={handlePress}
       style={{
+        height: height ? height : undefined,
         backgroundColor: bgColor ? bgColor : AppColors.BTNCOLOURS,
         alignItems: 'center',
         justifyContent: leftIcon ? 'center' : 'space-between',
@@ -71,17 +75,17 @@ const AppButton = ({
       }}>
       {leftIcon}
       <View />
-      {loading ?
-              <AppLoader size={loaderSize} />
-      :
-      <AppText
-        textColor={textColor}
-        textSize={textSize}
-        title={title}
-        textFontWeight={textFontWeight}
-        textTransform={textTransform}
-      />
-      }
+      {loading ? (
+        <AppLoader size={loaderSize} />
+      ) : (
+        <AppText
+          textColor={textColor}
+          textSize={textSize}
+          title={title}
+          textFontWeight={textFontWeight}
+          textTransform={textTransform}
+        />
+      )}
     </TouchableOpacity>
   );
 };

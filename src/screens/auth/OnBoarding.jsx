@@ -13,11 +13,14 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import {useNavigation} from '@react-navigation/native';
 import LineBreak from '../../components/LineBreak';
 import Feather from 'react-native-vector-icons/Feather';
+import {useDispatch} from 'react-redux';
+import {setOnboardingDone} from '../../redux/slices/appSlice';
 
 const OnBoarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const slides = [
     {
@@ -83,7 +86,9 @@ const OnBoarding = () => {
         title={item.text}
         textColor={AppColors.BLACK}
         textSize={2.5}
-        textwidth={item.key === 1 ? 60 : item.key === 2 ? 72 : item.key === 3 ? 65 : 70}
+        textwidth={
+          item.key === 1 ? 60 : item.key === 2 ? 72 : item.key === 3 ? 65 : 70
+        }
         textFontWeight
         textAlignment={'center'}
       />
@@ -104,6 +109,7 @@ const OnBoarding = () => {
   };
 
   const handleDone = () => {
+    dispatch(setOnboardingDone());
     navigation.replace('Login');
   };
 

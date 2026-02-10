@@ -66,7 +66,7 @@ const AccountSettings = () => {
       return ShowToast('Please enter your username');
     } else if (!state.phone) {
       return ShowToast('Please enter your phone number');
-    } 
+    }
 
     const formData = new FormData();
     formData.append('id', user?._id);
@@ -85,7 +85,7 @@ const AccountSettings = () => {
     }
 
     try {
-      const res = await createProfile(formData).unwrap();
+      const res = await createProfile({payload: formData}).unwrap();
       if (res.success) {
         ShowToast(res.message);
       } else {
@@ -127,8 +127,7 @@ const AccountSettings = () => {
                 right: responsiveWidth(-1),
                 elevation: 10,
               }}
-              onPress={() => handleProfileImage()}
-              >
+              onPress={() => handleProfileImage()}>
               <AntDesign
                 name="plus"
                 size={responsiveFontSize(3)}

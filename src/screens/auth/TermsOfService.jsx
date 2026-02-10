@@ -43,13 +43,13 @@ const TermsOfService = () => {
         />
       </View>
       <LineBreak space={3} />
-      <View style={{alignItems: 'center'}}>
+      {/* <View style={{alignItems: 'center'}}>
         <AppButton
           title={'Accept'}
           borderRadius={5}
           handlePress={() => navigateToRoute('Login')}
         />
-      </View>
+      </View> */}
       <LineBreak space={3} />
     </ScrollView>
   );

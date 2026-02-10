@@ -30,7 +30,7 @@ type props = {
   textTransform?: any;
   privateMessages?: any;
   profImg?: any;
-  arrowWhite?:any;
+  arrowWhite?: any;
 };
 
 const AppHeader = ({

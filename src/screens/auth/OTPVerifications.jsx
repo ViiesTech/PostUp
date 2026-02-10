@@ -11,32 +11,48 @@ import {OtpInput} from 'react-native-otp-entry';
 import {useVerifyOTPMutation} from '../../redux/services';
 
 const OTPVerifications = ({route}) => {
-  const {code, email,id} = route?.params;
+  const {code, email, id, type, token} = route?.params;
   const {navigateToRoute} = useCustomNavigation();
   const [verifyOTP, {isLoading}] = useVerifyOTPMutation();
   const [OTPCode, setOTPCode] = useState('');
-
-  // console.log('data', code, email);
+  let signupFlow = type === 'signup';
 
   const onOTPVerify = async () => {
     if (OTPCode) {
       let data = {
         email: email,
-        Otp: code,
+        otp: OTPCode,
       };
-      await verifyOTP(data)
+      let data2 = {
+        token: token,
+        otp: OTPCode,
+      };
+      await verifyOTP(signupFlow ? data2 : data)
         .unwrap()
         .then(res => {
           console.log('otp response ===>', res);
           ShowToast(res.message);
           if (res.success) {
-            navigateToRoute('NewPassword', {type: 'reset',id: id});
+            if (signupFlow) {
+              navigateToRoute('CreateProfile', {
+                data: res?.data,
+                token: res?.token || token,
+              });
+            } else {
+              navigateToRoute('NewPassword', {type: 'reset', id: id});
+            }
           }
         });
     } else {
       ShowToast('Please enter your verification code');
     }
   };
+
+  console.log('code:-', code);
+  console.log('email:-', email);
+  console.log('id:-', id);
+  console.log('type:-', type);
+  console.log('token:-', token);
 
   return (
     <View style={{flex: 1, backgroundColor: AppColors.WHITE}}>
@@ -51,9 +67,14 @@ const OTPVerifications = ({route}) => {
       />
       <LineBreak space={1} />
       <AppText
-        title={'We can help to recover your account'}
+        title={
+          signupFlow
+            ? `An email has been sent to your email: ${email}.`
+            : 'We can help to recover your account'
+        }
         textColor={AppColors.LIGHTGRAY}
         textSize={2}
+        textwidth={90}
         textAlignment={'center'}
       />
       <LineBreak space={20} />

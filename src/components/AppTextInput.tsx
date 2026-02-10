@@ -25,12 +25,12 @@ type props = {
   borderRadius?: any;
   borderBottomWidth?: any;
   borderBottomColor?: any;
-  borderWidth?:any;
-  borderColor?:any;
-  maxLength?:any;
-  keyboardType?:any;
-  textAlign?:any;
-  editable?:any;
+  borderWidth?: any;
+  borderColor?: any;
+  maxLength?: any;
+  keyboardType?: any;
+  textAlign?: any;
+  editable?: any;
 };
 const AppTextInput = ({
   logo,

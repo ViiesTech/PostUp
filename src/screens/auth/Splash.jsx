@@ -10,15 +10,21 @@ import {
 import LineBreak from '../../components/LineBreak';
 import AppText from '../../components/AppTextComps/AppText';
 import {useCustomNavigation} from '../../utils/Hooks';
+import {useSelector} from 'react-redux';
 
 const Splash = () => {
+  const {isFirstLaunch} = useSelector(state => state?.persistedData);
   const {navigateToRoute} = useCustomNavigation();
 
   useEffect(() => {
     setTimeout(() => {
-      navigateToRoute('OnBoarding');
+      if (isFirstLaunch) {
+        navigateToRoute('OnBoarding');
+      } else {
+        navigateToRoute('Login');
+      }
     }, 1500);
-  }, [navigateToRoute]);
+  }, [navigateToRoute, isFirstLaunch]);
 
   return (
     <View

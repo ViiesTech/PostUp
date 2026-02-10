@@ -29,19 +29,20 @@ import ImagePicker from 'react-native-image-crop-picker';
 const CreateProfile = ({route}) => {
   const {navigateToRoute} = useCustomNavigation();
   const params = route?.params?.data;
+  const token = route?.params?.token;
   const [state, setState] = useState({
     full_name: params?.fullName,
     username: params?.userName,
     email: params?.email,
-    dob: params?.dob,
-    gender: params?.gender,
-    phone: JSON.stringify(params?.phoneNumber),
+    dob: '',
+    gender: '',
+    phone: '',
   });
 
-  const [d, m, y] = params?.dob.split('-');
+  const [d, m, y] = params?.dob?.split('-') || [];
 
-  const [day, setDay] = useState(d.padStart(2, '0'));
-  const [month, setMonth] = useState(m.padStart(2, '0'));
+  const [day, setDay] = useState(d?.padStart(2, '0'));
+  const [month, setMonth] = useState(m?.padStart(2, '0'));
   const [year, setYear] = useState(y);
   const [createProfile, {isLoading}] = useCreateProfileMutation();
   const [image, setImage] = useState('');
@@ -81,9 +82,13 @@ const CreateProfile = ({route}) => {
       return ShowToast('Please enter your phone number');
     } else if (!image) {
       return ShowToast('Please enter your Profile Image');
+    } else if (!params?._id) {
+      return ShowToast(
+        'User ID is missing. Please restart the sign-up process.',
+      );
     }
 
-    const formattedDOB = `${day.padStart(2, '0')}-${month.padStart(
+    const formattedDOB = `${month.padStart(2, '0')}-${day.padStart(
       2,
       '0',
     )}-${year}`;
@@ -107,29 +112,31 @@ const CreateProfile = ({route}) => {
       });
     }
 
-    console.log(formData);
+    console.log('formData:-', formData);
 
     try {
-      const res = await createProfile(formData).unwrap();
-      console.log('create profile response ====>', res);
+      const res = await createProfile({payload: formData, token}).unwrap();
+      console.log('res in createProfile:-', res);
       if (res.success) {
-        navigateToRoute('TermsOfService');
+        navigateToRoute('Login'); // TermsOfService
         ShowToast(res.message);
       } else {
         ShowToast(res.message);
       }
-    } catch (error) {
-      console.log('failed to create profile ====>', error);
-      ShowToast('Some problem occurred');
+    } catch (err) {
+      console.log('err in createProfile:-', JSON.stringify(err, null, 2));
+      ShowToast(err?.data?.message || 'Failed to update profile');
     }
   };
+
+  console.log('params:-', JSON.stringify(params, null, 2));
 
   return (
     <KeyboardAvoidingView
       style={{flex: 1, backgroundColor: AppColors.WHITE}}
       behavior="height">
       <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
-        <AppHeader goBack />
+        <AppHeader goBack={false} />
         <LineBreak space={3} />
 
         <View style={{paddingHorizontal: responsiveWidth(6)}}>
@@ -242,9 +249,9 @@ const CreateProfile = ({route}) => {
                   inputWidth={22}
                   textAlignVertical={'center'}
                   textAlign={'center'}
-                  onChangeText={setDay}
+                  onChangeText={setMonth}
                   keyboardType={'numeric'}
-                  value={day}
+                  value={month}
                   maxLength={2}
                 />
                 <AppTextInput
@@ -254,8 +261,8 @@ const CreateProfile = ({route}) => {
                   inputWidth={22}
                   textAlignVertical={'center'}
                   textAlign={'center'}
-                  onChangeText={setMonth}
-                  value={month}
+                  onChangeText={setDay}
+                  value={day}
                   keyboardType={'numeric'}
                   maxLength={2}
                 />
@@ -320,7 +327,7 @@ const CreateProfile = ({route}) => {
                 inputWidth={72}
                 rightIcon={
                   <TouchableOpacity
-                    onPress={() => navigateToRoute('AllowAccess')}
+                    // onPress={() => navigateToRoute('AllowAccess')}
                     style={{
                       backgroundColor: AppColors.darkYellow,
                       width: 30,

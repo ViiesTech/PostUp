@@ -1,49 +1,50 @@
-/* eslint-disable no-shadow */
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   ScrollView,
   Image,
-  FlatList,
   StyleSheet,
   TouchableOpacity,
   Text,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+
 import AppColors from '../../utils/AppColors';
 import AppHeader from '../../components/AppHeader';
 import LineBreak from '../../components/LineBreak';
 import AppImages from '../../assets/images/AppImages';
 import AppText from '../../components/AppTextComps/AppText';
 import AppButton from '../../components/AppButton';
+import WelcomeModal from '../../components/WelcomeModal';
 import {
   responsiveHeight,
   responsiveWidth,
 } from '../../utils/Responsive_Dimensions';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useCustomNavigation} from '../../utils/Hooks';
-import WelcomeModal from '../../components/WelcomeModal';
-import {useDispatch, useSelector} from 'react-redux';
-import {setLogout} from '../../redux/slices/appSlice';
-import { IMAGE_URL } from '../../redux/constant';
 
-const settingsSections = [
+import {useCustomNavigation} from '../../utils/Hooks';
+import {setLogout} from '../../redux/slices/appSlice';
+import {IMAGE_URL} from '../../redux/constant';
+
+const SETTINGS_SECTIONS = [
   {
     id: 'group1',
     items: [
       {
         id: '1',
         title: 'Settings',
-        icon: <Ionicons name="settings-outline" size={20} />,
+        icon: 'settings-outline',
+        lib: 'Ionicons',
         navTo: 'Settings',
       },
       {
         id: '2',
         title: 'Find PostUp Pals',
-        icon: <Ionicons name="people-outline" size={20} />,
+        icon: 'people-outline',
+        lib: 'Ionicons',
         navTo: 'PostUpPals',
       },
     ],
@@ -54,28 +55,29 @@ const settingsSections = [
       {
         id: '3',
         title: 'Favorites',
-        icon: <Text style={{fontSize: 20}}>🤗</Text>,
+        icon: '🤗',
+        lib: 'Emoji',
         navTo: 'Favorites',
       },
       {
         id: '4',
         title: 'Privacy and safety',
-        icon: <Ionicons name="shield-checkmark-outline" size={20} />,
+        icon: 'shield-checkmark-outline',
+        lib: 'Ionicons',
         navTo: 'PrivacyPolicy',
-        heading: 'Privacy Policy',
       },
       {
         id: '5',
         title: 'Accessibility, display and languages',
-        icon: (
-          <MaterialCommunityIcons name="hand-back-right-outline" size={20} />
-        ),
+        icon: 'hand-back-right-outline',
+        lib: 'MCI',
         navTo: 'Favorites',
       },
       {
         id: '6',
         title: 'Notifications',
-        icon: <Ionicons name="notifications-outline" size={20} />,
+        icon: 'notifications-outline',
+        lib: 'Ionicons',
         navTo: 'Notifications',
       },
     ],
@@ -86,17 +88,31 @@ const settingsSections = [
       {
         id: '7',
         title: 'History',
-        icon: <Ionicons name="time-outline" size={20} />,
+        icon: 'time-outline',
+        lib: 'Ionicons',
         navTo: 'History',
       },
-      {
-        id: '8',
-        title: 'Logout',
-        icon: <MaterialIcons name="logout" size={20} />,
-      },
+      {id: '8', title: 'Logout', icon: 'logout', lib: 'MaterialIcons'},
     ],
   },
 ];
+
+// Reusable Icon Component to keep the data array clean
+const SettingIcon = ({item}) => {
+  const size = 20;
+  const color = AppColors.BLACK;
+  if (item.lib === 'Ionicons')
+    return <Ionicons name={item.icon} size={size} color={color} />;
+  if (item.lib === 'MaterialIcons')
+    return <MaterialIcons name={item.icon} size={size} color={color} />;
+  if (item.lib === 'MCI')
+    return (
+      <MaterialCommunityIcons name={item.icon} size={size} color={color} />
+    );
+  if (item.lib === 'Emoji')
+    return <Text style={{fontSize: 20}}>{item.icon}</Text>;
+  return null;
+};
 
 const Profile = () => {
   const {navigateToRoute} = useCustomNavigation();
@@ -104,41 +120,79 @@ const Profile = () => {
   const dispatch = useDispatch();
   const {user} = useSelector(state => state?.persistedData);
 
-  const renderGroup = ({item}) => (
-    <View style={styles.card}>
-      {item.items.map((setting, index) => (
-        <TouchableOpacity
-          key={setting.id}
-          style={styles.item}
-          onPress={() => {
-            if (setting.navTo) {
-              navigateToRoute(setting.navTo);
-            } else if (setting.heading) {
-              navigateToRoute(setting.navTo);
-            } else {
-              setShowModal(true);
-            }
-          }}>
-          <View style={styles.icon}>{setting.icon}</View>
-          <AppText
-            title={setting.title}
-            textColor={AppColors.BLACK}
-            textSize={2}
-          />
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
+  const handlePress = item => {
+    if (item.title === 'Logout') {
+      setShowModal(true);
+    } else if (item.navTo) {
+      navigateToRoute(item.navTo);
+    }
+  };
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+    <View style={styles.container}>
       <AppHeader
         heading="My Profile"
         goBack
-        isCenteredHead={true}
-        textFontWeight={true}
+        isCenteredHead
+        textFontWeight
         isCenteredHeadWidth={57.5}
       />
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}>
+        <LineBreak space={3} />
+
+        {/* User Profile Header */}
+        <View style={styles.profileHeader}>
+          <Image
+            source={{uri: `${IMAGE_URL}${user?.image}`}}
+            style={styles.profileImage}
+          />
+          <LineBreak space={2} />
+          <AppText
+            title={user?.fullName || 'User Name'}
+            textColor={AppColors.BLACK}
+            textSize={1.8}
+            textFontWeight
+          />
+          <LineBreak space={1.5} />
+          <AppButton
+            title={'Edit Profile'}
+            borderRadius={5}
+            handlePress={() => navigateToRoute('AccountSettings')}
+            textSize={1.4}
+            buttoWidth={28}
+          />
+        </View>
+
+        <LineBreak space={4} />
+
+        {/* Settings Sections Mapping */}
+        {SETTINGS_SECTIONS.map(group => (
+          <View key={group.id} style={styles.card}>
+            {group.items.map((item, index) => (
+              <TouchableOpacity
+                key={item.id}
+                style={[
+                  styles.item,
+                  index === group.items.length - 1 && {borderBottomWidth: 0},
+                ]}
+                activeOpacity={0.7}
+                onPress={() => handlePress(item)}>
+                <View style={styles.iconContainer}>
+                  <SettingIcon item={item} />
+                </View>
+                <AppText
+                  title={item.title}
+                  textColor={AppColors.BLACK}
+                  textSize={1.8}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+        ))}
+      </ScrollView>
 
       <WelcomeModal
         isVisible={showModal}
@@ -148,68 +202,53 @@ const Profile = () => {
           setShowModal(false);
         }}
       />
-
-      <LineBreak space={3} />
-
-      <View style={{paddingHorizontal: responsiveWidth(6)}}>
-        <View style={{alignItems: 'center'}}>
-          <Image
-            source={{uri: `${IMAGE_URL}${user?.image}`}}
-            style={{width: 100, height: 100, borderRadius: 100}}
-          />
-          <LineBreak space={2} />
-          <AppText
-            title={user?.fullName}
-            textColor={AppColors.BLACK}
-            textSize={1.8}
-            textFontWeight
-          />
-          <LineBreak space={2} />
-          <AppButton
-            title={'Edit Profile'}
-            borderRadius={5}
-            handlePress={() => navigateToRoute('AccountSettings')}
-            textSize={1.4}
-            buttoWidth={25}
-          />
-        </View>
-        <LineBreak space={3} />
-
-        <FlatList
-          data={settingsSections}
-          keyExtractor={item => item.id}
-          renderItem={renderGroup}
-          ItemSeparatorComponent={() => <LineBreak space={2} />}
-          contentContainerStyle={{paddingBottom: 20}}
-          scrollEnabled={false}
-        />
-      </View>
-    </ScrollView>
+    </View>
   );
 };
 
 export default Profile;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: AppColors.WHITE,
+  },
+  scrollContent: {
+    paddingHorizontal: responsiveWidth(6),
+    paddingBottom: 40,
+  },
+  profileHeader: {
+    alignItems: 'center',
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#eee',
+  },
   card: {
     backgroundColor: '#f9f9f9',
-    borderRadius: 12,
-    paddingVertical: responsiveHeight(2),
-    elevation: 2,
+    borderRadius: 15,
+    marginBottom: responsiveHeight(2.5),
+    paddingHorizontal: responsiveWidth(2),
+    // Standard shadow/elevation
+    elevation: 3,
     shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
-    marginBottom: responsiveHeight(2),
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: responsiveWidth(4),
+    paddingVertical: responsiveHeight(2),
+    paddingHorizontal: responsiveWidth(3),
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    gap: 15,
+    borderBottomColor: '#ececec',
   },
-  icon: {
+  iconContainer: {
+    width: 35,
     alignItems: 'center',
+    marginRight: 10,
   },
 });

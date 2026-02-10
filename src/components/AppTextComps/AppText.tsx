@@ -16,10 +16,10 @@ type textProps = {
   textAlignment?: any;
   textwidth?: any;
   textTransform?: any;
-  lineHeight?:any;
-  numberOfLines?:any;
-  borderBottomWidth?:any;
-  borderBottomColor?:any;
+  lineHeight?: any;
+  numberOfLines?: any;
+  borderBottomWidth?: any;
+  borderBottomColor?: any;
 };
 
 const AppText = ({

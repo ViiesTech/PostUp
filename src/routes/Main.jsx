@@ -30,10 +30,11 @@ import ShowMyLocation from '../screens/main/ShowMyLocation';
 import FAQ from '../screens/main/FAQ';
 import AllowAccess from '../screens/auth/AllowAccess';
 import AllReview from '../screens/main/AllReview';
-import {TouchableOpacity, View} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {TouchableOpacity, View, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import CreatePost from '../screens/main/CreatePost';
 import CreateEvent from '../screens/main/CreateEvent';
+import CreateProfile from '../screens/auth/CreateProfile';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,47 +62,35 @@ const Main = () => {
       <Stack.Screen name="AllReview" component={AllReview} />
       <Stack.Screen name="CreatePost" component={CreatePost} />
       <Stack.Screen name="CreateEvent" component={CreateEvent} />
+      <Stack.Screen name="CreateProfile" component={CreateProfile} />
     </Stack.Navigator>
   );
 };
 
+const TAB_ICONS = {
+  Home: {lib: Ionicons, name: 'home-outline'},
+  Search: {lib: Ionicons, name: 'search'},
+  Messages: {lib: Ionicons, name: 'chatbox-ellipses-outline'},
+  Profile: {lib: FontAwesome, name: 'user-o'},
+};
+
 function MyTabs() {
   const nav = useNavigation();
+
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarStyle: {
-          height: responsiveHeight(8),
-          paddingTop: responsiveHeight(1.6),
-          backgroundColor: AppColors.BTNCOLOURS,
-        },
-        tabBarLabelStyle: {
-          fontSize: responsiveFontSize(1.6),
-        },
+        tabBarStyle: styles.tabBar,
+        tabBarLabelStyle: styles.tabBarLabel,
         tabBarActiveTintColor: AppColors.WHITE,
         tabBarInactiveTintColor: AppColors.WHITE,
         tabBarLabel: '',
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName;
-
-          if (route.name === 'Home') {
-            iconName = focused ? 'home-outline' : 'home-outline';
-          } else if (route.name === 'Search') {
-            iconName = focused ? 'search' : 'search';
-          } else if (route.name === 'Messages') {
-            iconName = focused
-              ? 'chatbox-ellipses-outline'
-              : 'chatbox-ellipses-outline';
-          } else if (route.name === 'Profile') {
-            iconName = focused ? 'user-o' : 'user-o';
-          }
-
-          if (route.name === 'Profile') {
-            return <FontAwesome name={iconName} size={size} color={color} />;
-          } else {
-            return <Ionicons name={iconName} size={size} color={color} />;
-          }
+        tabBarIcon: ({color, size}) => {
+          const icon = TAB_ICONS[route.name];
+          if (!icon) return null;
+          const IconLib = icon.lib;
+          return <IconLib name={icon.name} size={size} color={color} />;
         },
       })}>
       <Tab.Screen name="Home" component={Home} />
@@ -110,25 +99,11 @@ function MyTabs() {
         name="GeneralForum"
         component={GeneralForum}
         options={{
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: () => (
             <TouchableOpacity
-            onPress={() =>  nav.navigate('Main', {screen: 'GeneralForum'})}
-              style={{
-                top: -30,
-                width: 60,
-                height: 60,
-                borderRadius: 35,
-                backgroundColor: '#FFD700',
-                justifyContent: 'center',
-                borderWidth: 2,
-                borderColor: AppColors.BTNCOLOURS,
-                alignItems: 'center',
-                shadowColor: '#000',
-                shadowOffset: {width: 0, height: 5},
-                shadowOpacity: 0.3,
-                shadowRadius: 5,
-                elevation: 8,
-              }}>
+              onPress={() => nav.navigate('Main', {screen: 'GeneralForum'})}
+              style={styles.centerButton}
+              activeOpacity={0.8}>
               <Ionicons name="add" size={40} color={AppColors.BTNCOLOURS} />
             </TouchableOpacity>
           ),
@@ -139,5 +114,33 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    height: responsiveHeight(8),
+    paddingTop: responsiveHeight(1.6),
+    backgroundColor: AppColors.BTNCOLOURS,
+    borderTopWidth: 0,
+  },
+  tabBarLabel: {
+    fontSize: responsiveFontSize(1.6),
+  },
+  centerButton: {
+    top: -30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#FFD700',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: AppColors.BTNCOLOURS,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 5},
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 8,
+  },
+});
 
 export default Main;

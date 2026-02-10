@@ -3,9 +3,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
-  Text,
   ImageBackground,
-  Image,
   TouchableOpacity,
   ScrollView,
   FlatList,
@@ -87,7 +85,7 @@ const EventDetails = ({route}) => {
     setActiveIndex(index);
   };
 
-  console.log(event?.reviews);
+  console.log('event:-', event);
 
   return (
     <>
@@ -119,6 +117,7 @@ const EventDetails = ({route}) => {
                   }}>
                   <LineBreak space={2} />
                   {index === 0 && <AppHeader goBack arrowWhite />}
+                  {/* <AppHeader goBack arrowWhite /> */}
                   <View
                     style={{
                       flex: 1,
@@ -457,7 +456,9 @@ const EventDetails = ({route}) => {
 
                 {event?.reviews?.length !== 0 && (
                   <TouchableOpacity
-                    onPress={() => navigateToRoute('AllReview', {reviews: event?.reviews})}>
+                    onPress={() =>
+                      navigateToRoute('AllReview', {reviews: event?.reviews})
+                    }>
                     <AppText
                       title={'See All'}
                       textColor={AppColors.LIGHTGRAY}

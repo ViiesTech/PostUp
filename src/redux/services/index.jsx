@@ -46,13 +46,14 @@ export const Apis = createApi({
       },
     }),
     createProfile: builder.mutation({
-      query: data => {
+      query: ({payload, token}) => {
         return {
           url: endpoints.UPDATE_PROFILE,
           method: 'POST',
-          body: data,
+          body: payload,
           headers: {
             Accept: 'application/json',
+            ...(token && {Authorization: `Bearer ${token}`}),
           },
         };
       },

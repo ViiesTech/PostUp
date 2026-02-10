@@ -1,6 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Image, TouchableOpacity, ImageBackground, ActivityIndicator } from 'react-native';
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  ActivityIndicator,
+} from 'react-native';
 import AppColors from '../utils/AppColors';
 import {
   responsiveFontSize,
@@ -15,7 +21,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import AppButton from './AppButton';
-import { IMAGE_URL } from '../redux/constant';
+import {IMAGE_URL} from '../redux/constant';
 import AppImages from '../assets/images/AppImages';
 
 type Prop = {
@@ -28,7 +34,7 @@ type Prop = {
   addToFavLoading: any;
   handleRemoveToFav: any;
   removeToFavLoading: any;
-}
+};
 
 const NearByEventsCard = ({
   item,
@@ -50,38 +56,52 @@ const NearByEventsCard = ({
         paddingVertical: responsiveHeight(1.5),
         borderRadius: 10,
       }}>
-      <View style={search ? { flexDirection: 'row', gap: 10 } : {}}>
+      <View style={search ? {flexDirection: 'row', gap: 10} : {}}>
         <ImageBackground
-          source={item ? { uri: `${IMAGE_URL}${item?.eventImage[0]}` } : AppImages.event}
+          source={
+            item
+              ? {uri: `${IMAGE_URL}${item?.eventImage?.[0]}`}
+              : AppImages.event
+          }
           // source={AppImages.event}
+          imageStyle={{
+            borderRadius: search ? 5 : 10,
+          }}
           style={
             search
-              ? { width: 90, height: 80, borderRadius: 5 }
-              : { width: responsiveWidth(65), height: responsiveHeight(20), borderRadius: 10 }
-          }
-        >
-          {home ? <TouchableOpacity
-            style={{
-              backgroundColor: AppColors.darkYellow,
-              borderRadius: 100,
-              width: 23,
-              height: 23,
-              justifyContent: 'center',
-              alignItems: 'center',
-              alignSelf: 'flex-end',
-              marginHorizontal: responsiveWidth(4),
-              marginVertical: responsiveHeight(1),
-            }}
-            disabled={addToFavLoading}
-            onPress={handleAddToFav}
-          >
-            {addToFavLoading ? <ActivityIndicator size={'small'} color={AppColors.WHITE} /> : <AppText
-              title={'🤗'}
-              textColor={AppColors.BLACK}
-              textSize={1.5}
-              textFontWeight
-            />}
-          </TouchableOpacity> : null}
+              ? {width: 90, height: 80}
+              : {
+                  width: responsiveWidth(65),
+                  height: responsiveHeight(20),
+                }
+          }>
+          {home ? (
+            <TouchableOpacity
+              style={{
+                backgroundColor: AppColors.darkYellow,
+                borderRadius: 100,
+                width: 23,
+                height: 23,
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignSelf: 'flex-end',
+                marginHorizontal: responsiveWidth(4),
+                marginVertical: responsiveHeight(1),
+              }}
+              disabled={addToFavLoading}
+              onPress={handleAddToFav}>
+              {addToFavLoading ? (
+                <ActivityIndicator size={'small'} color={AppColors.WHITE} />
+              ) : (
+                <AppText
+                  title={'🤗'}
+                  textColor={AppColors.BLACK}
+                  textSize={1.5}
+                  textFontWeight
+                />
+              )}
+            </TouchableOpacity>
+          ) : null}
         </ImageBackground>
         <View>
           {!search && <LineBreak space={1.5} />}
@@ -89,9 +109,9 @@ const NearByEventsCard = ({
             style={
               favorites
                 ? {
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }
                 : null
             }>
             <AppText
@@ -112,14 +132,17 @@ const NearByEventsCard = ({
                   alignItems: 'center',
                 }}
                 disabled={removeToFavLoading}
-                onPress={handleRemoveToFav}
-                >
-               {removeToFavLoading ? <ActivityIndicator size={'small'} color={AppColors.WHITE} /> :  <AppText
-                  title={'🤗'}
-                  textColor={AppColors.BLACK}
-                  textSize={1.5}
-                  textFontWeight
-                />}
+                onPress={handleRemoveToFav}>
+                {removeToFavLoading ? (
+                  <ActivityIndicator size={'small'} color={AppColors.WHITE} />
+                ) : (
+                  <AppText
+                    title={'🤗'}
+                    textColor={AppColors.BLACK}
+                    textSize={1.5}
+                    textFontWeight
+                  />
+                )}
               </TouchableOpacity>
             )}
           </View>

@@ -8,6 +8,7 @@ const initialState = {
     lat: null,
     long: null,
   },
+  isFirstLaunch: true,
 };
 
 export const appSlice = createSlice({
@@ -18,8 +19,11 @@ export const appSlice = createSlice({
       state.user = {};
       state.token = null;
     },
-    saveUserLocation: (state,action) => {
+    saveUserLocation: (state, action) => {
       state.userLocation = action.payload;
+    },
+    setOnboardingDone: state => {
+      state.isFirstLaunch = false;
     },
   },
   extraReducers: builder => {
@@ -30,14 +34,18 @@ export const appSlice = createSlice({
           state.token = action.payload.token;
         }
       })
-      .addMatcher(Apis.endpoints.createProfile.matchFulfilled, (state, action) => {
-        if (action.payload?.data) {
-          state.user = action.payload?.data;
-        }
-      });
+      .addMatcher(
+        Apis.endpoints.createProfile.matchFulfilled,
+        (state, action) => {
+          if (action.payload?.data) {
+            state.user = action.payload?.data;
+          }
+        },
+      );
   },
 });
 
-export const {setLogout,saveUserLocation} = appSlice.actions;
+export const {setLogout, saveUserLocation, setOnboardingDone} =
+  appSlice.actions;
 
 export default appSlice.reducer;

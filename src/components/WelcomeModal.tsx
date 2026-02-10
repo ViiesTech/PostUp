@@ -45,7 +45,7 @@ const WelcomeModal = ({
         <AppText
           title={'Logout'}
           textColor={AppColors.BLACK}
-          textSize={2.5}
+          textSize={2}
           textwidth={60}
           textAlignment={'center'}
           textFontWeight
@@ -54,7 +54,7 @@ const WelcomeModal = ({
         <AppText
           title={'Are you sure you want to logout'}
           textColor={AppColors.GRAY}
-          textSize={2}
+          textSize={1.8}
           textAlignment={'center'}
           lineHeight={2.5}
           textwidth={40}
@@ -65,8 +65,10 @@ const WelcomeModal = ({
             title="Cancel"
             textColor={AppColors.BLACK}
             bgColor={AppColors.WHITE}
+            textSize={1.5}
             buttoWidth={40}
-            padding={15}
+            padding={9}
+            height={42}
             borderColor={AppColors.BTNCOLOURS}
             handlePress={exploreOnPress}
           />
@@ -75,7 +77,8 @@ const WelcomeModal = ({
             textColor={AppColors.WHITE}
             bgColor={'#E55B13'}
             buttoWidth={40}
-            padding={15}
+            height={42}
+            textSize={1.5}
             handlePress={submitOnPress}
           />
         </View>

@@ -90,20 +90,21 @@ import {
 //   },
 // ];
 
-const Home = () => {
+const Home = ({navigation}) => {
   const sliderRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const dispatch = useDispatch();
   const {navigateToRoute} = useCustomNavigation();
-  const [getAllEvent, {data, error, isLoading}] = useLazyGetAllEventQuery();
-  const [
-    addOrRemoveToFav,
-    {data: favRes, error: favErr, isLoading: favIsLoading},
-  ] = useAddOrRemoveToFavMutation();
   const {user} = useSelector(state => state?.persistedData);
+  let isProfileCompleted = user?.isupdated;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isId, setIsId] = useState(0);
+
+  const [getAllEvent, {data, isLoading}] = useLazyGetAllEventQuery();
   const [getAllBanner, {data: bannerData, isLoading: bannerLoading}] =
     useLazyGetAllBannerQuery();
-  const dispatch = useDispatch();
+  const [addOrRemoveToFav, {isLoading: favIsLoading}] =
+    useAddOrRemoveToFavMutation();
 
   useEffect(() => {
     handleFetchEvents(user?._id);
@@ -250,10 +251,14 @@ const Home = () => {
     }
   };
 
+  console.log('isProfileCompleted:-', isProfileCompleted);
+  // console.log('user in Home:-', user?.isupdated);
+
   return (
     <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
       <View style={{paddingHorizontal: responsiveWidth(5)}}>
         <LineBreak space={2} />
+
         <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
           <AppTextInput
             inputPlaceHolder={'Search...'}
@@ -280,6 +285,7 @@ const Home = () => {
             />
           </TouchableOpacity>
         </View>
+
         <LineBreak space={2} />
 
         <View>

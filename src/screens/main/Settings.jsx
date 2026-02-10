@@ -2,27 +2,35 @@
 import React, {useState} from 'react';
 import {
   View,
-  Text,
   ScrollView,
-  FlatList,
   StyleSheet,
   TouchableOpacity,
-  Alert,
+  Switch,
 } from 'react-native';
 import AppHeader from '../../components/AppHeader';
 import LineBreak from '../../components/LineBreak';
 import AppColors from '../../utils/AppColors';
+import AppText from '../../components/AppTextComps/AppText';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Switch} from 'react-native-gesture-handler';
 import {
-  responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from '../../utils/Responsive_Dimensions';
 import {useCustomNavigation} from '../../utils/Hooks';
 
-const settings = [
-  {key: 'privacy', label: 'Privacy Settings', icon: 'lock-outline', navTo: ''},
+const SETTINGS_DATA = [
+  {
+    key: 'account',
+    label: 'Account Settings',
+    icon: 'home-outline',
+    navTo: 'AccountSettings',
+  },
+  {
+    key: 'privacy_settings',
+    label: 'Privacy Settings',
+    icon: 'lock-outline',
+    navTo: '',
+  },
   {
     key: 'notification',
     label: 'Notification',
@@ -45,20 +53,20 @@ const settings = [
   {
     key: 'policy',
     label: 'Privacy Policy',
-    icon: 'file-document-outline',
+    icon: 'lock-outline',
     navTo: 'PrivacyPolicy',
     heading: 'Privacy Policy',
   },
   {
     key: 'faq',
     label: 'Frequently Ask Questions',
-    icon: 'file-question-outline',
+    icon: 'file-document-outline',
     navTo: 'FAQ',
   },
   {
     key: 'report',
     label: 'Report an Issue',
-    icon: 'alert-circle-outline',
+    icon: 'bell-outline',
   },
   {
     key: 'about',
@@ -79,47 +87,60 @@ const Settings = () => {
   const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
   const {navigateToRoute} = useCustomNavigation();
 
-  const renderItem = ({item}) => (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => {
-        if (item.heading) {
-          navigateToRoute(item?.navTo, {heading: item.heading});
-        } else if (item?.navTo) {
-          navigateToRoute(item?.navTo);
-        } else if (!item.isSwitch) {
-          Alert.alert('will soon...');
-        }
-      }}>
-      <View style={styles.iconLabel}>
-        <Icon name={item.icon} size={20} color="#000" />
-        <Text style={styles.label}>{item.label}</Text>
-      </View>
-      {item.isSwitch && (
-        <Switch
-          value={isNotificationEnabled}
-          onValueChange={setIsNotificationEnabled}
-        />
-      )}
-    </TouchableOpacity>
-  );
+  const handlePress = item => {
+    if (item.heading) {
+      navigateToRoute(item?.navTo, {heading: item.heading});
+    } else if (item?.navTo) {
+      navigateToRoute(item?.navTo);
+    }
+  };
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+    <View style={styles.container}>
       <AppHeader
         heading="Settings"
         goBack
-        isCenteredHead={true}
-        textFontWeight={true}
+        isCenteredHead
+        textFontWeight
         isCenteredHeadWidth={55}
       />
-      <LineBreak space={4} />
-      <FlatList
-        data={settings}
-        renderItem={renderItem}
-        keyExtractor={item => item.key}
-      />
-    </ScrollView>
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}>
+        <LineBreak space={2} />
+
+        {SETTINGS_DATA.map(item => (
+          <TouchableOpacity
+            key={item.key}
+            style={styles.card}
+            activeOpacity={item?.isSwitch ? 1 : 0.7}
+            onPress={() => handlePress(item)}>
+            <View style={styles.row}>
+              <View style={styles.iconContainer}>
+                <Icon name={item.icon} size={24} color={AppColors.BLACK} />
+              </View>
+              <AppText
+                title={item.label}
+                textColor={AppColors.BLACK}
+                textSize={1.8}
+                textFontWeight
+              />
+            </View>
+
+            {item.isSwitch && (
+              <Switch
+                value={isNotificationEnabled}
+                onValueChange={setIsNotificationEnabled}
+                trackColor={{false: '#D1D1D1', true: AppColors.BTNCOLOURS}}
+                thumbColor={AppColors.WHITE}
+                ios_backgroundColor="#D1D1D1"
+              />
+            )}
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
@@ -128,27 +149,28 @@ export default Settings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingVertical: responsiveHeight(1),
+    backgroundColor: AppColors.WHITE,
   },
-  item: {
-    backgroundColor: '#F5F7F9',
-    padding: responsiveWidth(4),
-    marginVertical: responsiveHeight(1),
-    marginHorizontal: responsiveWidth(5),
-    borderRadius: 8,
+  scrollContent: {
+    paddingHorizontal: responsiveWidth(5),
+    paddingBottom: 20,
+  },
+  card: {
+    backgroundColor: '#F8F9FA',
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    paddingVertical: responsiveHeight(2),
+    paddingHorizontal: responsiveWidth(4),
+    borderRadius: 10,
+    marginBottom: responsiveHeight(1.5),
   },
-  iconLabel: {
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
   },
-  label: {
-    fontSize: responsiveFontSize(2),
-    fontWeight: '500',
-    color: '#000',
+  iconContainer: {
+    width: 40,
+    alignItems: 'flex-start',
   },
 });
