@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   ScrollView,
   Text,
@@ -18,19 +19,33 @@ import AppButton from '../../components/AppButton';
 import AppHeader from '../../components/AppHeader';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useRegisterMutation} from '../../redux/services';
+import {
+  useRegisterMutation,
+  useGoogleSignInMutation,
+} from '../../redux/services';
 import {isValidDate, ShowToast, useCustomNavigation} from '../../utils/Hooks';
+import {getFcmToken} from '../../GlobalFunctions/Firebase';
+import {
+  GoogleSignin,
+  isSuccessResponse,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = () => {
   const [state, setState] = useState({
-    username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     termsAccepted: false,
   });
 
   const {navigateToRoute} = useCustomNavigation();
   const [register, {isLoading}] = useRegisterMutation();
+  const [googleSignInApi, {isLoading: isGoogleLoading}] =
+    useGoogleSignInMutation();
+  const [isGoogleSignLoading, setIsGoogleSignLoading] = useState(false);
+  const isSigningIn = useRef(false);
 
   const onChangeText = (value, text) => {
     setState(prevState => ({
@@ -40,25 +55,35 @@ const SignUp = () => {
   };
 
   const onSignupPress = async () => {
-    if (!state.username) {
-      return ShowToast('Please enter your username');
-    } else if (!state.email) {
+    if (!state.email) {
       return ShowToast('Please enter your email');
     } else if (!state.password) {
       return ShowToast('Please enter your password');
     } else if (state.password.length < 8) {
       return ShowToast('Your password is too weak');
+    } else if (!state.confirmPassword) {
+      return ShowToast('Please confirm your password');
+    } else if (state.password !== state.confirmPassword) {
+      return ShowToast('Passwords do not match');
     } else if (!state.termsAccepted) {
       return ShowToast('Please accept the Terms and Conditions');
     }
 
-    const data = {
-      userName: state.username,
-      email: state.email?.toLowerCase(),
-      password: state.password,
-    };
-
     try {
+      // Get FCM token (may be null if Firebase not properly initialized)
+      const fcmToken = await getFcmToken();
+      console.log('FCM Token:', fcmToken);
+
+      const data = {
+        email: state.email?.toLowerCase(),
+        password: state.password,
+      };
+
+      // Only add FCMToken if it exists
+      if (fcmToken) {
+        data.FCMToken = fcmToken;
+      }
+
       const res = await register(data).unwrap();
       console.log('res in signup:-', res);
       if (res.success) {
@@ -74,7 +99,56 @@ const SignUp = () => {
       }
     } catch (err) {
       console.log('err in signup:-', err);
-      ShowToast('Some problem occurred');
+      ShowToast(err.data.message || 'Some problem occurred');
+    }
+  };
+
+  const onGoogleSignIn = async () => {
+    if (isSigningIn.current) {
+      return;
+    }
+    isSigningIn.current = true;
+    setIsGoogleSignLoading(true);
+    try {
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      const response = await GoogleSignin.signIn();
+
+      if (isSuccessResponse(response)) {
+        const {user} = response.data;
+        const fcmToken = await getFcmToken();
+
+        const body = {email: user.email ? user.email.trim().toLowerCase() : user.email};
+        if (fcmToken) {
+          body.FCMToken = fcmToken;
+        }
+
+        const res = await googleSignInApi(body).unwrap();
+        console.log('[Google Sign-In] API response:', res);
+
+        if (res.success) {
+          if (res.token) {
+            await AsyncStorage.setItem('authToken', res.token);
+          }
+          ShowToast(res.message || 'Signed in successfully');
+          // Navigation is handled automatically by Redux token state in Routes.jsx
+        } else {
+          ShowToast(res.message || 'Sign-in failed');
+        }
+      }
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled — no toast needed
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        ShowToast('Sign-in already in progress');
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        ShowToast('Google Play Services not available');
+      } else {
+        console.log('[Google Sign-In] error:', error);
+        ShowToast('Google sign-in failed');
+      }
+    } finally {
+      isSigningIn.current = false;
+      setIsGoogleSignLoading(false);
     }
   };
 
@@ -104,24 +178,6 @@ const SignUp = () => {
         <View style={{paddingHorizontal: responsiveWidth(5)}}>
           <View>
             <AppText
-              title={'Username'}
-              textColor={AppColors.BLACK}
-              textSize={2}
-            />
-            <LineBreak space={1} />
-            <AppTextInput
-              inputPlaceHolder={'Enter username'}
-              onChangeText={text => onChangeText('username', text)}
-              value={state.username}
-              placeholderTextColor={AppColors.GRAY}
-              borderRadius={5}
-            />
-          </View>
-
-          <LineBreak space={2} />
-
-          <View>
-            <AppText
               title={'Email Address'}
               textColor={AppColors.BLACK}
               textSize={2}
@@ -131,6 +187,7 @@ const SignUp = () => {
               inputPlaceHolder={'Email'}
               value={state.email}
               onChangeText={text => onChangeText('email', text)}
+              keyboardType="email-address"
               placeholderTextColor={AppColors.GRAY}
               borderRadius={5}
             />
@@ -149,6 +206,25 @@ const SignUp = () => {
               inputPlaceHolder={'Password'}
               value={state.password}
               onChangeText={text => onChangeText('password', text)}
+              placeholderTextColor={AppColors.GRAY}
+              borderRadius={5}
+              secureTextEntry={true}
+            />
+          </View>
+
+          <LineBreak space={2} />
+
+          <View>
+            <AppText
+              title={'Confirm Password'}
+              textColor={AppColors.BLACK}
+              textSize={2}
+            />
+            <LineBreak space={1} />
+            <AppTextInput
+              inputPlaceHolder={'Confirm Password'}
+              value={state.confirmPassword}
+              onChangeText={text => onChangeText('confirmPassword', text)}
               placeholderTextColor={AppColors.GRAY}
               borderRadius={5}
               secureTextEntry={true}
@@ -202,26 +278,13 @@ const SignUp = () => {
           />
           <LineBreak space={2} />
           <AppButton
-            title={'Continue with Google'}
-            borderRadius={5}
-            borderWidth={1}
-            borderColor={AppColors.BTNCOLOURS}
-            bgColor={AppColors.WHITE}
-            textColor={AppColors.BLACK}
-            borderRightWidth={3}
-            borderBottomWidth={3}
-            handlePress={() => {}}
-            leftIcon={
-              <AntDesign
-                name="google"
-                size={responsiveFontSize(3)}
-                color={AppColors.BLACK}
-              />
+            title={
+              (isGoogleSignLoading || isGoogleLoading) ? (
+                <ActivityIndicator size={26} color={AppColors.BLACK} />
+              ) : (
+                'Continue with Google'
+              )
             }
-          />
-          <LineBreak space={2} />
-          <AppButton
-            title={'Continue with Facebook'}
             borderRadius={5}
             borderWidth={1}
             borderColor={AppColors.BTNCOLOURS}
@@ -229,13 +292,15 @@ const SignUp = () => {
             textColor={AppColors.BLACK}
             borderRightWidth={3}
             borderBottomWidth={3}
-            handlePress={() => {}}
+            handlePress={onGoogleSignIn}
             leftIcon={
-              <FontAwesome
-                name="facebook-f"
-                size={responsiveFontSize(3)}
-                color={AppColors.BLACK}
-              />
+              (isGoogleSignLoading || isGoogleLoading) ? null : (
+                <AntDesign
+                  name="google"
+                  size={responsiveFontSize(3)}
+                  color={AppColors.BLACK}
+                />
+              )
             }
           />
         </View>

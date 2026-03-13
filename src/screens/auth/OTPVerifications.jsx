@@ -33,15 +33,18 @@ const OTPVerifications = ({route}) => {
           console.log('otp response ===>', res);
           ShowToast(res.message);
           if (res.success) {
-            if (signupFlow) {
-              navigateToRoute('CreateProfile', {
-                data: res?.data,
-                token: res?.token || token,
-              });
-            } else {
+            if (!signupFlow) {
               navigateToRoute('NewPassword', {type: 'reset', id: id});
+            } else {
+              // navigateToRoute('CreateProfile', {
+              //   data: res?.data,
+              //   token: res?.token || token,
+              // });
             }
           }
+        })
+        .catch(err => {
+          return ShowToast(err?.data?.message || 'Failed to verify OTP');
         });
     } else {
       ShowToast('Please enter your verification code');
@@ -78,7 +81,7 @@ const OTPVerifications = ({route}) => {
         textAlignment={'center'}
       />
       <LineBreak space={20} />
-      <View style={{paddingHorizontal: responsiveWidth(6), flex: 1}}>
+      <View style={{paddingHorizontal: responsiveWidth(6), flex: 0.9}}>
         <View>
           <OtpInput
             numberOfDigits={6}

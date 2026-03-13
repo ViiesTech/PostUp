@@ -41,8 +41,9 @@ const NewPassword = ({route}) => {
 
     const data = {
       id,
-      type: type,
-      ...(type === 'change' ? {oldPassword} : {}),
+      // type: type,
+      // ...(type === 'change' ? {oldPassword} : {}),
+      type: 'Reset',
       newPassword,
     };
 

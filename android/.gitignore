@@ -1,0 +1,3 @@
+# Android keystore — NEVER commit these
+keystore.properties
+app/postup-release.keystore

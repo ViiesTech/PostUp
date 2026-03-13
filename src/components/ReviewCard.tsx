@@ -10,7 +10,11 @@ import {
 } from 'react-native';
 import React from 'react';
 import AppImages from '../assets/images/AppImages';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../utils/Responsive_Dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from '../utils/Responsive_Dimensions';
 import AppColors from '../utils/AppColors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -26,23 +30,25 @@ interface reviewProps {
 
 const ReviewCard = (props: reviewProps) => {
   return (
-    <TouchableOpacity style={[styles.reviewStyle, props?.style]}>
+    <View style={[styles.reviewStyle, props?.style]}>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <View style={{ flexDirection: 'row', gap: 10 }}>
-          <Image
-            style={styles.imageStyle}
-            source={props?.image}
-          />
+        <View style={{flexDirection: 'row', gap: 10}}>
+          <Image style={styles.imageStyle} source={{uri: props?.image}} />
           <View>
             <Text style={styles.name}>{props?.name}</Text>
             <Text style={styles.day}>{props?.day}</Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'row', gap: responsiveWidth(2), alignItems: 'center' }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            gap: responsiveWidth(2),
+            alignItems: 'center',
+          }}>
           <FontAwesome
             name="star"
             size={responsiveFontSize(2)}
@@ -52,7 +58,7 @@ const ReviewCard = (props: reviewProps) => {
         </View>
       </View>
       <Text style={styles.desc}>{props?.desc}</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

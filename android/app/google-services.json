@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "551548744324",
+    "project_id": "postup-aad04",
+    "storage_bucket": "postup-aad04.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551548744324:android:67f9e430fe4c519e3008d1",
+        "android_client_info": {
+          "package_name": "com.postup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGWNFI8oCNgente7gaa2io6iE8Sg5HVe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

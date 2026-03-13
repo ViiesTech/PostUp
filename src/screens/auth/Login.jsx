@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   KeyboardAvoidingView,
   ScrollView,
@@ -13,9 +13,16 @@ import AppTextInput from '../../components/AppTextInput';
 import AppButton from '../../components/AppButton';
 import {ShowToast, useCustomNavigation} from '../../utils/Hooks';
 import {useLoginMutation} from '../../redux/services';
+import {getFcmToken} from '../../GlobalFunctions/Firebase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  initBackgroundFetch,
+  startLocationWatcher,
+} from '../../services/LocationService';
+import {useSelector} from 'react-redux';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const {navigateToRoute} = useCustomNavigation();
@@ -23,28 +30,46 @@ const Login = () => {
   const [login, {isLoading}] = useLoginMutation();
 
   const onLoginPress = async () => {
-    if (!username) {
-      return ShowToast('Please enter your username');
+    if (!email) {
+      return ShowToast('Please enter your email');
     } else if (!password) {
       return ShowToast('Please enter your password');
     } else {
-      let data = {
-        userName: username,
-        password: password,
-      };
-      await login(data)
-        .unwrap()
-        .then(res => {
-          console.log('login response ====>', res);
-          ShowToast(res.message);
-          // if(res.success) {
+      try {
+        // Get FCM token (may be null if Firebase not properly initialized)
+        const fcmToken = await getFcmToken();
+        console.log('FCM Token:', fcmToken);
 
-          // }
-        })
-        .catch(error => {
-          console.log('failed to login ====>', error);
-          ShowToast('Some problem occured');
-        });
+        let data = {
+          email: email ? email.trim().toLowerCase() : email,
+          password: password,
+        };
+
+        // Only add FCMToken if it exists
+        if (fcmToken) {
+          data.FCMToken = fcmToken;
+        }
+
+        const res = await login(data).unwrap();
+        console.log('[Login] login response ====>', res);
+        ShowToast(res.message);
+
+        if (res.success) {
+          // Store auth token
+          if (res.token) {
+            await AsyncStorage.setItem('authToken', res.token);
+            console.log('[Login] Auth token saved');
+          }
+
+          // 1. BackgroundFetch — handles background + killed state
+          await initBackgroundFetch();
+          // 2. watchPosition — fires on real GPS movement in foreground/background
+          startLocationWatcher();
+        }
+      } catch (error) {
+        console.log('failed to login ====>', error);
+        ShowToast(error?.data?.message || 'Some problem occured');
+      }
     }
   };
 
@@ -73,15 +98,16 @@ const Login = () => {
         <View style={{paddingHorizontal: responsiveWidth(5)}}>
           <View>
             <AppText
-              title={'Username'}
+              title={'Email'}
               textColor={AppColors.BLACK}
               textSize={2}
             />
             <LineBreak space={1} />
             <AppTextInput
-              inputPlaceHolder={'username'}
-              value={username}
-              onChangeText={setUsername}
+              keyboardType="email-address"
+              inputPlaceHolder={'testuser@gmail.com'}
+              value={email}
+              onChangeText={setEmail}
               placeholderTextColor={AppColors.GRAY}
               borderRadius={5}
             />

@@ -53,15 +53,31 @@ const CreateEvent = () => {
   const nav = useNavigation();
 
   const handleAddMedia = () => {
+    // Try the new Android photo picker first; if no activity found, fall back
+    // to the legacy picker by disabling `useAndroidPhotoPicker`.
     ImagePicker.openPicker({
       multiple: true,
-      mediaType: 'photo', 
+      mediaType: 'photo',
+      useAndroidPhotoPicker: true,
     })
       .then(images => {
         console.log('Selected Media:', images);
         setMedia(images);
       })
-      .catch(err => console.log('Picker Error:', err));
+      .catch(err => {
+        console.log('Picker Error:', err);
+        // Fallback for devices that don't handle the new photo picker intent
+        ImagePicker.openPicker({
+          multiple: true,
+          mediaType: 'photo',
+          useAndroidPhotoPicker: false,
+        })
+          .then(images => {
+            console.log('Fallback Selected Media:', images);
+            setMedia(images);
+          })
+          .catch(fallbackErr => console.log('Fallback Picker Error:', fallbackErr));
+      });
   };
 
   const handlePlayVideo = videoItem => {

@@ -1,19 +1,38 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import NetInfo from '@react-native-community/netinfo';
 import {BASE_URL, endpoints} from '../constant';
+
+const rawBaseQuery = fetchBaseQuery({
+  baseUrl: BASE_URL,
+  prepareHeaders: (headers, {getState}) => {
+    const token = getState().persistedData.token;
+    console.log('-:TOKEN:-', token);
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
+const baseQueryWithNetCheck = async (args, api, extraOptions) => {
+  const netState = await NetInfo.fetch();
+  const isOnline =
+    netState.isConnected === true && netState.isInternetReachable !== false;
+  if (!isOnline) {
+    return {
+      error: {
+        status: 'CUSTOM_ERROR',
+        error: 'No internet connection. Please check your network and try again.',
+      },
+    };
+  }
+  return rawBaseQuery(args, api, extraOptions);
+};
 
 export const Apis = createApi({
   reducerPath: 'Apis',
-  baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
-    prepareHeaders: (headers, {getState}) => {
-      const token = getState().persistedData.token;
-      console.log('-:TOKEN:-', token);
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithNetCheck,
+    tagTypes: ['PendingReviews', 'Reviews', 'Notifications'],
   endpoints: builder => ({
     register: builder.mutation({
       query: data => ({
@@ -189,6 +208,17 @@ export const Apis = createApi({
         };
       },
     }),
+    getNearByBusinesses: builder.query({
+      query: ({latitude, longitude}) => {
+        return {
+          url: endpoints.GETNEARBYBUSINESSES(latitude, longitude),
+          method: 'GET',
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        };
+      },
+    }),
     addRequest: builder.mutation({
       query: data => ({
         url: endpoints.ADD_REQUEST,
@@ -233,6 +263,61 @@ export const Apis = createApi({
         };
       },
     }),
+    scanQRCode: builder.mutation({
+      query: data => ({
+        url: endpoints.SCAN_QR_CODE,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    submitReview: builder.mutation({
+      query: data => ({
+        url: endpoints.SUBMIT_REVIEW,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['PendingReviews', 'Reviews'],
+    }),
+    getUserPendingReviews: builder.query({
+      query: () => ({
+        url: endpoints.GET_USER_PENDING_REVIEWS,
+        method: 'GET',
+      }),
+      providesTags: ['PendingReviews'],
+    }),
+    getReviews: builder.query({
+      query: ({userId, status}) => ({
+        url: endpoints.GET_REVIEWS(userId, status),
+        method: 'GET',
+      }),
+      providesTags: ['Reviews'],
+    }),
+    getNotifications: builder.query({
+      query: () => ({
+        url: endpoints.GET_NOTIFICATIONS,
+        method: 'GET',
+      }),
+      providesTags: ['Notifications'],
+    }),
+    googleSignIn: builder.mutation({
+      query: data => ({
+        url: endpoints.GOOGLE_SIGNIN,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    searchAdmins: builder.query({
+      query: query => ({
+        url: endpoints.SEARCH_ADMINS(query),
+        method: 'GET',
+      }),
+    }),
+    getBusinessReviews: builder.query({
+      query: adminId => ({
+        url: endpoints.GET_BUSINESS_REVIEWS(adminId),
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -254,6 +339,8 @@ export const {
   useIgnoreUserMutation,
   useBlockUserMutation,
   useCreateEventMutation,
+  useScanQRCodeMutation,
+  useSubmitReviewMutation,
   useLazyGetProfileQuery,
   useLazyGetAllEventQuery,
   useLazyGetAllBannerQuery,
@@ -263,4 +350,11 @@ export const {
   useLazyGetFavoriesByTokenQuery,
   useLazyGetFollowingsAndFollowReqQuery,
   useLazySearchByEventNameQuery,
+  useLazyGetNearByBusinessesQuery,
+  useLazyGetUserPendingReviewsQuery,
+  useLazyGetReviewsQuery,
+  useLazyGetNotificationsQuery,
+  useGoogleSignInMutation,
+  useLazySearchAdminsQuery,
+  useLazyGetBusinessReviewsQuery,
 } = Apis;

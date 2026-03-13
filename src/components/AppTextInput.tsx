@@ -32,30 +32,34 @@ type props = {
   textAlign?: any;
   editable?: any;
 };
-const AppTextInput = ({
-  logo,
-  secureTextEntry,
-  inputPlaceHolder,
-  inputWidth = 60,
-  containerBg,
-  rightIcon,
-  placeholderTextColor,
-  inputHeight,
-  textAlignVertical,
-  placeholderTextfontWeight,
-  multiline,
-  value,
-  onChangeText,
-  borderRadius,
-  borderBottomWidth,
-  borderBottomColor,
-  borderWidth,
-  borderColor,
-  maxLength,
-  keyboardType,
-  textAlign,
-  editable,
-}: props) => {
+const AppTextInput = React.forwardRef((
+  {
+    logo,
+    secureTextEntry,
+    inputPlaceHolder,
+    inputWidth = 60,
+    containerBg,
+    rightIcon,
+    placeholderTextColor,
+    inputHeight,
+    textAlignVertical,
+    placeholderTextfontWeight,
+    multiline,
+    value,
+    onChangeText,
+    borderRadius,
+    borderBottomWidth,
+    borderBottomColor,
+    borderWidth,
+    borderColor,
+    maxLength,
+    keyboardType,
+    textAlign,
+    editable,
+    ...rest
+  }: props & {[key: string]: any},
+  ref: any,
+) => {
   return (
     <View
       style={{
@@ -95,11 +99,13 @@ const AppTextInput = ({
         multiline={multiline}
         maxLength={maxLength}
         keyboardType={keyboardType}
+        ref={ref}
+        {...rest}
       />
 
       {rightIcon}
     </View>
   );
-};
+});
 
 export default AppTextInput;

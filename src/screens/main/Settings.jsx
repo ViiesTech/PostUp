@@ -1,11 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React from 'react';
 import {
   View,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Switch,
 } from 'react-native';
 import AppHeader from '../../components/AppHeader';
 import LineBreak from '../../components/LineBreak';
@@ -26,24 +25,6 @@ const SETTINGS_DATA = [
     navTo: 'AccountSettings',
   },
   {
-    key: 'privacy_settings',
-    label: 'Privacy Settings',
-    icon: 'lock-outline',
-    navTo: '',
-  },
-  {
-    key: 'notification',
-    label: 'Notification',
-    icon: 'bell-outline',
-    isSwitch: true,
-  },
-  {
-    key: 'push',
-    label: 'Push Notification',
-    icon: 'bell-outline',
-    navTo: 'Notifications',
-  },
-  {
     key: 'terms',
     label: 'Terms of Service',
     icon: 'file-document-outline',
@@ -57,17 +38,12 @@ const SETTINGS_DATA = [
     navTo: 'PrivacyPolicy',
     heading: 'Privacy Policy',
   },
-  {
-    key: 'faq',
-    label: 'Frequently Ask Questions',
-    icon: 'file-document-outline',
-    navTo: 'FAQ',
-  },
-  {
-    key: 'report',
-    label: 'Report an Issue',
-    icon: 'bell-outline',
-  },
+  // {
+  //   key: 'faq',
+  //   label: 'Frequently Ask Questions',
+  //   icon: 'file-document-outline',
+  //   navTo: 'FAQ',
+  // },
   {
     key: 'about',
     label: 'About PostUp',
@@ -84,7 +60,6 @@ const SETTINGS_DATA = [
 ];
 
 const Settings = () => {
-  const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
   const {navigateToRoute} = useCustomNavigation();
 
   const handlePress = item => {
@@ -127,16 +102,6 @@ const Settings = () => {
                 textFontWeight
               />
             </View>
-
-            {item.isSwitch && (
-              <Switch
-                value={isNotificationEnabled}
-                onValueChange={setIsNotificationEnabled}
-                trackColor={{false: '#D1D1D1', true: AppColors.BTNCOLOURS}}
-                thumbColor={AppColors.WHITE}
-                ios_backgroundColor="#D1D1D1"
-              />
-            )}
           </TouchableOpacity>
         ))}
       </ScrollView>

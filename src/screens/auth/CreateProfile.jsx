@@ -1,12 +1,15 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   ScrollView,
   ImageBackground,
   TouchableOpacity,
   KeyboardAvoidingView,
+  PermissionsAndroid,
+  Platform,
+  Alert,
 } from 'react-native';
 import AppColors from '../../utils/AppColors';
 import AppHeader from '../../components/AppHeader';
@@ -25,15 +28,19 @@ import {isValidDate, ShowToast, useCustomNavigation} from '../../utils/Hooks';
 import AppButton from '../../components/AppButton';
 import {useCreateProfileMutation} from '../../redux/services';
 import ImagePicker from 'react-native-image-crop-picker';
+import {useSelector} from 'react-redux';
 
 const CreateProfile = ({route}) => {
   const {navigateToRoute} = useCustomNavigation();
+  const {token, user} = useSelector(state => state?.persistedData);
+  console.log('user', user._id);
+  console.log('token', token);
+
   const params = route?.params?.data;
-  const token = route?.params?.token;
+  const routeToken = route?.params?.token;
+  const activeToken = routeToken || token;
   const [state, setState] = useState({
-    full_name: params?.fullName,
     username: params?.userName,
-    email: params?.email,
     dob: '',
     gender: '',
     phone: '',
@@ -44,6 +51,9 @@ const CreateProfile = ({route}) => {
   const [day, setDay] = useState(d?.padStart(2, '0'));
   const [month, setMonth] = useState(m?.padStart(2, '0'));
   const [year, setYear] = useState(y);
+  const monthRef = useRef(null);
+  const dayRef = useRef(null);
+  const yearRef = useRef(null);
   const [createProfile, {isLoading}] = useCreateProfileMutation();
   const [image, setImage] = useState('');
 
@@ -54,24 +64,81 @@ const CreateProfile = ({route}) => {
     }));
   };
 
-  const handleProfileImage = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-    });
+  const handleProfileImage = async () => {
+    console.log('Requesting permissions...');
+
+    const requestAndroidReadPermission = async () => {
+      try {
+        // Android 13+ uses READ_MEDIA_IMAGES, older versions use READ_EXTERNAL_STORAGE
+        const perm =
+          Platform.OS === 'android' && Platform.Version >= 33
+            ? PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES
+            : PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
+
+        // If permission is already granted, continue
+        const has = await PermissionsAndroid.check(perm);
+        if (has) return true;
+
+        const granted = await PermissionsAndroid.request(perm, {
+          title: 'Photo Library Permission',
+          message:
+            'PostUp needs access to your photos to set your profile picture',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        });
+
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (err) {
+        console.warn('Android permission request error', err);
+        return false;
+      }
+    };
+
+    try {
+      if (Platform.OS === 'android') {
+        const ok = await requestAndroidReadPermission();
+        if (!ok) {
+          Alert.alert(
+            'Permission Required',
+            'Photo library permission is required to select images',
+          );
+          return;
+        }
+      }
+
+      console.log('Opening image picker...');
+      const picked = await ImagePicker.openPicker({
+        width: 300,
+        height: 400,
+        cropping: true,
+        mediaType: 'photo',
+      });
+
+      if (!picked) return;
+
+      // image-crop-picker may return different uri fields across platforms/versions
+      let pickedPath = picked.path || picked.sourceURL || picked.uri;
+
+      // Normalize android file paths for older RN versions when needed
+      if (Platform.OS === 'android' && pickedPath && !pickedPath.startsWith('file://') && !pickedPath.startsWith('content://')) {
+        pickedPath = 'file://' + pickedPath;
+      }
+
+      console.log('Image selected:', pickedPath, picked);
+      setImage(pickedPath);
+    } catch (error) {
+      console.log('ImagePicker Error:', error);
+      // If user cancelled, image-crop-picker throws E_PICKER_CANCELLED — ignore
+      if (error && error.code && error.code !== 'E_PICKER_CANCELLED') {
+        Alert.alert('Error', 'Failed to pick image');
+      }
+    }
   };
 
   const onCreateProfilePress = async () => {
-    if (!state.full_name) {
-      return ShowToast('Please enter your full name');
-    } else if (!state.username) {
+    if (!state.username) {
       return ShowToast('Please enter your username');
-    } else if (!state.email) {
-      return ShowToast('Please enter your email');
     } else if (!day || !month || !year) {
       return ShowToast('Please enter your complete date of birth');
     } else if (!isValidDate(day, month, year)) {
@@ -82,10 +149,6 @@ const CreateProfile = ({route}) => {
       return ShowToast('Please enter your phone number');
     } else if (!image) {
       return ShowToast('Please enter your Profile Image');
-    } else if (!params?._id) {
-      return ShowToast(
-        'User ID is missing. Please restart the sign-up process.',
-      );
     }
 
     const formattedDOB = `${month.padStart(2, '0')}-${day.padStart(
@@ -94,15 +157,13 @@ const CreateProfile = ({route}) => {
     )}-${year}`;
 
     const formData = new FormData();
-    formData.append('id', params?._id);
-    formData.append('email', state.email);
-    formData.append('fullName', state.full_name);
+    // formData.append('id', user?._id);
     formData.append('userName', state.username);
     formData.append('phoneNumber', state.phone);
     formData.append('gender', state.gender);
     formData.append('dob', formattedDOB);
-    formData.append('longitude', '17.4067');
-    formData.append('latitude', '78.477');
+    // formData.append('longitude', '17.4067');
+    // formData.append('latitude', '78.477');
 
     if (image) {
       formData.append('image', {
@@ -115,14 +176,13 @@ const CreateProfile = ({route}) => {
     console.log('formData:-', formData);
 
     try {
-      const res = await createProfile({payload: formData, token}).unwrap();
+      const res = await createProfile({
+        payload: formData,
+        token: activeToken,
+      }).unwrap();
       console.log('res in createProfile:-', res);
-      if (res.success) {
-        navigateToRoute('Login'); // TermsOfService
-        ShowToast(res.message);
-      } else {
-        ShowToast(res.message);
-      }
+      ShowToast(res.message);
+      // Navigation is handled automatically by Routes.jsx based on token + user.isupdated
     } catch (err) {
       console.log('err in createProfile:-', JSON.stringify(err, null, 2));
       ShowToast(err?.data?.message || 'Failed to update profile');
@@ -135,8 +195,10 @@ const CreateProfile = ({route}) => {
     <KeyboardAvoidingView
       style={{flex: 1, backgroundColor: AppColors.WHITE}}
       behavior="height">
-      <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
-        <AppHeader goBack={false} />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+        {/* <AppHeader goBack={false} /> */}
         <LineBreak space={3} />
 
         <View style={{paddingHorizontal: responsiveWidth(6)}}>
@@ -188,22 +250,6 @@ const CreateProfile = ({route}) => {
           <View>
             <View>
               <AppText
-                title={'Full Name'}
-                textColor={AppColors.BLACK}
-                textSize={2}
-              />
-              <LineBreak space={1} />
-              <AppTextInput
-                inputPlaceHolder={'Input full name'}
-                placeholderTextColor={AppColors.GRAY}
-                borderRadius={5}
-                value={state.full_name}
-                onChangeText={text => onChangeText('full_name', text)}
-              />
-            </View>
-            <LineBreak space={2} />
-            <View>
-              <AppText
                 title={'Username'}
                 textColor={AppColors.BLACK}
                 textSize={2}
@@ -215,22 +261,6 @@ const CreateProfile = ({route}) => {
                 value={state.username}
                 onChangeText={text => onChangeText('username', text)}
                 borderRadius={5}
-              />
-            </View>
-            <LineBreak space={2} />
-            <View>
-              <AppText
-                title={'Email Address'}
-                textColor={AppColors.BLACK}
-                textSize={2}
-              />
-              <LineBreak space={1} />
-              <AppTextInput
-                inputPlaceHolder={'Input email address'}
-                placeholderTextColor={AppColors.GRAY}
-                borderRadius={5}
-                value={state.email}
-                onChangeText={text => onChangeText('email', text)}
               />
             </View>
             <LineBreak space={2} />
@@ -249,11 +279,24 @@ const CreateProfile = ({route}) => {
                   inputWidth={22}
                   textAlignVertical={'center'}
                   textAlign={'center'}
-                  onChangeText={setMonth}
-                  keyboardType={'numeric'}
+                  keyboardType={'number-pad'}
                   value={month}
                   maxLength={2}
+                  ref={monthRef}
+                  onChangeText={text => {
+                    const digits = (text || '').replace(/[^0-9]/g, '').slice(0, 2);
+                    setMonth(digits);
+                    if (digits.length === 2) {
+                      dayRef.current && dayRef.current.focus();
+                    }
+                  }}
+                  onKeyPress={({nativeEvent}) => {
+                    if (nativeEvent.key === 'Backspace' && !month) {
+                      // no previous field here
+                    }
+                  }}
                 />
+
                 <AppTextInput
                   inputPlaceHolder={'DD'}
                   placeholderTextColor={AppColors.GRAY}
@@ -261,11 +304,24 @@ const CreateProfile = ({route}) => {
                   inputWidth={22}
                   textAlignVertical={'center'}
                   textAlign={'center'}
-                  onChangeText={setDay}
+                  keyboardType={'number-pad'}
                   value={day}
-                  keyboardType={'numeric'}
                   maxLength={2}
+                  ref={dayRef}
+                  onChangeText={text => {
+                    const digits = (text || '').replace(/[^0-9]/g, '').slice(0, 2);
+                    setDay(digits);
+                    if (digits.length === 2) {
+                      yearRef.current && yearRef.current.focus();
+                    }
+                  }}
+                  onKeyPress={({nativeEvent}) => {
+                    if (nativeEvent.key === 'Backspace' && !day) {
+                      monthRef.current && monthRef.current.focus();
+                    }
+                  }}
                 />
+
                 <AppTextInput
                   inputPlaceHolder={'YYYY'}
                   placeholderTextColor={AppColors.GRAY}
@@ -273,10 +329,19 @@ const CreateProfile = ({route}) => {
                   inputWidth={22}
                   textAlignVertical={'center'}
                   textAlign={'center'}
+                  keyboardType={'number-pad'}
                   value={year}
-                  onChangeText={setYear}
-                  keyboardType={'numeric'}
                   maxLength={4}
+                  ref={yearRef}
+                  onChangeText={text => {
+                    const digits = (text || '').replace(/[^0-9]/g, '').slice(0, 4);
+                    setYear(digits);
+                  }}
+                  onKeyPress={({nativeEvent}) => {
+                    if (nativeEvent.key === 'Backspace' && !year) {
+                      dayRef.current && dayRef.current.focus();
+                    }
+                  }}
                 />
               </View>
             </View>
@@ -313,7 +378,7 @@ const CreateProfile = ({route}) => {
               />
             </View>
             <LineBreak space={2} />
-            <View>
+            {/* <View>
               <AppText
                 title={'Location'}
                 textColor={AppColors.BLACK}
@@ -344,8 +409,8 @@ const CreateProfile = ({route}) => {
                   </TouchableOpacity>
                 }
               />
-            </View>
-            <LineBreak space={4} />
+            </View> */}
+            <LineBreak space={2} />
             <AppButton
               title={'Continue'}
               borderRadius={5}

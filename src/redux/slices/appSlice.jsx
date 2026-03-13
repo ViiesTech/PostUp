@@ -9,6 +9,7 @@ const initialState = {
     long: null,
   },
   isFirstLaunch: true,
+  isGoogleSign: false,
 };
 
 export const appSlice = createSlice({
@@ -18,6 +19,7 @@ export const appSlice = createSlice({
     setLogout: state => {
       state.user = {};
       state.token = null;
+      state.isGoogleSign = false;
     },
     saveUserLocation: (state, action) => {
       state.userLocation = action.payload;
@@ -40,8 +42,30 @@ export const appSlice = createSlice({
           if (action.payload?.data) {
             state.user = action.payload?.data;
           }
+          if (action.payload?.token) {
+            state.token = action.payload?.token;
+          }
         },
-      );
+      )
+      .addMatcher(
+        Apis.endpoints.googleSignIn.matchFulfilled,
+        (state, action) => {
+          if (action.payload?.data && action.payload?.token) {
+            state.user = action.payload.data;
+            state.token = action.payload.token;
+            state.isGoogleSign = true;
+          }
+        },
+      )
+      .addMatcher(Apis.endpoints.verifyOTP.matchFulfilled, (state, action) => {
+        // Only save during signup flow — response includes token + user data
+        if (action.payload?.token) {
+          state.token = action.payload.token;
+        }
+        if (action.payload?.data) {
+          state.user = action.payload.data;
+        }
+      });
   },
 });
 

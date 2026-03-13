@@ -22,6 +22,9 @@ type Colors = {
     darkBlue: string
     darkYellow:string
     lowGreen: string
+    ORANGE: string
+    RED: string
+    LIGHTPRIMARY: string
   };
 
 const   AppColors: Colors = {
@@ -49,6 +52,9 @@ const   AppColors: Colors = {
     darkBlue: '#33434F',
     darkYellow: '#E55B13',
     lowGreen: '#587B58',
+    ORANGE: '#FF9C12',
+    RED: '#FF3B30',
+    LIGHTPRIMARY: '#E8F5FF',
   };
   
   export default AppColors;

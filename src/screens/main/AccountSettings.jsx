@@ -30,7 +30,6 @@ const AccountSettings = () => {
   const {navigateToRoute} = useCustomNavigation();
   const {user} = useSelector(state => state?.persistedData);
   const [state, setState] = useState({
-    full_name: user?.fullName,
     username: user?.userName,
     email: user?.email,
     dob: user?.dob,
@@ -53,16 +52,22 @@ const AccountSettings = () => {
       width: 300,
       height: 400,
       cropping: true,
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-    });
+      mediaType: 'photo',
+    })
+      .then(image => {
+        console.log('Selected image:', image);
+        setImage(image);
+      })
+      .catch(error => {
+        console.log('ImagePicker Error:', error);
+        if (error.code !== 'E_PICKER_CANCELLED') {
+          ShowToast('Failed to select image');
+        }
+      });
   };
 
   const onCreateProfilePress = async () => {
-    if (!state.full_name) {
-      return ShowToast('Please enter your full name');
-    } else if (!state.username) {
+    if (!state.username) {
       return ShowToast('Please enter your username');
     } else if (!state.phone) {
       return ShowToast('Please enter your phone number');
@@ -70,17 +75,20 @@ const AccountSettings = () => {
 
     const formData = new FormData();
     formData.append('id', user?._id);
-    formData.append('fullName', state.full_name);
     formData.append('userName', state.username);
     formData.append('phoneNumber', state.phone);
     formData.append('longitude', '17.4067');
     formData.append('latitude', '78.477');
 
     if (image) {
+      const imageUri = image.path || image;
+      const imageType = image.mime || 'image/jpeg';
+      const fileName = imageUri.split('/').pop() || `profile_${Date.now()}.jpg`;
+      
       formData.append('image', {
-        uri: image,
-        type: 'image/jpeg',
-        name: 'profile.jpg',
+        uri: imageUri,
+        type: imageType,
+        name: fileName,
       });
     }
 
@@ -111,7 +119,7 @@ const AccountSettings = () => {
       <View style={{paddingHorizontal: responsiveWidth(6)}}>
         <View style={{alignItems: 'center'}}>
           <ImageBackground
-            source={image ? {uri: image} : {uri: `${IMAGE_URL}${user?.image}`}}
+            source={image ? {uri: image.path || image} : {uri: `${IMAGE_URL}${user?.image}`}}
             style={{width: 120, height: 120, position: 'relative'}}
             imageStyle={{borderRadius: 100}}>
             <TouchableOpacity
@@ -140,22 +148,6 @@ const AccountSettings = () => {
         <LineBreak space={8} />
 
         <View>
-          <View>
-            <AppText
-              title={'Full Name'}
-              textColor={AppColors.BLACK}
-              textSize={2}
-            />
-            <LineBreak space={1} />
-            <AppTextInput
-              inputPlaceHolder={'Ronald'}
-              placeholderTextColor={AppColors.GRAY}
-              borderRadius={5}
-              value={state.full_name}
-              onChangeText={text => onChangeText('full_name', text)}
-            />
-          </View>
-          <LineBreak space={2} />
           <View>
             <AppText
               title={'Username'}
@@ -244,7 +236,7 @@ const AccountSettings = () => {
           </View>
           {/* <LineBreak space={2} /> */}
           <View>
-            <AppText
+            {/* <AppText
               title={'Password'}
               textColor={AppColors.BLACK}
               textSize={2}
@@ -271,8 +263,8 @@ const AccountSettings = () => {
                 buttoWidth={36}
               />
             </View>
-
-            <LineBreak space={8} />
+*/}
+             <LineBreak space={2} />
 
             <View>
               <AppButton

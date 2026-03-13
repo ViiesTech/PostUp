@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://apiforapp.link/PostUp/';
-export const IMAGE_URL = 'https://apiforapp.link/PostUp/';
+export const BASE_URL = 'https://postup.apiforapp.link/';
+export const IMAGE_URL = 'https://postup.apiforapp.link/';
 
 export const endpoints = {
   signup: 'api/user/signUpUser',
@@ -26,7 +26,20 @@ export const endpoints = {
   ADD_REQUEST: '/api/user/sendFollowRequest',
   IGNORE_USER: '/api/user/ignoreUser',
   BLOCK_USER: '/api/user/blockUser',
-  GET_FOLLOWINGS_FOLLOWREQ: type => `/api/user/getFollowingsAndFollowReq?type=${type}`,
-  SEARCH_BY_EVENT_NAME: eventName => `/api/admin/getEvent?eventName=${eventName}`,
+  GET_FOLLOWINGS_FOLLOWREQ: type =>
+    `/api/user/getFollowingsAndFollowReq?type=${type}`,
+  SEARCH_BY_EVENT_NAME: eventName =>
+    `/api/admin/getEvent?eventName=${eventName}`,
   APPROVE_REJECT: '/api/user/followRequest',
+  GETNEARBYBUSINESSES: (lat, lng) =>
+    `/api/admin/getNearbyAdmins?latitude=${lat}&longitude=${lng}`,
+  SCAN_QR_CODE: '/api/reviews/scanQRCode',
+  SUBMIT_REVIEW: '/api/reviews/submitReview',
+  GET_USER_PENDING_REVIEWS: '/api/reviews/getUserPendingReviews',
+  GET_REVIEWS: (userId, status) => `/api/reviews/getReviews?userId=${userId}&status=${status}`,
+  GET_NOTIFICATIONS: '/api/notifications/getNotifications',
+  MARK_NOTIFICATION_READ: id => `/api/notifications/markAsRead/${id}`,
+  GOOGLE_SIGNIN: 'api/user/signUpOrLoginByGoogle',
+  SEARCH_ADMINS: query => `api/admin/searchAdmins?query=${encodeURIComponent(query)}`,
+  GET_BUSINESS_REVIEWS: adminId => `api/reviews/getReviews?adminId=${adminId}&status=Completed`,
 };

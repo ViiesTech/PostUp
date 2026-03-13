@@ -11,7 +11,10 @@ import {
 import AppColors from '../utils/AppColors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Search from '../screens/main/Search';
+import Map from '../screens/main/Map';
+import ScanQrCode from '../screens/main/ScanQrCode';
 import GeneralForum from '../screens/main/GeneralForum';
 import Profile from '../screens/main/Profile';
 import LocationSelection from '../screens/main/LocationSelection';
@@ -35,6 +38,8 @@ import {useNavigation} from '@react-navigation/native';
 import CreatePost from '../screens/main/CreatePost';
 import CreateEvent from '../screens/main/CreateEvent';
 import CreateProfile from '../screens/auth/CreateProfile';
+import SubmitReview from '../screens/main/SubmitReview';
+import BusinessDetail from '../screens/main/BusinessDetail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -63,14 +68,17 @@ const Main = () => {
       <Stack.Screen name="CreatePost" component={CreatePost} />
       <Stack.Screen name="CreateEvent" component={CreateEvent} />
       <Stack.Screen name="CreateProfile" component={CreateProfile} />
+      <Stack.Screen name="SubmitReview" component={SubmitReview} />
+      <Stack.Screen name="BusinessDetail" component={BusinessDetail} />
     </Stack.Navigator>
   );
 };
 
 const TAB_ICONS = {
   Home: {lib: Ionicons, name: 'home-outline'},
-  Search: {lib: Ionicons, name: 'search'},
-  Messages: {lib: Ionicons, name: 'chatbox-ellipses-outline'},
+  Map: {lib: Ionicons, name: 'map-outline'},
+  ScanQrCode: {lib: MaterialCommunityIcons, name: 'qrcode-scan'},
+  AllReview: {lib: Ionicons, name: 'star-outline'},
   Profile: {lib: FontAwesome, name: 'user-o'},
 };
 
@@ -83,33 +91,33 @@ function MyTabs() {
         headerShown: false,
         tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabBarLabel,
-        tabBarActiveTintColor: AppColors.WHITE,
-        tabBarInactiveTintColor: AppColors.WHITE,
+        tabBarActiveTintColor: '#FFD700',
+        tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.5)',
         tabBarLabel: '',
-        tabBarIcon: ({color, size}) => {
+        tabBarIcon: ({color, size, focused}) => {
           const icon = TAB_ICONS[route.name];
           if (!icon) return null;
           const IconLib = icon.lib;
-          return <IconLib name={icon.name} size={size} color={color} />;
+          return <IconLib name={icon.name} size={focused ? size + 2 : size} color={color} />;
         },
       })}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="Map" component={Map} />
       <Tab.Screen
-        name="GeneralForum"
-        component={GeneralForum}
+        name="ScanQrCode"
+        component={ScanQrCode}
         options={{
           tabBarIcon: () => (
             <TouchableOpacity
-              onPress={() => nav.navigate('Main', {screen: 'GeneralForum'})}
+              onPress={() => nav.navigate('Main', {screen: 'ScanQrCode'})}
               style={styles.centerButton}
               activeOpacity={0.8}>
-              <Ionicons name="add" size={40} color={AppColors.BTNCOLOURS} />
+              <MaterialCommunityIcons name="qrcode-scan" size={35} color={AppColors.BTNCOLOURS} />
             </TouchableOpacity>
           ),
         }}
       />
-      <Tab.Screen name="Messages" component={Messages} />
+      <Tab.Screen name="AllReview" component={AllReview} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

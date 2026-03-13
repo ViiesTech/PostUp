@@ -1,105 +1,234 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
-  Text,
-  ScrollView,
-  ImageBackground,
+  StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import AppHeader from '../../components/AppHeader';
-import LineBreak from '../../components/LineBreak';
 import AppColors from '../../utils/AppColors';
+import AppText from '../../components/AppTextComps/AppText';
+import LineBreak from '../../components/LineBreak';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from '../../utils/Responsive_Dimensions';
-import AppImages from '../../assets/images/AppImages';
-import AppText from '../../components/AppTextComps/AppText';
-import AppButton from '../../components/AppButton';
+import {
+  getCurrentLocation,
+  requestLocationPermission,
+} from '../../config/Location';
+import {ShowToast} from '../../utils/Hooks';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import {useCustomNavigation} from '../../utils/Hooks';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 const ShowMyLocation = () => {
-  const {navigateToRoute} = useCustomNavigation();
+  const mapRef = useRef(null);
+
+  const [region, setRegion] = useState(null);
+  const [address, setAddress] = useState('');
+  const [addressLoading, setAddressLoading] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(true);
+
+  useEffect(() => {
+    handleGetMyLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const fetchAddress = async (lat, lng) => {
+    setAddressLoading(true);
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&zoom=14`,
+        {
+          headers: {
+            'User-Agent': 'PostUpApp/1.0 (contact@postup.com)',
+            Accept: 'application/json',
+            'Accept-Language': 'en',
+          },
+        },
+      );
+      const data = await response.json();
+      if (data?.address) {
+        const {road, suburb, city, town, village, state, country} =
+          data.address;
+        const area = road || suburb || '';
+        const place = city || town || village || state || '';
+        const parts = [area, place, country].filter(Boolean);
+        setAddress(parts.join(', ') || data.display_name);
+      }
+    } catch (err) {
+      console.log('[ShowMyLocation] Reverse geocode error:', err);
+    } finally {
+      setAddressLoading(false);
+    }
+  };
+
+  const handleGetMyLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+    if (!hasPermission) {
+      ShowToast('Location permission denied');
+      setLocationLoading(false);
+      return;
+    }
+    setLocationLoading(true);
+    try {
+      const loc = await getCurrentLocation();
+      if (loc?.lat && loc?.long) {
+        const newRegion = {
+          latitude: loc.lat,
+          longitude: loc.long,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        };
+        setRegion(newRegion);
+        mapRef.current?.animateToRegion(newRegion, 600);
+        fetchAddress(loc.lat, loc.long);
+      }
+    } catch (err) {
+      ShowToast('Could not fetch location');
+    } finally {
+      setLocationLoading(false);
+    }
+  };
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: AppColors.WHITE}}>
+    <View style={styles.container}>
       <AppHeader
-        heading="Show My Location"
+        heading="My Location"
         goBack
-        isCenteredHead={true}
-        textFontWeight={true}
-        isCenteredHeadWidth={68}
+        isCenteredHead
+        textFontWeight
+        // isCenteredHeadWidth={68}
       />
-      <LineBreak space={3} />
 
-      <View style={{paddingHorizontal: responsiveWidth(5)}}>
-        <ImageBackground
-          source={AppImages.full_map}
-          style={{
-            width: responsiveWidth(100),
-            height: responsiveHeight(85),
-            paddingVertical: responsiveHeight(2),
-            paddingHorizontal: responsiveWidth(8),
-            alignSelf: 'center',
-            alignItems: 'flex-end',
-          }}
-          resizeMode="contain">
-          <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: AppColors.appBgColor,
-                paddingHorizontal: responsiveWidth(4),
-                paddingVertical: responsiveHeight(1),
-                borderRadius: 20,
-                borderWidth: 1,
-                borderColor: AppColors.DARKGRAY,
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 5,
-              }}>
-              <AppText
-                title={'1 mile'}
-                textColor={AppColors.BLACK}
-                textSize={1.5}
-              />
-              <Entypo
-                name="chevron-small-down"
-                size={responsiveFontSize(2)}
-                color={AppColors.BLACK}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigateToRoute('AllowAccess')}
-              style={{
-                backgroundColor: AppColors.darkYellow,
-                width: 40,
-                height: 40,
-                borderRadius: 100,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <MaterialCommunityIcons
-                name="crosshairs-gps"
-                size={responsiveFontSize(2.7)}
-                color={AppColors.WHITE}
-              />
-            </TouchableOpacity>
+      {/* Map */}
+      <View style={styles.mapContainer}>
+        {locationLoading || !region ? (
+          <View style={styles.loadingOverlay}>
+            <ActivityIndicator size="large" color={AppColors.BTNCOLOURS} />
+            <LineBreak space={2} />
+            <AppText
+              title={'Fetching your location...'}
+              textColor={AppColors.GRAY}
+              textSize={1.7}
+              textAlignment={'center'}
+            />
           </View>
-        </ImageBackground>
-        <LineBreak space={3} />
-        <AppButton
-          title={'Save Location'}
-          borderRadius={5}
-          handlePress={() => {}}
-        />
+        ) : (
+          <MapView
+          userInterfaceStyle="light"
+            ref={mapRef}
+            provider={PROVIDER_GOOGLE}
+            style={StyleSheet.absoluteFillObject}
+            region={region}
+            showsUserLocation
+            showsMyLocationButton={false}>
+            <Marker
+              coordinate={{
+                latitude: region.latitude,
+                longitude: region.longitude,
+              }}
+              pinColor={AppColors.BTNCOLOURS}
+            />
+          </MapView>
+        )}
+
+        {/* Refresh GPS button */}
+        {!locationLoading && (
+          <TouchableOpacity
+            style={styles.gpsButton}
+            onPress={handleGetMyLocation}>
+            <MaterialCommunityIcons
+              name="crosshairs-gps"
+              size={responsiveFontSize(3)}
+              color={AppColors.BTNCOLOURS}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
+
+      {/* Address card */}
+      <View style={styles.bottomCard}>
+        <View style={styles.addressRow}>
+          <Octicons
+            name="location"
+            size={responsiveFontSize(2.5)}
+            color={AppColors.BTNCOLOURS}
+          />
+          <View style={{flex: 1}}>
+            <AppText
+              title={'Your Current Location'}
+              textColor={AppColors.GRAY}
+              textSize={1.5}
+            />
+            <LineBreak space={0.5} />
+            {addressLoading ? (
+              <ActivityIndicator size="small" color={AppColors.GRAY} />
+            ) : (
+              <AppText
+                title={address || 'Locating...'}
+                textColor={AppColors.BLACK}
+                textSize={1.7}
+                textFontWeight
+                numberOfLines={2}
+              />
+            )}
+          </View>
+        </View>
         <LineBreak space={2} />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
 export default ShowMyLocation;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: AppColors.WHITE,
+  },
+  mapContainer: {
+    flex: 1,
+  },
+  loadingOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: AppColors.WHITE,
+  },
+  gpsButton: {
+    position: 'absolute',
+    bottom: responsiveHeight(2),
+    right: responsiveWidth(4),
+    backgroundColor: AppColors.WHITE,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  bottomCard: {
+    backgroundColor: AppColors.WHITE,
+    paddingHorizontal: responsiveWidth(5),
+    paddingTop: responsiveHeight(2),
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: -3},
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+  },
+  addressRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 12,
+  },
+});

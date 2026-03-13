@@ -1,112 +1,154 @@
-/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   View,
-  Text,
-  ScrollView,
   FlatList,
   StyleSheet,
-  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import AppColors from '../../utils/AppColors';
 import AppHeader from '../../components/AppHeader';
+import AppText from '../../components/AppTextComps/AppText';
 import LineBreak from '../../components/LineBreak';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from '../../utils/Responsive_Dimensions';
-import AppText from '../../components/AppTextComps/AppText';
+import {useLazyGetNotificationsQuery} from '../../redux/services';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import moment from 'moment';
 
-const notificationsData = [
-  {
-    id: '1',
-    name: 'Benjamin Poole',
-    date: 'Nov 2nd',
-    message:
-      'Hi @tranmautritam, when you have time please take a look at the new designs I just made in Figma.',
-    emoji: '👏',
-    avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-    mention: '@tranmautritam',
-    footerText: 'Katharine Wells Lorem ipsum dolor sit amet,',
-  },
-  {
-    id: '2',
-    name: 'Katharine Wells',
-    date: 'Nov 2nd',
-    message:
-      'Please make the presentation as soon as possible Tam. We’re still waiting for it.',
-    emoji: '🧡',
-    avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-    footerText: 'Katharine Wells Lorem ipsum dolor sit amet,',
-  },
-  {
-    id: '3',
-    name: 'Bertha Ramos',
-    date: 'Nov 2nd',
-    message:
-      'Are you actually working? I don’t see any new stuffs from you. Be creative!!!',
-    emoji: '😤',
-    avatar: 'https://randomuser.me/api/portraits/women/3.jpg',
-    footerText: 'Katharine Wells Lorem ipsum dolor sit amet,',
-  },
-  {
-    id: '4',
-    name: 'Marie Bowen',
-    date: 'Nov 2nd',
-    message:
-      'Are you actually working? I don’t see any new stuffs from you. Be creative!!!',
-    emoji: '😤',
-    avatar: 'https://randomuser.me/api/portraits/women/4.jpg',
-    footerText: 'Katharine Wells Lorem ipsum dolor sit amet,',
-  },
-];
+// ─── Single notification card ─────────────────────────────────────────────────
+const NotificationCard = ({item}) => {
+  const isUnread = !item.read;
 
-const MessageCard = ({item}) => (
-  <View>
-    <View style={styles.card}>
-      <View style={styles.header}>
-        <Image source={{uri: item.avatar}} style={styles.avatar} />
-        <View style={{flex: 1}}>
-          <Text style={styles.name}>{item.name}</Text>
-        </View>
-        <Text style={styles.date}>{item.date}</Text>
+  return (
+    <View style={[styles.card, isUnread && styles.cardUnread]}>
+      {/* Icon */}
+      <View style={[styles.iconWrap, isUnread && styles.iconWrapUnread]}>
+        <Ionicons
+          name="location-outline"
+          size={responsiveFontSize(2.4)}
+          color={isUnread ? AppColors.WHITE : AppColors.BTNCOLOURS}
+        />
       </View>
-      <Text style={styles.message}>
-        {item.message} <Text style={styles.emoji}>{item.emoji}</Text>
-      </Text>
+
+      {/* Content */}
+      <View style={styles.content}>
+        <View style={styles.row}>
+          <AppText
+            title={item.title}
+            textColor={AppColors.BLACK}
+            textSize={1.8}
+            textFontWeight
+            textwidth={65}
+          />
+          {isUnread && <View style={styles.dot} />}
+        </View>
+        <LineBreak space={0.5} />
+        <AppText
+          title={item.message}
+          textColor={AppColors.DARKGRAY}
+          textSize={1.6}
+          textwidth={70}
+          numberOfLines={3}
+        />
+        <LineBreak space={0.8} />
+        <AppText
+          title={moment(item.createdAt).fromNow()}
+          textColor={AppColors.LIGHTGRAY}
+          textSize={1.4}
+        />
+      </View>
     </View>
+  );
+};
+
+// ─── Empty state ──────────────────────────────────────────────────────────────
+const EmptyState = () => (
+  <View style={styles.emptyContainer}>
+    <Ionicons
+      name="notifications-off-outline"
+      size={responsiveFontSize(8)}
+      color={AppColors.LIGHTGRAY}
+    />
     <LineBreak space={2} />
     <AppText
-      title={item.footerText}
+      title="No notifications yet"
       textColor={AppColors.DARKGRAY}
-      textSize={1.7}
+      textSize={2}
+      textFontWeight
+      textAlignment="center"
+    />
+    <LineBreak space={1} />
+    <AppText
+      title="You'll see nearby place alerts here when you're on the move."
+      textColor={AppColors.LIGHTGRAY}
+      textSize={1.6}
+      textAlignment="center"
+      textwidth={70}
     />
   </View>
 );
 
+// ─── Screen ───────────────────────────────────────────────────────────────────
 const Notifications = () => {
+  const [getNotifications, {data, isLoading, isFetching}] =
+    useLazyGetNotificationsQuery();
+
+  const notifications = data?.data ?? [];
+  const unreadCount = notifications.filter(n => !n.read).length;
+
+  // Fetch on every screen focus
+  useFocusEffect(
+    useCallback(() => {
+      getNotifications();
+    }, [getNotifications]),
+  );
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <AppHeader
-        heading={'Notifications'}
+        heading={
+          unreadCount > 0 ? `Notifications (${unreadCount})` : 'Notifications'
+        }
         goBack
-        isCenteredHead={true}
-        textFontWeight={true}
+        isCenteredHead
+        textFontWeight
         isCenteredHeadWidth={60}
       />
-      <LineBreak space={4} />
 
-      <View style={{paddingHorizontal: responsiveWidth(6)}}>
+      {isLoading ? (
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" color={AppColors.BTNCOLOURS} />
+        </View>
+      ) : (
         <FlatList
-          data={notificationsData}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <MessageCard item={item} />}
-          ItemSeparatorComponent={() => <LineBreak space={2} />}
+          data={notifications}
+          keyExtractor={item => item._id}
+          renderItem={({item}) => <NotificationCard item={item} />}
+          contentContainerStyle={[
+            styles.list,
+            notifications.length === 0 && {flex: 1},
+          ]}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ListEmptyComponent={<EmptyState />}
+          refreshControl={
+            <RefreshControl
+              refreshing={isFetching && !isLoading}
+              onRefresh={getNotifications}
+              colors={[AppColors.BTNCOLOURS]}
+              tintColor={AppColors.BTNCOLOURS}
+            />
+          }
+          showsVerticalScrollIndicator={false}
         />
-      </View>
-    </ScrollView>
+      )}
+    </View>
   );
 };
 
@@ -117,37 +159,65 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppColors.WHITE,
   },
-  card: {
-    paddingHorizontal: responsiveWidth(4),
-    paddingVertical: responsiveHeight(2),
-    backgroundColor: '#f8f8f8',
-    borderRadius: 10,
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  header: {
+  list: {
+    paddingHorizontal: responsiveWidth(5),
+    paddingTop: responsiveHeight(2),
+    paddingBottom: responsiveHeight(4),
+  },
+  separator: {
+    height: responsiveHeight(1.5),
+  },
+  card: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    backgroundColor: AppColors.WHITE,
+    borderRadius: 14,
+    padding: responsiveWidth(4),
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+  },
+  cardUnread: {
+    borderLeftWidth: 3,
+    borderLeftColor: AppColors.BTNCOLOURS,
+  },
+  iconWrap: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    backgroundColor: '#E8F0FE',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: responsiveWidth(3),
+  },
+  iconWrapUnread: {
+    backgroundColor: AppColors.BTNCOLOURS,
+  },
+  content: {
+    flex: 1,
+  },
+  row: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'space-between',
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 100,
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: AppColors.BTNCOLOURS,
   },
-  name: {
-    fontWeight: 'bold',
-    fontSize: responsiveFontSize(1.8),
-  },
-  date: {
-    fontSize: responsiveFontSize(1.5),
-    color: AppColors.BLACK,
-    fontWeight: 'bold',
-  },
-  message: {
-    fontSize: responsiveFontSize(1.8),
-    color: AppColors.DARKGRAY,
-    paddingLeft: responsiveWidth(11),
-  },
-  emoji: {
-    fontSize: responsiveFontSize(1.8),
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: responsiveHeight(10),
   },
 });

@@ -8,6 +8,10 @@ import {
   Text,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import notifee from '@notifee/react-native';
+import {stopBackgroundFetch} from '../../services/LocationService';
+import {ShowToast} from '../../utils/Hooks';
 
 import AppColors from '../../utils/AppColors';
 import AppHeader from '../../components/AppHeader';
@@ -28,6 +32,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useCustomNavigation} from '../../utils/Hooks';
 import {setLogout} from '../../redux/slices/appSlice';
 import {IMAGE_URL} from '../../redux/constant';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const SETTINGS_SECTIONS = [
   {
@@ -40,38 +45,17 @@ const SETTINGS_SECTIONS = [
         lib: 'Ionicons',
         navTo: 'Settings',
       },
-      {
-        id: '2',
-        title: 'Find PostUp Pals',
-        icon: 'people-outline',
-        lib: 'Ionicons',
-        navTo: 'PostUpPals',
-      },
     ],
   },
   {
     id: 'group2',
     items: [
       {
-        id: '3',
-        title: 'Favorites',
-        icon: '🤗',
-        lib: 'Emoji',
-        navTo: 'Favorites',
-      },
-      {
         id: '4',
         title: 'Privacy and safety',
         icon: 'shield-checkmark-outline',
         lib: 'Ionicons',
         navTo: 'PrivacyPolicy',
-      },
-      {
-        id: '5',
-        title: 'Accessibility, display and languages',
-        icon: 'hand-back-right-outline',
-        lib: 'MCI',
-        navTo: 'Favorites',
       },
       {
         id: '6',
@@ -85,13 +69,6 @@ const SETTINGS_SECTIONS = [
   {
     id: 'group3',
     items: [
-      {
-        id: '7',
-        title: 'History',
-        icon: 'time-outline',
-        lib: 'Ionicons',
-        navTo: 'History',
-      },
       {id: '8', title: 'Logout', icon: 'logout', lib: 'MaterialIcons'},
     ],
   },
@@ -105,12 +82,6 @@ const SettingIcon = ({item}) => {
     return <Ionicons name={item.icon} size={size} color={color} />;
   if (item.lib === 'MaterialIcons')
     return <MaterialIcons name={item.icon} size={size} color={color} />;
-  if (item.lib === 'MCI')
-    return (
-      <MaterialCommunityIcons name={item.icon} size={size} color={color} />
-    );
-  if (item.lib === 'Emoji')
-    return <Text style={{fontSize: 20}}>{item.icon}</Text>;
   return null;
 };
 
@@ -118,7 +89,7 @@ const Profile = () => {
   const {navigateToRoute} = useCustomNavigation();
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const {user} = useSelector(state => state?.persistedData);
+  const {user, isGoogleSign} = useSelector(state => state?.persistedData);
 
   const handlePress = item => {
     if (item.title === 'Logout') {
@@ -151,7 +122,7 @@ const Profile = () => {
           />
           <LineBreak space={2} />
           <AppText
-            title={user?.fullName || 'User Name'}
+            title={user?.userName || user?.fullName || 'User'}
             textColor={AppColors.BLACK}
             textSize={1.8}
             textFontWeight
@@ -197,11 +168,34 @@ const Profile = () => {
       <WelcomeModal
         isVisible={showModal}
         exploreOnPress={() => setShowModal(false)}
-        submitOnPress={() => {
+        submitOnPress={async () => {
+          try {
+            // Remove stored auth token so background jobs stop using it
+            await AsyncStorage.removeItem('authToken');
+
+            // Sign out from Google if user signed in with Google
+            if (isGoogleSign) {
+              await GoogleSignin.signOut();
+            }
+
+            // Stop background fetch tasks
+            stopBackgroundFetch();
+
+            // Foreground service removed — BackgroundFetch stop is sufficient
+
+            // Cancel any displayed notifications
+            await notifee.cancelAllNotifications();
+          } catch (err) {
+            console.log('[Profile] Error during logout cleanup:', err);
+          }
+
+          // Clear redux state
           dispatch(setLogout());
           setShowModal(false);
         }}
       />
+
+      {/* Foreground test buttons removed — app uses BackgroundFetch only */}
     </View>
   );
 };
