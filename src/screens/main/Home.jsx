@@ -414,7 +414,7 @@ const Home = ({navigation}) => {
             }
           />
           <TouchableOpacity
-            onPress={() => navigateToRoute('Settings')}
+            onPress={() => navigateToRoute('ScanQrCode')}
             style={{
               borderColor: AppColors.GRAY,
               borderWidth: 1,
@@ -423,11 +423,12 @@ const Home = ({navigation}) => {
               borderRadius: 5,
               justifyContent: 'center',
               alignItems: 'center',
+              // backgroundColor: '#FFD700',
             }}>
-            <Feather
-              name="settings"
+            <MaterialCommunityIcons
+              name="qrcode-scan"
               size={responsiveFontSize(3.5)}
-              color={AppColors.GRAY}
+              color={AppColors.BTNCOLOURS}
             />
           </TouchableOpacity>
         </View>
@@ -700,14 +701,14 @@ const Home = ({navigation}) => {
                 paddingHorizontal: responsiveWidth(5),
                 // alignItems: 'center',
               }}
-                renderItem={({item}) => (
-                  <NearbyBusinessCard
-                    item={item}
-                    onPress={() => {}}
-                    cardWidth={responsiveWidth(78)}
-                    showDistance={false}
-                  />
-                )}
+              renderItem={({item}) => (
+                <NearbyBusinessCard
+                  item={item}
+                  onPress={() => {}}
+                  cardWidth={responsiveWidth(78)}
+                  showDistance={false}
+                />
+              )}
             />
           )}
         </View>
@@ -780,7 +781,11 @@ const Home = ({navigation}) => {
                   gap: responsiveWidth(3),
                 }}
                 renderItem={({item}) => (
-                  <NearbyBusinessCard item={item} onPress={() => {}} cardWidth={responsiveWidth(78)} />
+                  <NearbyBusinessCard
+                    item={item}
+                    onPress={() => {}}
+                    cardWidth={responsiveWidth(78)}
+                  />
                 )}
                 keyExtractor={item => item._id}
               />

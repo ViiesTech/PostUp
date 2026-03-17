@@ -11,7 +11,7 @@ import {
 import AppColors from '../utils/AppColors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import Search from '../screens/main/Search';
 import Map from '../screens/main/Map';
 import ScanQrCode from '../screens/main/ScanQrCode';
@@ -40,6 +40,8 @@ import CreateEvent from '../screens/main/CreateEvent';
 import CreateProfile from '../screens/auth/CreateProfile';
 import SubmitReview from '../screens/main/SubmitReview';
 import BusinessDetail from '../screens/main/BusinessDetail';
+import Reminders from '../screens/main/Reminders';
+import CreateReminder from '../screens/main/CreateReminder';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -70,6 +72,9 @@ const Main = () => {
       <Stack.Screen name="CreateProfile" component={CreateProfile} />
       <Stack.Screen name="SubmitReview" component={SubmitReview} />
       <Stack.Screen name="BusinessDetail" component={BusinessDetail} />
+      <Stack.Screen name="Reminders" component={Reminders} />
+      <Stack.Screen name="CreateReminder" component={CreateReminder} />
+      <Stack.Screen name="ScanQrCode" component={ScanQrCode} />
     </Stack.Navigator>
   );
 };
@@ -77,7 +82,7 @@ const Main = () => {
 const TAB_ICONS = {
   Home: {lib: Ionicons, name: 'home-outline'},
   Map: {lib: Ionicons, name: 'map-outline'},
-  ScanQrCode: {lib: MaterialCommunityIcons, name: 'qrcode-scan'},
+  Reminders: {lib: Feather, name: 'calendar'},
   AllReview: {lib: Ionicons, name: 'star-outline'},
   Profile: {lib: FontAwesome, name: 'user-o'},
 };
@@ -98,24 +103,30 @@ function MyTabs() {
           const icon = TAB_ICONS[route.name];
           if (!icon) return null;
           const IconLib = icon.lib;
-          return <IconLib name={icon.name} size={focused ? size + 2 : size} color={color} />;
+          return (
+            <IconLib
+              name={icon.name}
+              size={focused ? size + 2 : size}
+              color={color}
+            />
+          );
         },
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Map" component={Map} />
       <Tab.Screen
-        name="ScanQrCode"
-        component={ScanQrCode}
-        options={{
-          tabBarIcon: () => (
-            <TouchableOpacity
-              onPress={() => nav.navigate('Main', {screen: 'ScanQrCode'})}
-              style={styles.centerButton}
-              activeOpacity={0.8}>
-              <MaterialCommunityIcons name="qrcode-scan" size={35} color={AppColors.BTNCOLOURS} />
-            </TouchableOpacity>
-          ),
-        }}
+        name="Reminders"
+        component={Reminders}
+        // options={{
+        //   tabBarIcon: () => (
+        //     <TouchableOpacity
+        //       onPress={() => nav.navigate('Main', {screen: 'ScanQrCode'})}
+        //       style={styles.centerButton}
+        //       activeOpacity={0.8}>
+        //       <Feather name="calendar" size={35} color={AppColors.BTNCOLOURS} />
+        //     </TouchableOpacity>
+        //   ),
+        // }}
       />
       <Tab.Screen name="AllReview" component={AllReview} />
       <Tab.Screen name="Profile" component={Profile} />
@@ -133,22 +144,22 @@ const styles = StyleSheet.create({
   tabBarLabel: {
     fontSize: responsiveFontSize(1.6),
   },
-  centerButton: {
-    top: -30,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#FFD700',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: AppColors.BTNCOLOURS,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 5},
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 8,
-  },
+  // centerButton: {
+  //   top: -30,
+  //   width: 60,
+  //   height: 60,
+  //   borderRadius: 30,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   backgroundColor: '#FFD700',
+  //   borderWidth: 2,
+  //   borderColor: AppColors.BTNCOLOURS,
+  //   shadowColor: '#000',
+  //   shadowOffset: {width: 0, height: 5},
+  //   shadowOpacity: 0.3,
+  //   shadowRadius: 5,
+  //   elevation: 8,
+  // },
 });
 
 export default Main;

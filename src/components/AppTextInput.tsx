@@ -32,80 +32,82 @@ type props = {
   textAlign?: any;
   editable?: any;
 };
-const AppTextInput = React.forwardRef((
-  {
-    logo,
-    secureTextEntry,
-    inputPlaceHolder,
-    inputWidth = 60,
-    containerBg,
-    rightIcon,
-    placeholderTextColor,
-    inputHeight,
-    textAlignVertical,
-    placeholderTextfontWeight,
-    multiline,
-    value,
-    onChangeText,
-    borderRadius,
-    borderBottomWidth,
-    borderBottomColor,
-    borderWidth,
-    borderColor,
-    maxLength,
-    keyboardType,
-    textAlign,
-    editable,
-    ...rest
-  }: props & {[key: string]: any},
-  ref: any,
-) => {
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        backgroundColor: containerBg,
-        paddingHorizontal: responsiveWidth(2),
-        paddingVertical: borderBottomWidth ? 0 : 5,
-        borderRadius: borderRadius ? borderRadius : 12,
-        alignItems: 'center',
-        gap: 10,
-        borderWidth: borderBottomWidth ? 0 : borderWidth ? borderWidth : 1,
-        borderBottomWidth: borderBottomWidth,
-        borderBottomColor: borderBottomColor,
-        borderColor: borderColor ? borderColor : AppColors.DARKGRAY,
-      }}>
-      {logo}
-
-      <TextInput
-        placeholder={inputPlaceHolder}
-        value={value}
-        onChangeText={onChangeText}
-        placeholderTextColor={
-          placeholderTextColor ? placeholderTextColor : AppColors.BLACK
-        }
+const AppTextInput = React.forwardRef(
+  (
+    {
+      logo,
+      secureTextEntry,
+      inputPlaceHolder,
+      inputWidth = 60,
+      containerBg,
+      rightIcon,
+      placeholderTextColor,
+      inputHeight,
+      textAlignVertical,
+      placeholderTextfontWeight,
+      multiline,
+      value,
+      onChangeText,
+      borderRadius,
+      borderBottomWidth,
+      borderBottomColor,
+      borderWidth,
+      borderColor,
+      maxLength,
+      keyboardType,
+      textAlign,
+      editable,
+      ...rest
+    }: props & {[key: string]: any},
+    ref: any,
+  ) => {
+    return (
+      <View
         style={{
-          width: responsiveWidth(inputWidth),
-          color: AppColors.BLACK,
-          height: inputHeight ? responsiveHeight(inputHeight) : null,
-          fontWeight: placeholderTextfontWeight
-            ? placeholderTextfontWeight
-            : null,
-          textAlign: textAlign,
-        }}
-        editable={editable}
-        secureTextEntry={secureTextEntry}
-        textAlignVertical={textAlignVertical}
-        multiline={multiline}
-        maxLength={maxLength}
-        keyboardType={keyboardType}
-        ref={ref}
-        {...rest}
-      />
+          flexDirection: 'row',
+          backgroundColor: containerBg,
+          paddingHorizontal: responsiveWidth(2),
+          paddingVertical: borderBottomWidth ? 0 : 5,
+          borderRadius: borderRadius ? borderRadius : 12,
+          alignItems: 'center',
+          gap: 10,
+          borderWidth: borderBottomWidth ? 0 : borderWidth ? borderWidth : 1,
+          borderBottomWidth: borderBottomWidth,
+          borderBottomColor: borderBottomColor,
+          borderColor: borderColor ? borderColor : AppColors.DARKGRAY,
+        }}>
+        {logo}
 
-      {rightIcon}
-    </View>
-  );
-});
+        <TextInput
+          placeholder={inputPlaceHolder}
+          value={value}
+          onChangeText={onChangeText}
+          placeholderTextColor={
+            placeholderTextColor ? placeholderTextColor : AppColors.LIGHTGRAY
+          }
+          style={{
+            width: responsiveWidth(inputWidth),
+            color: AppColors.BLACK,
+            height: inputHeight ? responsiveHeight(inputHeight) : null,
+            fontWeight: placeholderTextfontWeight
+              ? placeholderTextfontWeight
+              : null,
+            textAlign: textAlign,
+          }}
+          editable={editable}
+          secureTextEntry={secureTextEntry}
+          textAlignVertical={textAlignVertical}
+          multiline={multiline}
+          maxLength={maxLength}
+          keyboardType={keyboardType}
+          ref={ref}
+          {...rest}
+        />
+
+        {rightIcon}
+      </View>
+    );
+  },
+);
 
 export default AppTextInput;

@@ -10,6 +10,7 @@ const initialState = {
   },
   isFirstLaunch: true,
   isGoogleSign: false,
+  reminders: [],
 };
 
 export const appSlice = createSlice({
@@ -26,6 +27,14 @@ export const appSlice = createSlice({
     },
     setOnboardingDone: state => {
       state.isFirstLaunch = false;
+    },
+    addReminder: (state, action) => {
+      state.reminders.push(action.payload);
+    },
+    deleteReminder: (state, action) => {
+      state.reminders = state.reminders.filter(
+        item => item.id !== action.payload,
+      );
     },
   },
   extraReducers: builder => {
@@ -69,7 +78,12 @@ export const appSlice = createSlice({
   },
 });
 
-export const {setLogout, saveUserLocation, setOnboardingDone} =
-  appSlice.actions;
+export const {
+  setLogout,
+  saveUserLocation,
+  setOnboardingDone,
+  addReminder,
+  deleteReminder,
+} = appSlice.actions;
 
 export default appSlice.reducer;

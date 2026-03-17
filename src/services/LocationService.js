@@ -107,6 +107,8 @@ export const sendLocationUpdate = async (latitude, longitude) => {
         android: {
           channelId: 'default',
           importance: AndroidImportance.HIGH,
+          smallIcon: 'ic_launcher',
+          largeIcon: 'ic_launcher',
           pressAction: {id: 'default'},
         },
         ios: {sound: 'default'},

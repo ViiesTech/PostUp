@@ -54,14 +54,16 @@ const App = () => {
       console.log('Foreground FCM:', remoteMessage);
 
       await notifee.displayNotification({
-        title:
-          remoteMessage.notification?.title ||
+        title: (remoteMessage.notification?.title ||
           remoteMessage.data?.title ||
-          'Notification',
-        body:
-          remoteMessage.notification?.body || remoteMessage.data?.body || '',
+          'Notification') as string,
+        body: (remoteMessage.notification?.body ||
+          remoteMessage.data?.body ||
+          '') as string,
         android: {
           channelId: 'default',
+          smallIcon: 'ic_launcher',
+          largeIcon: 'ic_launcher',
           pressAction: {
             id: 'default',
           },

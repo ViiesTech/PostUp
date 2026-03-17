@@ -1,0 +1,1358 @@
+Starting a Gradle Daemon, 1 stopped Daemon could not be reused, use --status for details
+Configuration on demand is an incubating feature.
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+
+> Configure project :notifee_react-native
+:notifee_react-native @notifee/react-native found at /Users/macbook/Documents/GitHub/PostUp/node_modules/@notifee/react-native
+:notifee_react-native package.json found at /Users/macbook/Documents/GitHub/PostUp/node_modules/@notifee/react-native/package.json
+:notifee_react-native:version set from package.json: 9.1.8 (9,1,8 - 9001008)
+:notifee_react-native:android.compileSdk using custom value: 35
+:notifee_react-native:android.targetSdk using custom value: 35
+:notifee_react-native:android.minSdk using custom value: 24
+:notifee_react-native:reactNativeAndroidDir /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/android
+
+> Configure project :react-native-firebase_app
+:react-native-firebase_app package.json found at /Users/macbook/Documents/GitHub/PostUp/node_modules/@react-native-firebase/app/package.json
+:react-native-firebase_app:firebase.bom using default value: 34.8.0
+:react-native-firebase_app:play.play-services-auth using default value: 21.4.0
+:react-native-firebase_app package.json found at /Users/macbook/Documents/GitHub/PostUp/node_modules/@react-native-firebase/app/package.json
+:react-native-firebase_app:version set from package.json: 23.8.6 (23,8,6 - 23008006)
+:react-native-firebase_app:android.compileSdk using custom value: 35
+:react-native-firebase_app:android.targetSdk using custom value: 35
+:react-native-firebase_app:android.minSdk using custom value: 24
+:react-native-firebase_app:reactNativeAndroidDir /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/android
+
+> Configure project :react-native-firebase_messaging
+:react-native-firebase_messaging package.json found at /Users/macbook/Documents/GitHub/PostUp/node_modules/@react-native-firebase/messaging/package.json
+:react-native-firebase_app package.json found at /Users/macbook/Documents/GitHub/PostUp/node_modules/@react-native-firebase/app/package.json
+:react-native-firebase_messaging:firebase.bom using default value: 34.8.0
+:react-native-firebase_messaging package.json found at /Users/macbook/Documents/GitHub/PostUp/node_modules/@react-native-firebase/messaging/package.json
+:react-native-firebase_messaging:version set from package.json: 23.8.6 (23,8,6 - 23008006)
+:react-native-firebase_messaging:android.compileSdk using custom value: 35
+:react-native-firebase_messaging:android.targetSdk using custom value: 35
+:react-native-firebase_messaging:android.minSdk using custom value: 24
+:react-native-firebase_messaging:reactNativeAndroidDir /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/android
+
+> Configure project :react-native-reanimated
+Android gradle plugin: 8.8.2
+Gradle: 8.13
+
+> Configure project :react-native-video
+Kotlin version is correct: 2.0.21
+AndroidX version is correct: 1.9.3
+useExoplayerIMA: false
+useExoplayerSmoothStreaming: true
+useExoplayerDash: true
+useExoplayerHls: true
+useExoplayerRtsp: false
+buildFromSource: false
+
+> Configure project :react-native-vision-camera
+[VisionCamera] Thank you for using VisionCamera ❤️
+[VisionCamera] If you enjoy using VisionCamera, please consider sponsoring this project: https://github.com/sponsors/mrousavy
+[VisionCamera] node_modules found at /Users/macbook/Documents/GitHub/PostUp/node_modules
+[VisionCamera] VisionCamera_enableFrameProcessors is set to true!
+[VisionCamera] react-native-worklets-core not found, Frame Processors are disabled!
+[VisionCamera] VisionCamera_enableCodeScanner is set to false!
+
+> Task :react-native-firebase_messaging:preBuild UP-TO-DATE
+> Task :react-native-background-fetch:preBuild UP-TO-DATE
+> Task :react-native-geolocation-service:preBuild UP-TO-DATE
+> Task :notifee_react-native:preBuild UP-TO-DATE
+> Task :react-native-firebase_messaging:preDebugBuild UP-TO-DATE
+> Task :react-native-geolocation-service:preDebugBuild UP-TO-DATE
+> Task :notifee_react-native:preDebugBuild UP-TO-DATE
+> Task :react-native-background-fetch:preDebugBuild UP-TO-DATE
+> Task :react-native-fast-image:preBuild UP-TO-DATE
+> Task :react-native-firebase_app:preBuild UP-TO-DATE
+> Task :react-native-fast-image:preDebugBuild UP-TO-DATE
+> Task :react-native-firebase_app:preDebugBuild UP-TO-DATE
+> Task :react-native-geolocation-service:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-maps:generateCodegenSchemaFromJavaScript SKIPPED
+> Task :react-native-firebase_messaging:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-maps:generateCodegenArtifactsFromSchema SKIPPED
+> Task :react-native-maps:preBuild UP-TO-DATE
+> Task :react-native-maps:preDebugBuild UP-TO-DATE
+> Task :notifee_react-native:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-fast-image:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-firebase_app:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-background-fetch:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-system-navigation-bar:preBuild UP-TO-DATE
+> Task :react-native-system-navigation-bar:preDebugBuild UP-TO-DATE
+> Task :react-native-reanimated:assertMinimalReactNativeVersionTask SKIPPED
+> Task :react-native-image-crop-picker:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-maps:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-gesture-handler:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-video:preBuild UP-TO-DATE
+> Task :react-native-video:preDebugBuild UP-TO-DATE
+> Task :react-native-system-navigation-bar:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-safe-area-context:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-permissions:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-community_netinfo:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-video:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-google-signin_google-signin:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-reanimated:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-vector-icons:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript SKIPPED
+> Task :app:generateCodegenArtifactsFromSchema SKIPPED
+> Task :notifee_react-native:generateDebugResValues UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :react-native-picker_picker:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-screens:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :notifee_react-native:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-image-crop-picker:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-community_netinfo:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-image-crop-picker:preBuild UP-TO-DATE
+> Task :react-native-reanimated:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-community_netinfo:preBuild UP-TO-DATE
+> Task :react-native-image-crop-picker:preDebugBuild UP-TO-DATE
+> Task :react-native-community_netinfo:preDebugBuild UP-TO-DATE
+> Task :react-native-vector-icons:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-safe-area-context:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-safe-area-context:preBuild UP-TO-DATE
+> Task :react-native-community_datetimepicker:preBuild UP-TO-DATE
+> Task :react-native-google-signin_google-signin:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-vector-icons:preBuild UP-TO-DATE
+> Task :react-native-permissions:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-google-signin_google-signin:preBuild UP-TO-DATE
+> Task :react-native-permissions:preBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:preBuild UP-TO-DATE
+> Task :react-native-google-signin_google-signin:preDebugBuild UP-TO-DATE
+> Task :react-native-permissions:preDebugBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:preDebugBuild UP-TO-DATE
+> Task :react-native-safe-area-context:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-community_datetimepicker:preDebugBuild UP-TO-DATE
+> Task :react-native-gesture-handler:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-vector-icons:preDebugBuild UP-TO-DATE
+> Task :react-native-community_netinfo:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-gesture-handler:preBuild UP-TO-DATE
+> Task :react-native-image-crop-picker:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-gesture-handler:preDebugBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-svg:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-safe-area-context:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-google-signin_google-signin:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-community_datetimepicker:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-permissions:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-picker_picker:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-vector-icons:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-background-fetch:generateDebugResValues UP-TO-DATE
+> Task :react-native-picker_picker:preBuild UP-TO-DATE
+> Task :react-native-community_netinfo:generateDebugResValues UP-TO-DATE
+> Task :react-native-picker_picker:preDebugBuild UP-TO-DATE
+> Task :react-native-fast-image:generateDebugResValues UP-TO-DATE
+> Task :react-native-firebase_app:generateDebugResValues UP-TO-DATE
+> Task :react-native-gesture-handler:writeDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :notifee_react-native:packageDebugResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateDebugResValues UP-TO-DATE
+> Task :react-native-firebase_messaging:generateDebugResValues UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateDebugResValues UP-TO-DATE
+> Task :react-native-geolocation-service:generateDebugResValues UP-TO-DATE
+> Task :react-native-background-fetch:generateDebugResources UP-TO-DATE
+> Task :react-native-picker_picker:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-firebase_app:generateDebugResources UP-TO-DATE
+> Task :react-native-gesture-handler:generateDebugResValues UP-TO-DATE
+> Task :react-native-google-signin_google-signin:generateDebugResValues UP-TO-DATE
+> Task :react-native-community_netinfo:generateDebugResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateDebugResources UP-TO-DATE
+> Task :react-native-image-crop-picker:generateDebugResValues UP-TO-DATE
+> Task :app:processDebugGoogleServices UP-TO-DATE
+> Task :react-native-screens:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-screens:preBuild UP-TO-DATE
+> Task :react-native-geolocation-service:generateDebugResources UP-TO-DATE
+> Task :react-native-screens:preDebugBuild UP-TO-DATE
+> Task :react-native-google-signin_google-signin:generateDebugResources UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateDebugResources UP-TO-DATE
+> Task :react-native-firebase_messaging:generateDebugResources UP-TO-DATE
+> Task :react-native-maps:generateDebugResValues UP-TO-DATE
+> Task :react-native-screens:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-image-crop-picker:generateDebugResources UP-TO-DATE
+> Task :react-native-background-fetch:packageDebugResources UP-TO-DATE
+> Task :react-native-firebase_app:packageDebugResources UP-TO-DATE
+> Task :react-native-permissions:generateDebugResValues UP-TO-DATE
+> Task :react-native-reanimated:prepareReanimatedHeadersForPrefabs UP-TO-DATE
+> Task :react-native-picker_picker:generateDebugResValues UP-TO-DATE
+> Task :react-native-safe-area-context:generateDebugResValues UP-TO-DATE
+> Task :react-native-async-storage_async-storage:packageDebugResources UP-TO-DATE
+> Task :react-native-community_netinfo:packageDebugResources UP-TO-DATE
+> Task :react-native-svg:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-maps:generateDebugResources UP-TO-DATE
+> Task :react-native-svg:preBuild UP-TO-DATE
+> Task :react-native-permissions:generateDebugResources UP-TO-DATE
+> Task :react-native-svg:preDebugBuild UP-TO-DATE
+> Task :react-native-screens:generateDebugResValues UP-TO-DATE
+> Task :react-native-google-signin_google-signin:packageDebugResources UP-TO-DATE
+> Task :react-native-system-navigation-bar:generateDebugResValues UP-TO-DATE
+> Task :react-native-community_datetimepicker:packageDebugResources UP-TO-DATE
+> Task :react-native-picker_picker:generateDebugResources UP-TO-DATE
+> Task :react-native-geolocation-service:packageDebugResources UP-TO-DATE
+> Task :react-native-safe-area-context:generateDebugResources UP-TO-DATE
+> Task :react-native-image-crop-picker:packageDebugResources UP-TO-DATE
+> Task :react-native-vector-icons:generateDebugResValues UP-TO-DATE
+> Task :react-native-svg:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-firebase_messaging:packageDebugResources UP-TO-DATE
+> Task :react-native-system-navigation-bar:generateDebugResources UP-TO-DATE
+> Task :react-native-svg:generateDebugResValues UP-TO-DATE
+> Task :react-native-maps:packageDebugResources UP-TO-DATE
+> Task :notifee_react-native:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-video:generateDebugResValues UP-TO-DATE
+> Task :react-native-permissions:packageDebugResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-screens:generateDebugResources UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :react-native-svg:generateDebugResources UP-TO-DATE
+> Task :react-native-background-fetch:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-video:generateDebugResources UP-TO-DATE
+> Task :react-native-reanimated:prepareWorkletsHeadersForPrefabs UP-TO-DATE
+> Task :react-native-community_datetimepicker:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-picker_picker:packageDebugResources UP-TO-DATE
+> Task :react-native-reanimated:preBuild UP-TO-DATE
+> Task :react-native-vector-icons:generateDebugResources UP-TO-DATE
+> Task :react-native-safe-area-context:packageDebugResources UP-TO-DATE
+> Task :react-native-reanimated:preDebugBuild UP-TO-DATE
+> Task :notifee_react-native:processDebugManifest UP-TO-DATE
+> Task :react-native-system-navigation-bar:packageDebugResources UP-TO-DATE
+> Task :react-native-background-fetch:processDebugManifest UP-TO-DATE
+> Task :react-native-community_netinfo:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-firebase_app:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-geolocation-service:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-vector-icons:packageDebugResources UP-TO-DATE
+> Task :react-native-svg:packageDebugResources UP-TO-DATE
+> Task :react-native-screens:packageDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :react-native-video:packageDebugResources UP-TO-DATE
+> Task :react-native-maps:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-community_netinfo:processDebugManifest UP-TO-DATE
+> Task :react-native-permissions:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:processDebugManifest UP-TO-DATE
+> Task :react-native-geolocation-service:processDebugManifest UP-TO-DATE
+> Task :react-native-picker_picker:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:processDebugManifest UP-TO-DATE
+> Task :react-native-safe-area-context:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-screens:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-system-navigation-bar:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-svg:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:processDebugManifest UP-TO-DATE
+> Task :react-native-maps:processDebugManifest UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-permissions:processDebugManifest UP-TO-DATE
+> Task :react-native-safe-area-context:processDebugManifest UP-TO-DATE
+> Task :react-native-video:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-picker_picker:processDebugManifest UP-TO-DATE
+> Task :react-native-vector-icons:extractDeepLinksDebug UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :react-native-screens:processDebugManifest UP-TO-DATE
+> Task :notifee_react-native:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-background-fetch:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-community_netinfo:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-firebase_messaging:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-system-navigation-bar:processDebugManifest UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :notifee_react-native:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-background-fetch:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-video:processDebugManifest UP-TO-DATE
+> Task :react-native-community_netinfo:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-vector-icons:processDebugManifest UP-TO-DATE
+> Task :react-native-geolocation-service:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-google-signin_google-signin:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-firebase_messaging:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-image-crop-picker:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-maps:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-geolocation-service:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-background-fetch:generateDebugRFile UP-TO-DATE
+> Task :notifee_react-native:generateDebugRFile UP-TO-DATE
+> Task :react-native-svg:processDebugManifest UP-TO-DATE
+> Task :react-native-image-crop-picker:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-google-signin_google-signin:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-maps:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-firebase_messaging:generateDebugRFile UP-TO-DATE
+> Task :react-native-community_netinfo:generateDebugRFile UP-TO-DATE
+> Task :react-native-permissions:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-picker_picker:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-safe-area-context:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-geolocation-service:generateDebugRFile UP-TO-DATE
+> Task :react-native-permissions:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-svg:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-image-crop-picker:generateDebugRFile UP-TO-DATE
+> Task :react-native-google-signin_google-signin:generateDebugRFile UP-TO-DATE
+> Task :react-native-picker_picker:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-system-navigation-bar:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-maps:generateDebugRFile UP-TO-DATE
+> Task :react-native-vector-icons:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-safe-area-context:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-svg:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-video:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-permissions:generateDebugRFile UP-TO-DATE
+> Task :react-native-system-navigation-bar:parseDebugLocalResources UP-TO-DATE
+> Task :notifee_react-native:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-screens:compileDebugLibraryResources UP-TO-DATE
+> Task :notifee_react-native:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-picker_picker:generateDebugRFile UP-TO-DATE
+> Task :react-native-vector-icons:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-background-fetch:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-svg:generateDebugRFile UP-TO-DATE
+> Task :react-native-screens:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-video:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-community_netinfo:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-background-fetch:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-system-navigation-bar:generateDebugRFile UP-TO-DATE
+> Task :react-native-safe-area-context:generateDebugRFile UP-TO-DATE
+> Task :react-native-firebase_messaging:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-community_netinfo:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-vector-icons:generateDebugRFile UP-TO-DATE
+> Task :react-native-google-signin_google-signin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-firebase_messaging:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-screens:generateDebugRFile UP-TO-DATE
+> Task :react-native-maps:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-geolocation-service:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-video:generateDebugRFile UP-TO-DATE
+> Task :react-native-google-signin_google-signin:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-geolocation-service:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-svg:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-permissions:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-image-crop-picker:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-maps:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-permissions:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-svg:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-fast-image:generateDebugResources UP-TO-DATE
+> Task :react-native-reanimated:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-gesture-handler:generateDebugResources UP-TO-DATE
+> Task :react-native-vision-camera:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-reanimated:generateDebugResValues UP-TO-DATE
+> Task :react-native-community_datetimepicker:processDebugManifest UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-firebase_app:processDebugManifest UP-TO-DATE
+> Task :react-native-fast-image:packageDebugResources UP-TO-DATE
+> Task :react-native-reanimated:generateDebugResources UP-TO-DATE
+> Task :react-native-vision-camera:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-async-storage_async-storage:processDebugManifest UP-TO-DATE
+> Task :react-native-firebase_app:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-community_datetimepicker:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-fast-image:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-gesture-handler:packageDebugResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-maps:compileDebugKotlin NO-SOURCE
+> Task :react-native-reanimated:packageDebugResources UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateDebugRFile UP-TO-DATE
+> Task :react-native-community_datetimepicker:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-gesture-handler:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-firebase_app:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-fast-image:processDebugManifest UP-TO-DATE
+> Task :react-native-community_datetimepicker:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-reanimated:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-fast-image:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-firebase_app:generateDebugRFile UP-TO-DATE
+> Task :react-native-maps:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-firebase_app:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-fast-image:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateDebugRFile UP-TO-DATE
+> Task :react-native-gesture-handler:processDebugManifest UP-TO-DATE
+> Task :react-native-firebase_app:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-gesture-handler:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-fast-image:generateDebugRFile UP-TO-DATE
+> Task :react-native-gesture-handler:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-fast-image:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-reanimated:processDebugManifest UP-TO-DATE
+> Task :react-native-gesture-handler:generateDebugRFile UP-TO-DATE
+> Task :react-native-reanimated:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-gesture-handler:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-reanimated:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-gesture-handler:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-gesture-handler:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-reanimated:generateDebugRFile UP-TO-DATE
+> Task :react-native-picker_picker:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-picker_picker:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-reanimated:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-reanimated:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-reanimated:packageNdkLibs NO-SOURCE
+> Task :react-native-vision-camera:prepareHeaders UP-TO-DATE
+> Task :react-native-vision-camera:preBuild UP-TO-DATE
+> Task :react-native-vision-camera:preDebugBuild UP-TO-DATE
+> Task :react-native-vision-camera:writeDebugAarMetadata UP-TO-DATE
+> Task :react-native-fast-image:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-vision-camera:generateDebugResValues UP-TO-DATE
+> Task :react-native-vision-camera:generateDebugResources UP-TO-DATE
+> Task :react-native-firebase_app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :notifee_react-native:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-picker_picker:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-async-storage_async-storage:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-svg:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-async-storage_async-storage:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-firebase_app:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :notifee_react-native:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-vision-camera:packageDebugResources UP-TO-DATE
+> Task :react-native-safe-area-context:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-picker_picker:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-screens:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-svg:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-vision-camera:extractDeepLinksDebug UP-TO-DATE
+> Task :react-native-safe-area-context:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-community_netinfo:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-geolocation-service:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-background-fetch:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-screens:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-system-navigation-bar:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-image-crop-picker:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-vision-camera:processDebugManifest UP-TO-DATE
+> Task :react-native-geolocation-service:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-vector-icons:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-background-fetch:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-community_netinfo:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-video:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-vision-camera:compileDebugLibraryResources UP-TO-DATE
+> Task :react-native-system-navigation-bar:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-vector-icons:javaPreCompileDebug UP-TO-DATE
+> Task :notifee_react-native:mergeDebugShaders UP-TO-DATE
+> Task :react-native-video:generateDebugBuildConfig UP-TO-DATE
+> Task :notifee_react-native:compileDebugShaders NO-SOURCE
+> Task :notifee_react-native:generateDebugAssets UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeDebugShaders UP-TO-DATE
+> Task :react-native-vision-camera:parseDebugLocalResources UP-TO-DATE
+> Task :react-native-async-storage_async-storage:compileDebugShaders NO-SOURCE
+> Task :react-native-async-storage_async-storage:generateDebugAssets UP-TO-DATE
+> Task :react-native-vision-camera:generateDebugRFile UP-TO-DATE
+> Task :react-native-vision-camera:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-async-storage_async-storage:packageDebugAssets UP-TO-DATE
+> Task :notifee_react-native:packageDebugAssets UP-TO-DATE
+> Task :react-native-vision-camera:generateDebugBuildConfig UP-TO-DATE
+> Task :react-native-background-fetch:mergeDebugShaders UP-TO-DATE
+> Task :react-native-community_netinfo:mergeDebugShaders UP-TO-DATE
+> Task :react-native-background-fetch:compileDebugShaders NO-SOURCE
+> Task :react-native-community_netinfo:compileDebugShaders NO-SOURCE
+> Task :react-native-background-fetch:generateDebugAssets UP-TO-DATE
+> Task :react-native-community_netinfo:generateDebugAssets UP-TO-DATE
+> Task :react-native-system-navigation-bar:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-system-navigation-bar:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-background-fetch:packageDebugAssets UP-TO-DATE
+> Task :react-native-vector-icons:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-firebase_app:mergeDebugShaders UP-TO-DATE
+> Task :react-native-community_netinfo:packageDebugAssets UP-TO-DATE
+> Task :react-native-firebase_app:compileDebugShaders NO-SOURCE
+> Task :react-native-geolocation-service:mergeDebugShaders UP-TO-DATE
+> Task :react-native-firebase_app:generateDebugAssets UP-TO-DATE
+> Task :react-native-vector-icons:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-geolocation-service:compileDebugShaders NO-SOURCE
+> Task :react-native-geolocation-service:generateDebugAssets UP-TO-DATE
+> Task :react-native-gesture-handler:mergeDebugShaders UP-TO-DATE
+> Task :react-native-gesture-handler:compileDebugShaders NO-SOURCE
+> Task :react-native-gesture-handler:generateDebugAssets UP-TO-DATE
+> Task :react-native-gesture-handler:packageDebugAssets UP-TO-DATE
+> Task :react-native-picker_picker:mergeDebugShaders UP-TO-DATE
+> Task :react-native-picker_picker:compileDebugShaders NO-SOURCE
+> Task :react-native-picker_picker:generateDebugAssets UP-TO-DATE
+> Task :react-native-picker_picker:packageDebugAssets UP-TO-DATE
+> Task :react-native-svg:mergeDebugShaders UP-TO-DATE
+> Task :react-native-svg:compileDebugShaders NO-SOURCE
+> Task :react-native-svg:generateDebugAssets UP-TO-DATE
+> Task :react-native-svg:packageDebugAssets UP-TO-DATE
+> Task :react-native-system-navigation-bar:mergeDebugShaders UP-TO-DATE
+> Task :react-native-system-navigation-bar:compileDebugShaders NO-SOURCE
+> Task :react-native-system-navigation-bar:generateDebugAssets UP-TO-DATE
+> Task :react-native-system-navigation-bar:packageDebugAssets UP-TO-DATE
+> Task :react-native-vector-icons:mergeDebugShaders UP-TO-DATE
+> Task :react-native-vector-icons:compileDebugShaders NO-SOURCE
+> Task :react-native-vector-icons:generateDebugAssets UP-TO-DATE
+> Task :react-native-vector-icons:packageDebugAssets UP-TO-DATE
+> Task :notifee_react-native:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:mergeDebugShaders UP-TO-DATE
+> Task :react-native-firebase_app:packageDebugAssets UP-TO-DATE
+> Task :react-native-image-crop-picker:compileDebugShaders NO-SOURCE
+> Task :react-native-image-crop-picker:generateDebugAssets UP-TO-DATE
+> Task :react-native-async-storage_async-storage:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-community_netinfo:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:packageDebugAssets UP-TO-DATE
+> Task :react-native-firebase_app:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-picker_picker:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-background-fetch:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-svg:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-geolocation-service:packageDebugAssets UP-TO-DATE
+> Task :react-native-geolocation-service:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-system-navigation-bar:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-vector-icons:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :notifee_react-native:processDebugJavaRes NO-SOURCE
+> Task :react-native-async-storage_async-storage:processDebugJavaRes NO-SOURCE
+> Task :react-native-background-fetch:processDebugJavaRes NO-SOURCE
+> Task :react-native-community_netinfo:processDebugJavaRes NO-SOURCE
+> Task :react-native-firebase_app:processDebugJavaRes NO-SOURCE
+> Task :react-native-geolocation-service:processDebugJavaRes NO-SOURCE
+> Task :react-native-image-crop-picker:processDebugJavaRes NO-SOURCE
+> Task :react-native-picker_picker:processDebugJavaRes NO-SOURCE
+> Task :react-native-svg:processDebugJavaRes NO-SOURCE
+> Task :react-native-system-navigation-bar:processDebugJavaRes NO-SOURCE
+> Task :react-native-vector-icons:processDebugJavaRes NO-SOURCE
+> Task :notifee_react-native:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-async-storage_async-storage:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-community_netinfo:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-firebase_app:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-background-fetch:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-picker_picker:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-geolocation-service:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-svg:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-system-navigation-bar:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-vector-icons:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :notifee_react-native:mergeDebugJniLibFolders UP-TO-DATE
+> Task :notifee_react-native:mergeDebugNativeLibs NO-SOURCE
+> Task :notifee_react-native:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-async-storage_async-storage:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-background-fetch:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-background-fetch:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-background-fetch:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-community_netinfo:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-community_netinfo:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-community_netinfo:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-firebase_app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-firebase_app:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-firebase_app:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-geolocation-service:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-geolocation-service:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-geolocation-service:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-gesture-handler:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-image-crop-picker:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-image-crop-picker:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-image-crop-picker:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-picker_picker:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-picker_picker:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-picker_picker:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-svg:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-svg:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-svg:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-system-navigation-bar:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-system-navigation-bar:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-system-navigation-bar:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :notifee_react-native:stripDebugDebugSymbols NO-SOURCE
+> Task :notifee_react-native:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-async-storage_async-storage:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-async-storage_async-storage:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-vector-icons:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-vector-icons:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-vector-icons:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-background-fetch:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-fast-image:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-background-fetch:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-fast-image:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-fast-image:mergeDebugShaders UP-TO-DATE
+> Task :react-native-fast-image:compileDebugShaders NO-SOURCE
+> Task :react-native-fast-image:generateDebugAssets UP-TO-DATE
+> Task :react-native-fast-image:packageDebugAssets UP-TO-DATE
+> Task :react-native-fast-image:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-fast-image:processDebugJavaRes UP-TO-DATE
+> Task :react-native-fast-image:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-fast-image:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-fast-image:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-fast-image:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-community_netinfo:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-community_netinfo:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-reanimated:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-reanimated:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileDebugKotlin UP-TO-DATE
+> Task :react-native-community_datetimepicker:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-community_datetimepicker:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeDebugShaders UP-TO-DATE
+> Task :react-native-community_datetimepicker:compileDebugShaders NO-SOURCE
+> Task :react-native-community_datetimepicker:generateDebugAssets UP-TO-DATE
+> Task :react-native-community_datetimepicker:packageDebugAssets UP-TO-DATE
+> Task :react-native-reanimated:mergeDebugShaders UP-TO-DATE
+> Task :react-native-reanimated:compileDebugShaders NO-SOURCE
+> Task :react-native-reanimated:generateDebugAssets UP-TO-DATE
+> Task :react-native-maps:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-reanimated:packageDebugAssets UP-TO-DATE
+> Task :react-native-maps:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-community_datetimepicker:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-maps:mergeDebugShaders UP-TO-DATE
+> Task :react-native-maps:compileDebugShaders NO-SOURCE
+> Task :react-native-maps:generateDebugAssets UP-TO-DATE
+> Task :react-native-maps:packageDebugAssets UP-TO-DATE
+> Task :react-native-maps:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-reanimated:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-maps:processDebugJavaRes NO-SOURCE
+> Task :react-native-community_datetimepicker:processDebugJavaRes UP-TO-DATE
+> Task :react-native-reanimated:processDebugJavaRes NO-SOURCE
+> Task :react-native-community_datetimepicker:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-maps:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-reanimated:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-community_datetimepicker:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-background-fetch:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-permissions:compileDebugKotlin UP-TO-DATE
+> Task :notifee_react-native:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-maps:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-background-fetch:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-permissions:javaPreCompileDebug UP-TO-DATE
+> Task :notifee_react-native:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-async-storage_async-storage:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-background-fetch:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-maps:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-async-storage_async-storage:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-community_netinfo:extractDebugAnnotations UP-TO-DATE
+> Task :notifee_react-native:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-background-fetch:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-maps:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :notifee_react-native:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-community_datetimepicker:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-async-storage_async-storage:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-background-fetch:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-google-signin_google-signin:compileDebugKotlin UP-TO-DATE
+> Task :react-native-community_datetimepicker:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-community_netinfo:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-background-fetch:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :notifee_react-native:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-google-signin_google-signin:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-community_netinfo:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :notifee_react-native:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-async-storage_async-storage:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-background-fetch:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-community_netinfo:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-async-storage_async-storage:prepareLintJarForPublish UP-TO-DATE
+> Task :notifee_react-native:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-background-fetch:syncDebugLibJars UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeDebugJavaResource UP-TO-DATE
+> Task :notifee_react-native:syncDebugLibJars UP-TO-DATE
+> Task :react-native-community_datetimepicker:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-community_netinfo:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-background-fetch:bundleDebugAar UP-TO-DATE
+> Task :react-native-background-fetch:assembleDebug UP-TO-DATE
+> Task :notifee_react-native:bundleDebugAar UP-TO-DATE
+> Task :react-native-async-storage_async-storage:syncDebugLibJars UP-TO-DATE
+> Task :react-native-safe-area-context:compileDebugKotlin UP-TO-DATE
+> Task :notifee_react-native:assembleDebug UP-TO-DATE
+> Task :react-native-permissions:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-community_netinfo:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-community_datetimepicker:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-fast-image:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-safe-area-context:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-firebase_app:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-fast-image:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-async-storage_async-storage:bundleDebugAar UP-TO-DATE
+> Task :react-native-google-signin_google-signin:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-firebase_messaging:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-async-storage_async-storage:assembleDebug UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-community_netinfo:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-firebase_app:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-geolocation-service:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-image-crop-picker:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-permissions:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:mergeDebugShaders UP-TO-DATE
+> Task :react-native-geolocation-service:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-community_netinfo:syncDebugLibJars UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-fast-image:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-image-crop-picker:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-permissions:mergeDebugShaders UP-TO-DATE
+> Task :react-native-google-signin_google-signin:mergeDebugShaders UP-TO-DATE
+> Task :react-native-community_netinfo:bundleDebugAar UP-TO-DATE
+> Task :react-native-gesture-handler:compileDebugKotlin UP-TO-DATE
+> Task :react-native-safe-area-context:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-firebase_messaging:compileDebugShaders NO-SOURCE
+> Task :react-native-firebase_app:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-firebase_messaging:generateDebugAssets UP-TO-DATE
+> Task :react-native-community_datetimepicker:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-fast-image:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-community_netinfo:assembleDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:compileDebugShaders NO-SOURCE
+> Task :react-native-permissions:compileDebugShaders NO-SOURCE
+> Task :react-native-safe-area-context:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:generateDebugAssets UP-TO-DATE
+> Task :react-native-permissions:generateDebugAssets UP-TO-DATE
+> Task :react-native-community_datetimepicker:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-firebase_app:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:packageDebugAssets UP-TO-DATE
+> Task :react-native-geolocation-service:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-maps:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-google-signin_google-signin:packageDebugAssets UP-TO-DATE
+> Task :react-native-image-crop-picker:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-safe-area-context:mergeDebugShaders UP-TO-DATE
+> Task :react-native-permissions:packageDebugAssets UP-TO-DATE
+> Task :react-native-fast-image:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-community_datetimepicker:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-firebase_app:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-maps:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-geolocation-service:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-safe-area-context:compileDebugShaders NO-SOURCE
+> Task :react-native-safe-area-context:generateDebugAssets UP-TO-DATE
+> Task :react-native-firebase_messaging:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-permissions:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-firebase_app:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-image-crop-picker:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-safe-area-context:packageDebugAssets UP-TO-DATE
+> Task :react-native-geolocation-service:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-fast-image:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-firebase_messaging:processDebugJavaRes NO-SOURCE
+> Task :react-native-community_datetimepicker:syncDebugLibJars UP-TO-DATE
+> Task :react-native-google-signin_google-signin:processDebugJavaRes UP-TO-DATE
+> Task :react-native-gesture-handler:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-maps:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-community_datetimepicker:bundleDebugAar UP-TO-DATE
+> Task :react-native-permissions:processDebugJavaRes UP-TO-DATE
+> Task :react-native-community_datetimepicker:assembleDebug UP-TO-DATE
+> Task :react-native-safe-area-context:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-fast-image:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-gesture-handler:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-geolocation-service:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-firebase_app:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-image-crop-picker:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-fast-image:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-firebase_app:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-gesture-handler:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-maps:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-image-crop-picker:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-permissions:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-fast-image:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-geolocation-service:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-firebase_app:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-google-signin_google-signin:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-safe-area-context:processDebugJavaRes UP-TO-DATE
+> Task :react-native-permissions:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-google-signin_google-signin:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-fast-image:syncDebugLibJars UP-TO-DATE
+> Task :react-native-gesture-handler:processDebugJavaRes UP-TO-DATE
+> Task :react-native-geolocation-service:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-google-signin_google-signin:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-firebase_app:syncDebugLibJars UP-TO-DATE
+> Task :react-native-permissions:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-google-signin_google-signin:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-fast-image:bundleDebugAar UP-TO-DATE
+> Task :react-native-permissions:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-image-crop-picker:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-fast-image:assembleDebug UP-TO-DATE
+> Task :react-native-geolocation-service:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-google-signin_google-signin:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-firebase_app:bundleDebugAar UP-TO-DATE
+> Task :react-native-safe-area-context:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-maps:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-image-crop-picker:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-firebase_app:assembleDebug UP-TO-DATE
+> Task :react-native-geolocation-service:syncDebugLibJars UP-TO-DATE
+> Task :react-native-permissions:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-picker_picker:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-maps:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-permissions:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-picker_picker:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-image-crop-picker:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-maps:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-svg:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-geolocation-service:bundleDebugAar UP-TO-DATE
+> Task :react-native-safe-area-context:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-geolocation-service:assembleDebug UP-TO-DATE
+> Task :react-native-system-navigation-bar:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-safe-area-context:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-maps:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-svg:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-image-crop-picker:syncDebugLibJars UP-TO-DATE
+> Task :react-native-safe-area-context:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-system-navigation-bar:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-maps:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-permissions:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-picker_picker:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-gesture-handler:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-safe-area-context:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-image-crop-picker:bundleDebugAar UP-TO-DATE
+> Task :react-native-image-crop-picker:assembleDebug UP-TO-DATE
+> Task :react-native-picker_picker:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-permissions:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-maps:syncDebugLibJars UP-TO-DATE
+> Task :react-native-safe-area-context:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-svg:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-system-navigation-bar:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-permissions:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-picker_picker:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-vector-icons:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-svg:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-system-navigation-bar:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-maps:bundleDebugAar UP-TO-DATE
+> Task :react-native-permissions:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-maps:assembleDebug UP-TO-DATE
+> Task :react-native-picker_picker:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-vector-icons:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-system-navigation-bar:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-svg:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-svg:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-gesture-handler:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-permissions:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-system-navigation-bar:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-picker_picker:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-safe-area-context:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-permissions:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-gesture-handler:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-picker_picker:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-safe-area-context:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-system-navigation-bar:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-vector-icons:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-svg:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-gesture-handler:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-permissions:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-system-navigation-bar:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-picker_picker:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-safe-area-context:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-vector-icons:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-svg:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-gesture-handler:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-permissions:syncDebugLibJars UP-TO-DATE
+> Task :react-native-picker_picker:syncDebugLibJars UP-TO-DATE
+> Task :react-native-safe-area-context:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-vector-icons:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-gesture-handler:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-system-navigation-bar:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-svg:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-safe-area-context:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-gesture-handler:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-permissions:bundleDebugAar UP-TO-DATE
+> Task :react-native-picker_picker:bundleDebugAar UP-TO-DATE
+> Task :react-native-picker_picker:assembleDebug UP-TO-DATE
+> Task :react-native-permissions:assembleDebug UP-TO-DATE
+> Task :react-native-vector-icons:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-safe-area-context:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-svg:syncDebugLibJars UP-TO-DATE
+> Task :react-native-system-navigation-bar:syncDebugLibJars UP-TO-DATE
+> Task :react-native-vector-icons:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-gesture-handler:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-safe-area-context:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-vector-icons:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-gesture-handler:syncDebugLibJars UP-TO-DATE
+> Task :react-native-svg:bundleDebugAar UP-TO-DATE
+> Task :react-native-svg:assembleDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-safe-area-context:syncDebugLibJars UP-TO-DATE
+> Task :react-native-vector-icons:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-system-navigation-bar:bundleDebugAar UP-TO-DATE
+> Task :react-native-system-navigation-bar:assembleDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-vector-icons:syncDebugLibJars UP-TO-DATE
+> Task :react-native-safe-area-context:bundleDebugAar UP-TO-DATE
+> Task :react-native-safe-area-context:assembleDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-google-signin_google-signin:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-firebase_messaging:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-google-signin_google-signin:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-vector-icons:bundleDebugAar UP-TO-DATE
+> Task :react-native-vector-icons:assembleDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-google-signin_google-signin:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-google-signin_google-signin:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-google-signin_google-signin:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-google-signin_google-signin:prepareLintJarForPublish UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :react-native-firebase_messaging:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-firebase_messaging:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-google-signin_google-signin:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-firebase_messaging:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-screens:compileDebugKotlin UP-TO-DATE
+> Task :react-native-firebase_messaging:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-google-signin_google-signin:syncDebugLibJars UP-TO-DATE
+> Task :react-native-vision-camera:compileDebugKotlin UP-TO-DATE
+> Task :react-native-screens:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-firebase_messaging:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-google-signin_google-signin:bundleDebugAar UP-TO-DATE
+> Task :react-native-google-signin_google-signin:assembleDebug UP-TO-DATE
+> Task :react-native-vision-camera:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-video:compileDebugKotlin UP-TO-DATE
+> Task :react-native-firebase_messaging:syncDebugLibJars UP-TO-DATE
+> Task :react-native-video:javaPreCompileDebug UP-TO-DATE
+> Task :react-native-firebase_messaging:bundleDebugAar UP-TO-DATE
+> Task :react-native-firebase_messaging:assembleDebug UP-TO-DATE
+> Task :react-native-screens:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-screens:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-vision-camera:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-screens:mergeDebugShaders UP-TO-DATE
+> Task :react-native-screens:compileDebugShaders NO-SOURCE
+> Task :react-native-screens:generateDebugAssets UP-TO-DATE
+> Task :react-native-vision-camera:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-screens:packageDebugAssets UP-TO-DATE
+> Task :react-native-video:compileDebugJavaWithJavac UP-TO-DATE
+> Task :react-native-vision-camera:mergeDebugShaders UP-TO-DATE
+> Task :react-native-vision-camera:compileDebugShaders NO-SOURCE
+> Task :react-native-screens:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-vision-camera:generateDebugAssets UP-TO-DATE
+> Task :react-native-video:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :react-native-video:mergeDebugShaders UP-TO-DATE
+> Task :react-native-vision-camera:packageDebugAssets UP-TO-DATE
+> Task :react-native-video:compileDebugShaders NO-SOURCE
+> Task :react-native-video:generateDebugAssets UP-TO-DATE
+> Task :react-native-vision-camera:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-video:packageDebugAssets UP-TO-DATE
+> Task :react-native-video:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :react-native-screens:processDebugJavaRes UP-TO-DATE
+> Task :react-native-video:processDebugJavaRes UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :react-native-vision-camera:processDebugJavaRes UP-TO-DATE
+> Task :react-native-video:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-video:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-video:mergeDebugNativeLibs NO-SOURCE
+> Task :react-native-video:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-video:stripDebugDebugSymbols NO-SOURCE
+> Task :react-native-video:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-video:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-video:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-vision-camera:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-screens:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :react-native-video:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-video:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-video:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-video:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-video:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-video:syncDebugLibJars UP-TO-DATE
+> Task :react-native-video:bundleDebugAar UP-TO-DATE
+> Task :react-native-video:assembleDebug UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :react-native-screens:configureCMakeDebug[arm64-v8a]
+> Task :react-native-vision-camera:configureCMakeDebug[arm64-v8a]
+> Task :react-native-reanimated:configureCMakeDebug[arm64-v8a]
+> Task :react-native-vision-camera:configureCMakeDebug[armeabi-v7a]
+> Task :react-native-reanimated:configureCMakeDebug[armeabi-v7a]
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :react-native-vision-camera:configureCMakeDebug[x86]
+> Task :react-native-reanimated:configureCMakeDebug[x86]
+> Task :react-native-vision-camera:configureCMakeDebug[x86_64]
+> Task :react-native-vision-camera:generateJsonModelDebug
+> Task :react-native-reanimated:configureCMakeDebug[x86_64]
+> Task :react-native-reanimated:generateJsonModelDebug
+> Task :react-native-vision-camera:prefabDebugConfigurePackage UP-TO-DATE
+> Task :react-native-reanimated:prefabDebugConfigurePackage UP-TO-DATE
+> Task :react-native-screens:buildCMakeDebug[arm64-v8a]
+> Task :react-native-vision-camera:buildCMakeDebug[arm64-v8a]
+> Task :react-native-vision-camera:buildCMakeDebug[armeabi-v7a]
+> Task :react-native-vision-camera:buildCMakeDebug[x86]
+> Task :react-native-reanimated:buildCMakeDebug[arm64-v8a][reanimated,worklets]
+> Task :react-native-vision-camera:buildCMakeDebug[x86_64]
+> Task :react-native-vision-camera:externalNativeBuildDebug
+> Task :react-native-vision-camera:prefabDebugPackage UP-TO-DATE
+> Task :react-native-vision-camera:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-vision-camera:mergeDebugNativeLibs UP-TO-DATE
+> Task :react-native-vision-camera:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-vision-camera:stripDebugDebugSymbols UP-TO-DATE
+> Task :react-native-vision-camera:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-vision-camera:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-screens:configureCMakeDebug[armeabi-v7a]
+> Task :react-native-vision-camera:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-vision-camera:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-vision-camera:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-vision-camera:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-vision-camera:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-vision-camera:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-vision-camera:syncDebugLibJars UP-TO-DATE
+> Task :react-native-vision-camera:bundleDebugAar UP-TO-DATE
+> Task :react-native-vision-camera:assembleDebug UP-TO-DATE
+> Task :react-native-reanimated:buildCMakeDebug[armeabi-v7a][reanimated,worklets]
+> Task :react-native-screens:buildCMakeDebug[armeabi-v7a]
+> Task :react-native-screens:configureCMakeDebug[x86]
+> Task :app:processDebugResources UP-TO-DATE
+> Task :react-native-screens:buildCMakeDebug[x86]
+> Task :react-native-screens:configureCMakeDebug[x86_64]
+> Task :react-native-reanimated:buildCMakeDebug[x86][reanimated,worklets]
+> Task :app:compileDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:copyReactNativeVectorIconFonts UP-TO-DATE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :react-native-screens:buildCMakeDebug[x86_64]
+> Task :react-native-screens:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-screens:mergeDebugNativeLibs UP-TO-DATE
+> Task :react-native-screens:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-screens:stripDebugDebugSymbols UP-TO-DATE
+> Task :react-native-screens:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-screens:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-screens:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-screens:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-screens:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-screens:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-screens:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-screens:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-screens:syncDebugLibJars UP-TO-DATE
+> Task :react-native-screens:bundleDebugAar UP-TO-DATE
+> Task :react-native-screens:assembleDebug UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :react-native-reanimated:buildCMakeDebug[x86_64][reanimated,worklets]
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :react-native-reanimated:externalNativeBuildDebug
+> Task :react-native-reanimated:prefabDebugPackage UP-TO-DATE
+> Task :react-native-reanimated:mergeDebugJniLibFolders UP-TO-DATE
+> Task :react-native-reanimated:mergeDebugNativeLibs UP-TO-DATE
+> Task :react-native-reanimated:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-reanimated:stripDebugDebugSymbols UP-TO-DATE
+> Task :react-native-reanimated:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :react-native-reanimated:extractDebugAnnotations UP-TO-DATE
+> Task :react-native-reanimated:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :react-native-reanimated:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :react-native-reanimated:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :react-native-reanimated:prepareDebugArtProfile UP-TO-DATE
+> Task :react-native-reanimated:prepareLintJarForPublish UP-TO-DATE
+> Task :react-native-reanimated:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-reanimated:syncDebugLibJars UP-TO-DATE
+> Task :react-native-reanimated:bundleDebugAar UP-TO-DATE
+> Task :react-native-reanimated:assembleDebug UP-TO-DATE
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :react-native-gesture-handler:configureCMakeDebug[arm64-v8a]
+> Task :app:processDebugJavaRes UP-TO-DATE
+> Task :react-native-gesture-handler:buildCMakeDebug[arm64-v8a]
+> Task :react-native-gesture-handler:configureCMakeDebug[armeabi-v7a]
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :react-native-gesture-handler:buildCMakeDebug[armeabi-v7a]
+> Task :react-native-gesture-handler:configureCMakeDebug[x86]
+> Task :react-native-gesture-handler:buildCMakeDebug[x86]
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :react-native-gesture-handler:configureCMakeDebug[x86_64]
+> Task :react-native-gesture-handler:buildCMakeDebug[x86_64]
+> Task :react-native-gesture-handler:mergeDebugNativeLibs UP-TO-DATE
+> Task :react-native-gesture-handler:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :react-native-gesture-handler:stripDebugDebugSymbols UP-TO-DATE
+> Task :react-native-gesture-handler:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :react-native-gesture-handler:bundleDebugAar UP-TO-DATE
+> Task :react-native-gesture-handler:assembleDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+
+> Task :app:configureCMakeDebug[arm64-v8a]
+C/C++: CMake Error at /Users/macbook/Documents/GitHub/PostUp/android/app/build/generated/autolinking/src/main/jni/Android-autolinking.cmake:22 (add_subdirectory):
+C/C++:   add_subdirectory given source
+C/C++:   "/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native-maps/android/android/src/main/jni/"
+C/C++:   which is not an existing directory.
+C/C++: Call Stack (most recent call first):
+C/C++:   /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/ReactNative-application.cmake:100 (include)
+C/C++:   CMakeLists.txt:31 (include)
+C/C++: CMake Error at /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/ReactNative-application.cmake:103 (target_link_libraries):
+C/C++:   Cannot specify link libraries for target "react_codegen_RNMapsSpecs" which
+C/C++:   is not built by this project.
+C/C++: Call Stack (most recent call first):
+C/C++:   CMakeLists.txt:31 (include)
+
+> Task :app:configureCMakeDebug[arm64-v8a] FAILED
+
+[Incubating] Problems report is available at: file:///Users/macbook/Documents/GitHub/PostUp/android/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:configureCMakeDebug[arm64-v8a]'.
+> [CXX1429] error when building with cmake using /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt: -- The C compiler identification is Clang 19.0.0
+  -- The CXX compiler identification is Clang 19.0.0
+  -- Detecting C compiler ABI info
+  -- Detecting C compiler ABI info - done
+  -- Check for working C compiler: /Users/macbook/Library/Android/sdk/ndk/28.0.12674087/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang - skipped
+  -- Detecting C compile features
+  -- Detecting C compile features - done
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+  -- Check for working CXX compiler: /Users/macbook/Library/Android/sdk/ndk/28.0.12674087/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ - skipped
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  -- Configuring incomplete, errors occurred!
+  See also "/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/arm64-v8a/CMakeFiles/CMakeOutput.log".
+  
+  C++ build system [configure] failed while executing:
+      /Users/macbook/Library/Android/sdk/cmake/3.22.1/bin/cmake \
+        -H/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup \
+        -DCMAKE_SYSTEM_NAME=Android \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+        -DCMAKE_SYSTEM_VERSION=24 \
+        -DANDROID_PLATFORM=android-24 \
+        -DANDROID_ABI=arm64-v8a \
+        -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \
+        -DANDROID_NDK=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087 \
+        -DCMAKE_ANDROID_NDK=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087 \
+        -DCMAKE_TOOLCHAIN_FILE=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087/build/cmake/android.toolchain.cmake \
+        -DCMAKE_MAKE_PROGRAM=/Users/macbook/Library/Android/sdk/cmake/3.22.1/bin/ninja \
+        -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/macbook/Documents/GitHub/PostUp/android/app/build/intermediates/cxx/Debug/2b5b1z60/obj/arm64-v8a \
+        -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/Users/macbook/Documents/GitHub/PostUp/android/app/build/intermediates/cxx/Debug/2b5b1z60/obj/arm64-v8a \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DCMAKE_FIND_ROOT_PATH=/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/prefab/arm64-v8a/prefab \
+        -B/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/arm64-v8a \
+        -GNinja \
+        -DPROJECT_BUILD_DIR=/Users/macbook/Documents/GitHub/PostUp/android/app/build \
+        -DPROJECT_ROOT_DIR=/Users/macbook/Documents/GitHub/PostUp/android \
+        -DREACT_ANDROID_DIR=/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid \
+        -DANDROID_STL=c++_shared \
+        -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON
+    from /Users/macbook/Documents/GitHub/PostUp/android/app
+  CMake Error at /Users/macbook/Documents/GitHub/PostUp/android/app/build/generated/autolinking/src/main/jni/Android-autolinking.cmake:22 (add_subdirectory):
+    add_subdirectory given source
+    "/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native-maps/android/android/src/main/jni/"
+    which is not an existing directory.
+  Call Stack (most recent call first):
+    /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/ReactNative-application.cmake:100 (include)
+    CMakeLists.txt:31 (include)
+  
+  
+  CMake Error at /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/ReactNative-application.cmake:103 (target_link_libraries):
+    Cannot specify link libraries for target "react_codegen_RNMapsSpecs" which
+    is not built by this project.
+  Call Stack (most recent call first):
+    CMakeLists.txt:31 (include) : com.android.ide.common.process.ProcessException: -- The C compiler identification is Clang 19.0.0
+  -- The CXX compiler identification is Clang 19.0.0
+  -- Detecting C compiler ABI info
+  -- Detecting C compiler ABI info - done
+  -- Check for working C compiler: /Users/macbook/Library/Android/sdk/ndk/28.0.12674087/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang - skipped
+  -- Detecting C compile features
+  -- Detecting C compile features - done
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+  -- Check for working CXX compiler: /Users/macbook/Library/Android/sdk/ndk/28.0.12674087/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ - skipped
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  -- Configuring incomplete, errors occurred!
+  See also "/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/arm64-v8a/CMakeFiles/CMakeOutput.log".
+  
+  C++ build system [configure] failed while executing:
+      /Users/macbook/Library/Android/sdk/cmake/3.22.1/bin/cmake \
+        -H/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup \
+        -DCMAKE_SYSTEM_NAME=Android \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+        -DCMAKE_SYSTEM_VERSION=24 \
+        -DANDROID_PLATFORM=android-24 \
+        -DANDROID_ABI=arm64-v8a \
+        -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \
+        -DANDROID_NDK=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087 \
+        -DCMAKE_ANDROID_NDK=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087 \
+        -DCMAKE_TOOLCHAIN_FILE=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087/build/cmake/android.toolchain.cmake \
+        -DCMAKE_MAKE_PROGRAM=/Users/macbook/Library/Android/sdk/cmake/3.22.1/bin/ninja \
+        -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/macbook/Documents/GitHub/PostUp/android/app/build/intermediates/cxx/Debug/2b5b1z60/obj/arm64-v8a \
+        -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/Users/macbook/Documents/GitHub/PostUp/android/app/build/intermediates/cxx/Debug/2b5b1z60/obj/arm64-v8a \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DCMAKE_FIND_ROOT_PATH=/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/prefab/arm64-v8a/prefab \
+        -B/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/arm64-v8a \
+        -GNinja \
+        -DPROJECT_BUILD_DIR=/Users/macbook/Documents/GitHub/PostUp/android/app/build \
+        -DPROJECT_ROOT_DIR=/Users/macbook/Documents/GitHub/PostUp/android \
+        -DREACT_ANDROID_DIR=/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid \
+        -DANDROID_STL=c++_shared \
+        -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON
+    from /Users/macbook/Documents/GitHub/PostUp/android/app
+  CMake Error at /Users/macbook/Documents/GitHub/PostUp/android/app/build/generated/autolinking/src/main/jni/Android-autolinking.cmake:22 (add_subdirectory):
+    add_subdirectory given source
+    "/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native-maps/android/android/src/main/jni/"
+    which is not an existing directory.
+  Call Stack (most recent call first):
+    /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/ReactNative-application.cmake:100 (include)
+    CMakeLists.txt:31 (include)
+  
+  
+  CMake Error at /Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/ReactNative-application.cmake:103 (target_link_libraries):
+    Cannot specify link libraries for target "react_codegen_RNMapsSpecs" which
+    is not built by this project.
+  Call Stack (most recent call first):
+    CMakeLists.txt:31 (include)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:288)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:108)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:106)
+  	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:32)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess(ExecuteProcess.kt:106)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$default(ExecuteProcess.kt:85)
+  	at com.android.build.gradle.tasks.CmakeQueryMetadataGenerator.executeProcess(CmakeFileApiMetadataGenerator.kt:59)
+  	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator$configureOneAbi$1$1$3.invoke(ExternalNativeJsonGenerator.kt:247)
+  	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator$configureOneAbi$1$1$3.invoke(ExternalNativeJsonGenerator.kt:247)
+  	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:32)
+  	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configureOneAbi(ExternalNativeJsonGenerator.kt:247)
+  	at com.android.build.gradle.tasks.ExternalNativeJsonGenerator.configure(ExternalNativeJsonGenerator.kt:113)
+  	at com.android.build.gradle.tasks.ExternalNativeBuildJsonTask.doTaskAction(ExternalNativeBuildJsonTask.kt:89)
+  	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask$taskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:59)
+  	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+  	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask.taskAction(UnsafeOutputsTask.kt:81)
+  	at jdk.internal.reflect.GeneratedMethodAccessor620.invoke(Unknown Source)
+  	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+  	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+  	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+  	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+  	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:244)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:229)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:212)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:195)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:162)
+  	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:105)
+  	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:44)
+  	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:59)
+  	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:56)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+  	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:56)
+  	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:44)
+  	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+  	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+  	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+  	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:50)
+  	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:28)
+  	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:67)
+  	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:37)
+  	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:61)
+  	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:26)
+  	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+  	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+  	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:40)
+  	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:29)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:75)
+  	at org.gradle.internal.Either$Right.fold(Either.java:175)
+  	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:73)
+  	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:48)
+  	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:46)
+  	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:35)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+  	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+  	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+  	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+  	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+  	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:49)
+  	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:27)
+  	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:71)
+  	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:39)
+  	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:65)
+  	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:36)
+  	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:107)
+  	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:56)
+  	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:64)
+  	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:43)
+  	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources(AbstractSkipEmptyWorkStep.java:125)
+  	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:56)
+  	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:36)
+  	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+  	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
+  	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:23)
+  	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:75)
+  	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:41)
+  	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$execute$0(AssignMutableWorkspaceStep.java:35)
+  	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:289)
+  	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:31)
+  	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:22)
+  	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+  	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+  	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+  	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+  	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+  	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+  	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+  	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+  	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:48)
+  	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:35)
+  	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:61)
+  	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:127)
+  	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
+  	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:40)
+  	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+  	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+  	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+  	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+  	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+  	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+  	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+  	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
+  	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
+  	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+  	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+  	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+  	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+  	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+  	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+  	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+  	at java.base/java.lang.Thread.run(Thread.java:842)
+  Caused by: com.android.ide.common.process.ProcessException: Error while executing process /Users/macbook/Library/Android/sdk/cmake/3.22.1/bin/cmake with arguments {-H/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup -DCMAKE_SYSTEM_NAME=Android -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_SYSTEM_VERSION=24 -DANDROID_PLATFORM=android-24 -DANDROID_ABI=arm64-v8a -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a -DANDROID_NDK=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087 -DCMAKE_ANDROID_NDK=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087 -DCMAKE_TOOLCHAIN_FILE=/Users/macbook/Library/Android/sdk/ndk/28.0.12674087/build/cmake/android.toolchain.cmake -DCMAKE_MAKE_PROGRAM=/Users/macbook/Library/Android/sdk/cmake/3.22.1/bin/ninja -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/macbook/Documents/GitHub/PostUp/android/app/build/intermediates/cxx/Debug/2b5b1z60/obj/arm64-v8a -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/Users/macbook/Documents/GitHub/PostUp/android/app/build/intermediates/cxx/Debug/2b5b1z60/obj/arm64-v8a -DCMAKE_BUILD_TYPE=Debug -DCMAKE_FIND_ROOT_PATH=/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/prefab/arm64-v8a/prefab -B/Users/macbook/Documents/GitHub/PostUp/android/app/.cxx/Debug/2b5b1z60/arm64-v8a -GNinja -DPROJECT_BUILD_DIR=/Users/macbook/Documents/GitHub/PostUp/android/app/build -DPROJECT_ROOT_DIR=/Users/macbook/Documents/GitHub/PostUp/android -DREACT_ANDROID_DIR=/Users/macbook/Documents/GitHub/PostUp/node_modules/react-native/ReactAndroid -DANDROID_STL=c++_shared -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON}
+  	at com.android.build.gradle.internal.process.GradleProcessResult.buildProcessException(GradleProcessResult.java:73)
+  	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:48)
+  	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:277)
+  	... 141 more
+  Caused by: org.gradle.process.internal.ExecException: Process 'command '/Users/macbook/Library/Android/sdk/cmake/3.22.1/bin/cmake'' finished with non-zero exit value 1
+  	at org.gradle.process.internal.DefaultExecHandle$ExecResultImpl.assertNormalExitValue(DefaultExecHandle.java:442)
+  	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:46)
+  	... 142 more
+
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.13/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 40s
+805 actionable tasks: 35 executed, 770 up-to-date

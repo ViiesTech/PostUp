@@ -75,7 +75,9 @@ const NearbyBusinessCard: React.FC<NearbyBusinessCardProps> = ({
 
   // Check if currently open
   const isCurrentlyOpen = () => {
-    if (!todayHours) return false;
+    if (!todayHours) {
+      return false;
+    }
 
     try {
       const now = new Date();
@@ -154,14 +156,21 @@ const NearbyBusinessCard: React.FC<NearbyBusinessCardProps> = ({
 
   // Compute distance safely: prefer numeric `item.distance`, else compute from coords when possible
   const toRad = (v: number) => (v * Math.PI) / 180;
-  const haversine = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+  const haversine = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number,
+  ) => {
     const R = 6371000; // meters
     const dLat = toRad(lat2 - lat1);
     const dLon = toRad(lon2 - lon1);
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
@@ -437,6 +446,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
+    backgroundColor: AppColors.INPUTBG,
   },
   tierBadge: {
     position: 'absolute',
